@@ -1,27 +1,14 @@
 ## AIRBNB
 ### project
 
-소스코드 블록은 다음과 같이 작설할 수 있습니다.
-
-```java
-
-int a = 0;
-int b = 0;
-system.out.println(a+b);
-
-```
-
-링크는 다음과 같이 작성할 수 있습니다.
-
-[블로그 주소](https:www.naver.com)
-
-순서 없는 목록은 다음과 같이 작성할 수 있습니다.
 
 * 깃 튜토리얼
   * 깃 Clone
   * 깃 Pull
   * 깃 Commit
 
+
+[깃 사용 방법]
 git clone https://github.com/suovj140/airbnb.git
 
 C:\github\airbnb\airbnb> 로 이동
