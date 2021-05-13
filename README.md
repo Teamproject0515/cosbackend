@@ -44,5 +44,3 @@ git remote show origin
 git remote rm temp
 
 git remote rename test temp
-
-> '공부합시다.' -중앙-
