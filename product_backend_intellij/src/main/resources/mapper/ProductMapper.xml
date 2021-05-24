@@ -4,12 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
-    <select id="productList" resultType="com.example.demo.vo.ProductVO">
-        SELECT * FROM product
+<!--    <select id="productList" resultType="com.example.demo.vo.ProductVO">-->
+<!--        SELECT * FROM product-->
+<!--    </select>-->
+
+    <select id="productColorList" resultType="com.example.demo.vo.ProductColorVO">
+        select p.product_seq, p.product_title, p.product_price, p.product_img, p.product_gender, p.product_size, p.product_saled, p.product_category, p.product_content, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
+        from product p, product_color c where p.product_seq = c.fk_product_seq
     </select>
 
     <select id="fetchProductByID" resultType="com.example.demo.vo.ProductVO"
             parameterType="int">
         SELECT * FROM product WHERE product_seq = #{product_seq}
+    </select>
+
+    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorVO">
+        select * from (select p.product_seq, p.product_title, p.product_price, p.product_img, p.product_gender, p.product_size, p.product_saled, p.product_category, p.product_content, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
+        from product p, product_color c where p.product_seq = c.fk_product_seq)
+        <where>
+            <if test="product_category==null">
+            </if>
+            <if test="product_category!=null">
+                product_category = #{product_category}
+            </if>
+        </where>
     </select>
 </mapper>

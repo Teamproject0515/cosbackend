@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.vo.UserColorVO;
 import com.example.demo.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,26 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
-    @GetMapping
-    public List<UserVO> userList(){
+//    @GetMapping
+//    public List<UserVO> userList(){
 //        System.out.println(userMapper.userList());
 //        System.out.println("유저리스트 출력 성공");
-        return userMapper.userList();
+//        return userMapper.userList();
+//    }
+
+    @GetMapping
+    public List<UserColorVO> userColorList(){
+        System.out.println(userMapper.userColorList());
+        System.out.println("유저컬러리스트 출력 성공");
+        return userMapper.userColorList();
     }
+
+    @GetMapping("/category/{firstname}")
+    public List<UserColorVO> category(@PathVariable String firstname){
+        System.out.println("category success");
+        return userMapper.category(firstname);
+    }
+
 
     @PostMapping
     void insertUser(@RequestBody UserVO user){

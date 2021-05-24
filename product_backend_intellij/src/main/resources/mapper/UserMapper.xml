@@ -29,4 +29,17 @@
         SET firstName = #{firstName}, lastName=#{lastName}, age=#{age}, salary=#{salary}
         WHERE id= #{id}
     </update>
+
+    <select id="userColorList" resultType="com.example.demo.vo.UserColorVO">
+        select u.id, u.username, u.password, u.firstname, u.lastname, u.age, u.salary, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
+        from users u, color c where u.id = c.fk_user_id
+    </select>
+
+    <select id="category" parameterType="String" resultType="com.example.demo.vo.UserColorVO">
+        select * from(select u.id, u.username, u.password, u.firstname, u.lastname, u.age, u.salary, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
+        from users u, color c where u.id = c.fk_user_id)
+        where firstname = #{firstname}
+    </select>
+
+
 </mapper>
