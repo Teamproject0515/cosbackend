@@ -6,7 +6,10 @@ import "./css/Main.css"
 import Mainmid from "./Mainmid";
 import Bottombig from "./Bottombig";
 import Footer from "./Footer";
+
 function Main(){
+
+
 
     return(
         <div>
