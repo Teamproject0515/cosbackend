@@ -27,19 +27,20 @@ public class ProductController {
 
     @GetMapping
     public List<ProductColorVO> productColorList(){
-        System.out.println("222");
+        System.out.println("ProductColorVOList Success!");
         return productMapper.productColorList();
     }
 
     @GetMapping("/{product_seq}")
     public ProductVO fetchProductByID(@PathVariable int product_seq){
         ProductVO fetchProduct = productMapper.fetchProductByID(product_seq);
+        System.out.println("fetchProductById Success!");
         return fetchProduct;
     }
 
     @GetMapping("/category/{product_category}")
     public List<ProductColorTestVO> productCategory(@PathVariable String product_category){
-        System.out.println("Product Category Success");
+        System.out.println("Product Category Success!");
         return productMapper.productCategory(product_category);
     }
 }

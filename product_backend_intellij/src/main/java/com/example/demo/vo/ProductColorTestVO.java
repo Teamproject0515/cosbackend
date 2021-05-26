@@ -21,4 +21,8 @@ public class ProductColorTestVO {
     String color7;
     String color8;
     String color9;
+
+
+
 }
+
