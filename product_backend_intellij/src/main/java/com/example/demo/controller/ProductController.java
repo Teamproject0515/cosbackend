@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.mapper.ProductMapper;
+import com.example.demo.vo.ProductColorTestVO;
 import com.example.demo.vo.ProductColorVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.UserColorVO;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -36,9 +38,8 @@ public class ProductController {
     }
 
     @GetMapping("/category/{product_category}")
-    public List<ProductColorVO> productCategory(@PathVariable String product_category){
+    public List<ProductColorTestVO> productCategory(@PathVariable String product_category){
         System.out.println("Product Category Success");
         return productMapper.productCategory(product_category);
     }
-
 }

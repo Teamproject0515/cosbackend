@@ -16,7 +16,8 @@ class ProductListComponent extends Component{
         this.state = {
             products : [],
             message : null,
-            category : null
+            category : null,
+            color : null
         }
         this.selectCategory = this.selectCategory.bind(this);
     }
@@ -30,6 +31,7 @@ class ProductListComponent extends Component{
         .then( res => {
             this.setState({
                 products : res.data
+                
             });
         })
         .catch(err => {
@@ -39,7 +41,6 @@ class ProductListComponent extends Component{
 
     selectCategory(e){
         this.state.category = e.target.value;
-        alert('categoryChangeSuccess!');
         this.reloadProductList();
     }
 
@@ -89,11 +90,15 @@ class ProductListComponent extends Component{
     render(){
         return(
             <div>
-                <div style={{marginLeft:'100px', marginRight:'100px'}}>
+                <div style={{}}>
                 <Grid container spacing={3}>
                 <Grid item xs={12}> 
-                <Typography variant ="h4" style={style}>Product List2</Typography>
-                <input type="radio" value="치마" name="category" onChange={this.selectCategory}/>치마
+                <Typography variant ="h4" style={style}>Product List</Typography>
+                </Grid>
+
+                <Grid item xs={12} style={{float:'left'}}> 
+
+                <input type="radio" value="치마" name="category" onClick={this.selectCategory}/>치마
                 <input type="radio" value="바지" name="category" onChange={this.selectCategory}/>바지
                 <input type="radio" value="상의" name="category" onChange={this.selectCategory}/>상의
                 <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
@@ -102,13 +107,13 @@ class ProductListComponent extends Component{
                 </Grid>
 
                 
-
                 {this.state.products.map(product =>
                 <Grid item xs={6} sm={4}>
-                    <Table style={{backgroundColor:'lightblue'}}>          
+                    <Table style={{backgroundColor:'orange'}}>          
                                 <div alingn="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
 
                                 <TableRow key={product.product_seq}>
+                                    
                                     <TableCell component="th" scope="product"> {product.product_img} </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -118,7 +123,7 @@ class ProductListComponent extends Component{
                                     <TableCell alingn="right">{ product.product_price }</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell alingn="right">                                    
+                                    <TableCell alingn="right">  
                                     <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color1}}></div>
                                     <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color2}}></div>
                                     <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color3}}></div>

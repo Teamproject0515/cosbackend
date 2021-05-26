@@ -13,7 +13,6 @@ function Main(){
 
     return(
         <div>
-            <Banner/>
             <Topbig/>
             <div style={{paddingTop:"20px"}}>
                 <h1>Most popular</h1>
@@ -23,7 +22,6 @@ function Main(){
             </div>
             <Mainmid/>
             <Bottombig/>
-            <Footer/>
         </div>
     );
 }
