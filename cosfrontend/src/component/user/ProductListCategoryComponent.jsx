@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import ApiService from "../../ApiService";
 import Grid from '@material-ui/core/Grid';
 
-import Table from '@material-ui/core/Table';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
+import {Table,TableCell,TableRow,Typography} from '@material-ui/core';
 
 
 class ProductListComponent extends Component{
@@ -15,8 +12,8 @@ class ProductListComponent extends Component{
 
         this.state = {
             products : [],
-            message : null,
-            category : null
+            category : null,
+            SEQ : 0
         }
         this.selectCategory = this.selectCategory.bind(this);
     }
@@ -29,131 +26,114 @@ class ProductListComponent extends Component{
         ApiService.productsCategory(this.state.category)
         .then( res => {
             this.setState({
-                products : res.data
+                products : res.data,
             });
         })
         .catch(err => {
             console.log('reloadProductList() Error!', err);
         })
+
+        
     }
 
     selectCategory(e){
         this.state.category = e.target.value;
-        alert('categoryChangeSuccess!');
         this.reloadProductList();
     }
 
-    // reloadProductList = () => {
-    //     ApiService.fetchProducts()
-    //     .then( res => {
-    //         this.setState({
-    //             products : res.data
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log('reloadProductList() Error!', err);
-    //     })
-    // }
-
-    // deleteUser = (userID) => {
-    //     ApiService.deleteUser(userID)
-    //     .then( res => {
-    //         this.setState({
-    //             message : 'User Deleted Successfully.'
-    //         });
-    //         this.setState({
-    //             users : this.state.users.filter(user =>
-    //                 user.id !== userID)
-    //         });
-    //     })
-    //     .catch(err =>{
-    //         console.log('deleteUser() Error!', err);
-    //     })
-    // }
-
-    // editUser = (ID) => {
-    //     window.localStorage.setItem("userID", ID);
-    //     this.props.history.push('/edit-user');
-    // }
-
-    // addUser = () => {
-    //     window.localStorage.removeItem("userID");
-    //     this.props.history.push('/add-user');
-    // }
 
     selectProduct = (SEQ) => {
         window.localStorage.setItem("ProductSEQ", SEQ);
         this.props.history.push('product-detail');
     }
 
+    // selectColor = (SEQ) => {
+    //     ApiService.selectColorById(this.state.SEQ)
+    //     .then( res => {
+    //         this.setState({
+    //             colors : res.data
+    //         });
+    //     })
+    //     .catch(err => {
+    //         console.log('selectColor() Error!', err);
+    //     })
+    // }
+
     render(){
         return(
             <div>
-                <div style={{marginLeft:'100px', marginRight:'100px'}}>
+                <div style={{}}>
                 <Grid container spacing={3}>
-                <Grid item xs={12}> 
-                <Typography variant ="h4" style={style}>Product List2</Typography>
-                <input type="radio" value="치마" name="category" onChange={this.selectCategory}/>치마
-                <input type="radio" value="바지" name="category" onChange={this.selectCategory}/>바지
-                <input type="radio" value="상의" name="category" onChange={this.selectCategory}/>상의
-                <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
-                <input type="radio" value="신발" name="category" onChange={this.selectCategory}/>신발
-                <input type="radio" value="모자" name="category" onChange={this.selectCategory}/>모자
-                </Grid>
+                    <Grid item xs={12}> 
+                    <Typography variant ="h4" style={style}>Product List2</Typography>
+                        <input type="radio" value="치마" name="category" onChange={this.selectCategory}/>치마
+                        <input type="radio" value="바지" name="category" onChange={this.selectCategory}/>바지
+                        <input type="radio" value="상의" name="category" onChange={this.selectCategory}/>상의
+                        <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
+                        <input type="radio" value="신발" name="category" onChange={this.selectCategory}/>신발
+                        <input type="radio" value="모자" name="category" onChange={this.selectCategory}/>모자
+                    </Grid>
 
-                
+                    {this.state.products.map(product =>
+                    <Grid item xs={6} sm={4}>
+                        <Table style={{backgroundColor:'lightorange'}}>          
+                                    <div align="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
 
-                {this.state.products.map(product =>
-                <Grid item xs={6} sm={4}>
-                    <Table style={{backgroundColor:'lightblue'}}>          
-                                <div alingn="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
-
-                                <TableRow key={product.product_seq}>
-                                    <TableCell component="th" scope="product"> {product.product_img} </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">{ product.product_title }</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">{ product.product_price }</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">                                    
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color1}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color2}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color3}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color4}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color5}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color6}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color7}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color8}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color9}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color10}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color11}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color12}}></div>
-                                    </TableCell>
-                                </TableRow>
-                                </div>
-                    </Table>
-                </Grid>
+                                    <TableRow key={product.product_seq}>
+                                        <TableCell component="th" scope="product"> {product.product_img} </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right">{ product.product_title }</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right">{ product.product_price }</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right">
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
+                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
+                                            
+                                        {/* {this.state.SEQ = product.product_seq}
+                                        <div align="right" onClick = {() => {this.selectColor(product.product_seq)}}>11</div>
+                                            {this.state.colors.map(color => 
+                                                <div key={color.product_seq}>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[0]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[1]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[2]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[3]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[4]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[5]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[6]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[7]}}></div>
+                                                    <div style={{width:'15px', height:'15px', backgroundColor:color.colors[8]}}></div>
+                                                </div>
+                                            )} */}
+                                        </TableCell>
+                                    </TableRow>
+                                    </div>
+                        </Table>
+                    </Grid>
                 )}
                 </Grid>
                 </div>
             </div>
         );
     }
-
 }
 
 const style = {
     display: 'flex',
     justifyContent: 'center'
 }
-
-// const root = {
-//     root: {
-//         flexGrow: 1,
-//       },
-// }
 
 export default ProductListComponent;

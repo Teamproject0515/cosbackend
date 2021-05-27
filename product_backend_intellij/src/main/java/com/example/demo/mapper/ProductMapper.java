@@ -1,8 +1,6 @@
 package com.example.demo.mapper;
 
-import com.example.demo.vo.ProductColorVO;
-import com.example.demo.vo.ProductVO;
-import com.example.demo.vo.UserColorVO;
+import com.example.demo.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,8 +8,11 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
 //    List<ProductVO> productList();
-    List<ProductColorVO> productColorList();
+    List<ProductVO> productList();
     ProductVO fetchProductByID(int product_seq);
-    List<ProductColorVO> productCategory(String product_category);
+    List<ProductColorLastVO> productCategory(String product_category);
+    List<ColorVO> selectColor(int SEQ);
+    List<ColorVO> color(int SEQ);
+    List<ProductColorLastVO> colorLast();
 
 }

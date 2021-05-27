@@ -8,9 +8,8 @@
 <!--        SELECT * FROM product-->
 <!--    </select>-->
 
-    <select id="productColorList" resultType="com.example.demo.vo.ProductColorVO">
-        select p.product_seq, p.product_title, p.product_price, p.product_img, p.product_gender, p.product_size, p.product_saled, p.product_category, p.product_content, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
-        from product p, product_color c where p.product_seq = c.fk_product_seq
+    <select id="productList" resultType="com.example.demo.vo.ProductVO">
+        select * from product
     </select>
 
     <select id="fetchProductByID" resultType="com.example.demo.vo.ProductVO"
@@ -18,6 +17,8 @@
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>
 
+
+    <!--
     <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorVO">
         select * from (select p.product_seq, p.product_title, p.product_price, p.product_img, p.product_gender, p.product_size, p.product_saled, p.product_category, p.product_content, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
         from product p, product_color c where p.product_seq = c.fk_product_seq)
@@ -28,5 +29,29 @@
                 product_category = #{product_category}
             </if>
         </where>
+    </select> -->
+
+    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorLastVO">
+        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c
+        <where>
+            <if test="product_category==null">
+                p.product_seq = c.product_seq
+            </if>
+            <if test="product_category!=null">
+                p.product_seq = c.product_seq and p.product_category = #{product_category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">
+        select * from color where product_seq = #{SEQ}
+    </select>
+
+    <select id="color" parameterType="int" resultType="com.example.demo.vo.ColorVO">
+        select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color where product_seq = #{product_seq} group by product_seq
+    </select>
+
+    <select id="colorLast" resultType="com.example.demo.vo.ProductColorLastVO">
+        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c where p.product_seq = c.product_seq
     </select>
 </mapper>

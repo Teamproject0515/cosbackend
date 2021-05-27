@@ -3,7 +3,7 @@ package com.example.demo.vo;
 import lombok.Data;
 
 @Data
-public class ProductVO {
+public class ProductColorLastVO {
 
     int product_seq;
     String product_title;
@@ -15,4 +15,10 @@ public class ProductVO {
     int product_saled;
     String product_category;
     String product_content;
+    String product_color;
+    String[] colors;
+
+    public void setProduct_color(String product_color) {
+        colors=product_color.split(",");
+    }
 }

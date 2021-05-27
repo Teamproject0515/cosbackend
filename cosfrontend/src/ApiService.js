@@ -45,6 +45,10 @@ class ApiService {
         return axios.get(PRODUCT_API_BASE_URL + '/' + productID);
     }
 
+    selectColorById(SEQ){
+        return axios.get(PRODUCT_API_BASE_URL+'/color/'+SEQ);
+    }
+
 }
 
 export default new ApiService();
