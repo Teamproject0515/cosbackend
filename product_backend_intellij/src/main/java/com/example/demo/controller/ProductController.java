@@ -1,12 +1,20 @@
 package com.example.demo.controller;
 
 import com.example.demo.mapper.ProductMapper;
+<<<<<<< HEAD
 import com.example.demo.vo.*;
+=======
+import com.example.demo.vo.ProductColorTestVO;
+import com.example.demo.vo.ProductColorVO;
+import com.example.demo.vo.ProductVO;
+import com.example.demo.vo.UserColorVO;
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -17,17 +25,25 @@ public class ProductController {
     ProductMapper productMapper;
 
     @GetMapping
+<<<<<<< HEAD
     public List<ProductVO> productColorList(){
         System.out.println("productList Success");
         return productMapper.productList();
+=======
+    public List<ProductColorVO> productColorList(){
+        System.out.println("ProductColorVOList Success!");
+        return productMapper.productColorList();
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
     }
 
     @GetMapping("/{product_seq}")
     public ProductVO fetchProductByID(@PathVariable int product_seq){
         ProductVO fetchProduct = productMapper.fetchProductByID(product_seq);
+        System.out.println("fetchProductById Success!");
         return fetchProduct;
     }
 
+<<<<<<< HEAD
     @GetMapping("/{product_category}/{product_pageNum}/{select_color}/{select_size}")
     public List<ProductColorLastVO> productCategory(@PathVariable String product_category, @PathVariable int product_pageNum, @PathVariable String select_color, @PathVariable String select_size){
         ProductColorLastVO productColorLastVO = new ProductColorLastVO();
@@ -50,6 +66,11 @@ public class ProductController {
     public List<ProductColorLastVO> colorLast(){
         System.out.println("colorLast Success");
         return productMapper.colorLast();
+=======
+    @GetMapping("/category/{product_category}")
+    public List<ProductColorTestVO> productCategory(@PathVariable String product_category){
+        System.out.println("Product Category Success!");
+        return productMapper.productCategory(product_category);
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
     }
-
 }

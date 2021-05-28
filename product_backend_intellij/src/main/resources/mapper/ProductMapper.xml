@@ -17,6 +17,7 @@
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>
 
+<<<<<<< HEAD
 
     <!--
     <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorVO">
@@ -82,5 +83,21 @@
 
     <select id="colorLast" resultType="com.example.demo.vo.ProductColorLastVO">
         select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c where p.product_seq = c.product_seq
+=======
+    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorTestVO">
+        select * from (select p.product_title, p.product_price, p.product_gender, p.product_category, p.product_content, p.product_img, c.* from product p,
+        (select product_seq,
+        max(decode(product_color, 'black','black',null)) as color1,
+        max(decode(product_color, 'pink','pink',null)) as color2,
+        max(decode(product_color, 'blue','blue',null)) as color3,
+        max(decode(product_color, 'white','white',null)) as color4,
+        max(decode(product_color, 'gray','gray',null)) as color5,
+        max(decode(product_color, 'green','green',null)) as color6,
+        max(decode(product_color, 'yellow','yellow',null)) as color7,
+        max(decode(product_color, 'orange','orange',null)) as color8,
+        max(decode(product_color, 'purple','purple',null)) as color9
+        from color_test group by product_seq) c where p.product_seq = c.product_seq)
+        where product_category = #{product_category}
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
     </select>
 </mapper>

@@ -12,10 +12,16 @@ class ProductListComponent extends Component{
 
         this.state = {
             products : [],
+<<<<<<< HEAD
             category : null,
             SEQ : 0,
             pageNum : 1
 
+=======
+            message : null,
+            category : null,
+            color : null
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
         }
         this.selectCategory = this.selectCategory.bind(this);
     }
@@ -30,7 +36,12 @@ class ProductListComponent extends Component{
         ApiService.productsCategory(this.state.category, this.state.pageNum)
         .then( res => {
             this.setState({
+<<<<<<< HEAD
                 products : res.data,
+=======
+                products : res.data
+                
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
             });
         })
         .catch(err => {
@@ -57,6 +68,7 @@ class ProductListComponent extends Component{
             <div>
                 <div style={{}}>
                 <Grid container spacing={3}>
+<<<<<<< HEAD
                     <Grid item xs={12}> 
                     <Typography variant ="h4" style={style}>Product List2</Typography>
                         <input type="radio" value="치마" name="category" onChange={this.selectCategory}/>치마
@@ -116,6 +128,57 @@ class ProductListComponent extends Component{
                                     </div>
                         </Table>
                     </Grid>
+=======
+                <Grid item xs={12}> 
+                <Typography variant ="h4" style={style}>Product List</Typography>
+                </Grid>
+
+                <Grid item xs={12} style={{float:'left'}}> 
+
+                <input type="radio" value="치마" name="category" onClick={this.selectCategory}/>치마
+                <input type="radio" value="바지" name="category" onChange={this.selectCategory}/>바지
+                <input type="radio" value="상의" name="category" onChange={this.selectCategory}/>상의
+                <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
+                <input type="radio" value="신발" name="category" onChange={this.selectCategory}/>신발
+                <input type="radio" value="모자" name="category" onChange={this.selectCategory}/>모자
+                </Grid>
+
+                
+                {this.state.products.map(product =>
+                <Grid item xs={6} sm={4}>
+                    <Table style={{backgroundColor:'orange'}}>          
+                                <div alingn="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
+
+                                <TableRow key={product.product_seq}>
+                                    
+                                    <TableCell component="th" scope="product"> {product.product_img} </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell alingn="right">{ product.product_title }</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell alingn="right">{ product.product_price }</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell alingn="right">  
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color1}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color2}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color3}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color4}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color5}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color6}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color7}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color8}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color9}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color10}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color11}}></div>
+                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color12}}></div>
+                                    </TableCell>
+                                </TableRow>
+                                </div>
+                    </Table>
+                </Grid>
+>>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
                 )}
                 </Grid>
                 </div>
