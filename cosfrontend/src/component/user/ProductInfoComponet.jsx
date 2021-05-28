@@ -19,13 +19,14 @@ class ProductInfoComponent extends Component{
         this.loadProduct();
     }
 
+    // 이전 페이지에서 받아온 ProductSEQ를 getItem을 통해서 들고오게된다. 
     loadProduct = () => {
         ApiService.fetchProductByID(window.localStorage.getItem("ProductSEQ"))
         .then( res => {
             this.setState({
                 product : res.data
             })
-            console.log(window.localStorage.getItem("ProductSEQ"))
+            // console.log(window.localStorage.getItem("ProductSEQ"))
         })
         .catch(err => {
             console.log('loadProduct() 에러',err);
@@ -35,7 +36,6 @@ class ProductInfoComponent extends Component{
     render(){
         return(
             <div>
-                
                 {this.state.product.product_seq}
                 {this.state.product.product_title}
                 {this.state.product.product_price}

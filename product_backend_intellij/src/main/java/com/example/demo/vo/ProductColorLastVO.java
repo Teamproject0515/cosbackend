@@ -16,7 +16,12 @@ public class ProductColorLastVO {
     String product_category;
     String product_content;
     String product_color;
+    String product_size_1;
+    int product_pageNum;
     String[] colors;
+    String select_color;
+    String select_size;
+
 
     public void setProduct_color(String product_color) {
         colors=product_color.split(",");

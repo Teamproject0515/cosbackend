@@ -13,17 +13,21 @@ class ProductListComponent extends Component{
         this.state = {
             products : [],
             category : null,
-            SEQ : 0
+            SEQ : 0,
+            pageNum : 1
+
         }
         this.selectCategory = this.selectCategory.bind(this);
     }
 
+    // 페이지로 넘어오면 가장 먼저 실행되는 함수
     componentDidMount(){
         this.reloadProductList();
     }
 
+    // 페이지로 넘어오면 products에 해당 페이지의 json을 가져오게 된다.
     reloadProductList = () => {
-        ApiService.productsCategory(this.state.category)
+        ApiService.productsCategory(this.state.category, this.state.pageNum)
         .then( res => {
             this.setState({
                 products : res.data,
@@ -36,28 +40,17 @@ class ProductListComponent extends Component{
         
     }
 
+    // radio버튼을 클릭하게 되면, 해당 값이 넘어간다. 넘어간 값은 reloadProductList에서 파라미터로 넘긴다.
     selectCategory(e){
         this.state.category = e.target.value;
         this.reloadProductList();
     }
 
-
+    // 한개의 아이템을 클릭하게되면 해당 상세페이지로 이동해야한다. 그렇기 위해서 localStorage에 set으로 값을 담고, 그 값을 상세 페이지에 넘어가서 get으로 불러올 수 있게된다. 
     selectProduct = (SEQ) => {
         window.localStorage.setItem("ProductSEQ", SEQ);
         this.props.history.push('product-detail');
     }
-
-    // selectColor = (SEQ) => {
-    //     ApiService.selectColorById(this.state.SEQ)
-    //     .then( res => {
-    //         this.setState({
-    //             colors : res.data
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log('selectColor() Error!', err);
-    //     })
-    // }
 
     render(){
         return(
@@ -90,18 +83,18 @@ class ProductListComponent extends Component{
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right">
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
-                                            <div style={{width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
                                             
                                         {/* {this.state.SEQ = product.product_seq}
                                         <div align="right" onClick = {() => {this.selectColor(product.product_seq)}}>11</div>

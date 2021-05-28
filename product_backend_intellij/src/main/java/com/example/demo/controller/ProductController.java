@@ -16,12 +16,6 @@ public class ProductController {
     @Autowired
     ProductMapper productMapper;
 
-//    @GetMapping
-//    public List<ProductVO> productList(){
-//        System.out.println("222");
-//        return productMapper.productList();
-//    }
-
     @GetMapping
     public List<ProductVO> productColorList(){
         System.out.println("productList Success");
@@ -34,10 +28,16 @@ public class ProductController {
         return fetchProduct;
     }
 
-    @GetMapping("/category/{product_category}")
-    public List<ProductColorLastVO> productCategory(@PathVariable String product_category){
+    @GetMapping("/{product_category}/{product_pageNum}/{select_color}/{select_size}")
+    public List<ProductColorLastVO> productCategory(@PathVariable String product_category, @PathVariable int product_pageNum, @PathVariable String select_color, @PathVariable String select_size){
+        ProductColorLastVO productColorLastVO = new ProductColorLastVO();
+        productColorLastVO.setProduct_category(product_category);
+        productColorLastVO.setProduct_pageNum(product_pageNum);
+        productColorLastVO.setSelect_color(select_color);
+        productColorLastVO.setSelect_size(select_size);
         System.out.println("Product Category Success");
-        return productMapper.productCategory(product_category);
+        return productMapper.productCategory2(productColorLastVO);
+        // 얘는 지금 리스트형태의 객체를 들고 있다. 1페이지를 누르게되면 1값이 넘어오고 rownum이 1~10인 애들이 출력되서 가야하고, 2누르면 11~20...
     }
 
     @GetMapping("/color/{SEQ}")
@@ -51,4 +51,5 @@ public class ProductController {
         System.out.println("colorLast Success");
         return productMapper.colorLast();
     }
+
 }

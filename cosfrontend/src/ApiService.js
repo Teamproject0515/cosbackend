@@ -37,8 +37,8 @@ class ApiService {
         return axios.get(PRODUCT_API_BASE_URL);
     }
 
-    productsCategory(product_category){
-        return axios.get(PRODUCT_API_BASE_URL+'/category/'+product_category);
+    productsCategory(product_category, product_pageNum){
+        return axios.get(PRODUCT_API_BASE_URL+'/category/'+product_category+'/'+product_pageNum);
     }
 
     fetchProductByID(productID){

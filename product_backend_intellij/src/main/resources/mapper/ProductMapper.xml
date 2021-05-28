@@ -31,8 +31,12 @@
         </where>
     </select> -->
 
-    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorLastVO">
-        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c
+    <select id="productCategory" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
+        select p.*,c.product_color, c.product_size from product p,
+        (select product_seq,
+        substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color,
+        substr(xmlagg(xmlelement(col,',',product_size)).extract('//text()').getstringval(),2)product_size
+        from optiontest group by product_seq) c
         <where>
             <if test="product_category==null">
                 p.product_seq = c.product_seq
@@ -42,6 +46,31 @@
             </if>
         </where>
     </select>
+
+    <select id="productCategory2" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
+        select * from
+        (select ROW_NUMBER() OVER(ORDER BY p.product_seq) RNUM, p.* ,c.product_color, c.product_size as product_size2 from product p,
+        (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color, substr(xmlagg(xmlelement(col,',',product_size)).extract('//text()').getstringval(),2)product_size from optiontest group by product_seq) c
+        where p.product_seq = c.product_seq)
+        <where>
+            <if test="product_category!=null">
+                rnum between ((#{product_pageNum}-1)*10)+1 and (#{product_pageNum}*10) and product_category = #{product_category} and product_color like '%'||#{select_color}||'%' and product_size2 like '%'||#{select_size}||'%'
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">
         select * from color where product_seq = #{SEQ}
