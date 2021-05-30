@@ -8,16 +8,15 @@
 <!--        SELECT * FROM product-->
 <!--    </select>-->
 
-    <select id="productList" resultType="com.example.demo.vo.ProductVO">
-        select * from product
-    </select>
+<!--    <select id="productList" resultType="com.example.demo.vo.ProductVO">-->
+<!--        select * from product-->
+<!--    </select>-->
 
     <select id="fetchProductByID" resultType="com.example.demo.vo.ProductVO"
             parameterType="int">
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>
 
-<<<<<<< HEAD
 
     <!--
     <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorVO">
@@ -33,71 +32,52 @@
     </select> -->
 
     <select id="productCategory" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
-        select p.*,c.product_color, c.product_size from product p,
-        (select product_seq,
-        substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color,
-        substr(xmlagg(xmlelement(col,',',product_size)).extract('//text()').getstringval(),2)product_size
-        from optiontest group by product_seq) c
-        <where>
-            <if test="product_category==null">
-                p.product_seq = c.product_seq
-            </if>
-            <if test="product_category!=null">
-                p.product_seq = c.product_seq and p.product_category = #{product_category}
-            </if>
-        </where>
-    </select>
-
-    <select id="productCategory2" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
         select * from
-        (select ROW_NUMBER() OVER(ORDER BY p.product_seq) RNUM, p.* ,c.product_color, c.product_size as product_size2 from product p,
-        (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color, substr(xmlagg(xmlelement(col,',',product_size)).extract('//text()').getstringval(),2)product_size from optiontest group by product_seq) c
-        where p.product_seq = c.product_seq)
+        (select row_number() over(order by p.product_seq) rnum, p.* ,c.product_color, c.product_size as product_size from product p,
+        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) c
+        where p.product_seq = c.product_option_seq)
         <where>
-            <if test="product_category!=null">
-                rnum between ((#{product_pageNum}-1)*10)+1 and (#{product_pageNum}*10) and product_category = #{product_category} and product_color like '%'||#{select_color}||'%' and product_size2 like '%'||#{select_size}||'%'
+            <if test="product_gender != 'null'">
+                and product_gender = #{product_gender}
+            </if>
+            <if test="product_category != 'null'">
+                and product_category = #{product_category}
+            </if>
+            <if test="select_color != 'null'">
+                and product_color like '%'||#{select_color}||'%'
+            </if>
+            <if test="select_size != 'null'">
+                and product_size like '%'||#{select_size}||'%'
             </if>
         </where>
+<!--        <where>-->
+<!--&lt;!&ndash;            <if test="product_pageNum != null and product_pageNum != ''">&ndash;&gt;-->
+<!--&lt;!&ndash;                rnum between ((#{product_pageNum}-1)*10)+1 and (#{product_pageNum}*10)&ndash;&gt;-->
+<!--&lt;!&ndash;            </if>&ndash;&gt;-->
+<!--            <if test="product_gender != null and product_gender != ''">-->
+<!--                and product_gender = #{product_gender}-->
+<!--            </if>-->
+<!--            <if test="product_category != null and product_category != ''">-->
+<!--                and product_category = #{product_category}-->
+<!--            </if>-->
+<!--            <if test="select_color != null and select_color != ''">-->
+<!--                and product_color like '%'||#{select_color}||'%'-->
+<!--            </if>-->
+<!--            <if test="select_size != null and select_size != ''">-->
+<!--                and product_size like '%'||#{select_size}||'%'-->
+<!--            </if>-->
+<!--        </where>-->
     </select>
 
+<!--    <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">-->
+<!--        select * from color where product_seq = #{SEQ}-->
+<!--    </select>-->
 
+<!--    <select id="color" parameterType="int" resultType="com.example.demo.vo.ColorVO">-->
+<!--        select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color where product_seq = #{product_seq} group by product_seq-->
+<!--    </select>-->
 
-
-
-
-
-
-
-
-
-
-
-
-    <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">
-        select * from color where product_seq = #{SEQ}
-    </select>
-
-    <select id="color" parameterType="int" resultType="com.example.demo.vo.ColorVO">
-        select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color where product_seq = #{product_seq} group by product_seq
-    </select>
-
-    <select id="colorLast" resultType="com.example.demo.vo.ProductColorLastVO">
-        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c where p.product_seq = c.product_seq
-=======
-    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorTestVO">
-        select * from (select p.product_title, p.product_price, p.product_gender, p.product_category, p.product_content, p.product_img, c.* from product p,
-        (select product_seq,
-        max(decode(product_color, 'black','black',null)) as color1,
-        max(decode(product_color, 'pink','pink',null)) as color2,
-        max(decode(product_color, 'blue','blue',null)) as color3,
-        max(decode(product_color, 'white','white',null)) as color4,
-        max(decode(product_color, 'gray','gray',null)) as color5,
-        max(decode(product_color, 'green','green',null)) as color6,
-        max(decode(product_color, 'yellow','yellow',null)) as color7,
-        max(decode(product_color, 'orange','orange',null)) as color8,
-        max(decode(product_color, 'purple','purple',null)) as color9
-        from color_test group by product_seq) c where p.product_seq = c.product_seq)
-        where product_category = #{product_category}
->>>>>>> f77bc0fcafa0911896ba28ed678a72fd782ed4c1
-    </select>
+<!--    <select id="colorLast" resultType="com.example.demo.vo.ProductColorLastVO">-->
+<!--        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c where p.product_seq = c.product_seq-->
+<!--    </select>-->
 </mapper>

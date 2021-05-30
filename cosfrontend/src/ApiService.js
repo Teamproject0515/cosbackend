@@ -37,8 +37,12 @@ class ApiService {
         return axios.get(PRODUCT_API_BASE_URL);
     }
 
-    productsCategory(product_category, product_pageNum){
-        return axios.get(PRODUCT_API_BASE_URL+'/category/'+product_category+'/'+product_pageNum);
+    productsCategory(product_pageNum, product_gender, product_category, select_color, select_size){
+        return axios.get(PRODUCT_API_BASE_URL+'/'+product_pageNum+'/'+product_gender+'/'+product_category+'/'+select_color+'/'+select_size);
+    }
+
+    productsCategoryPost(product){
+        return axios.post(PRODUCT_API_BASE_URL, product);
     }
 
     fetchProductByID(productID){
