@@ -41,9 +41,13 @@ class ApiService {
         return axios.get(PRODUCT_API_BASE_URL+'/'+product_pageNum+'/'+product_gender+'/'+product_category+'/'+select_color+'/'+select_size);
     }
 
-    productsCategoryPost(product){
-        return axios.post(PRODUCT_API_BASE_URL, product);
+    findPageNum(product_gender, product_category, select_color, select_size){
+        return axios.get(PRODUCT_API_BASE_URL+'/'+product_gender+'/'+product_category+'/'+select_color+'/'+select_size);
     }
+
+    // productsCategoryPost(product){
+    //     return axios.post(PRODUCT_API_BASE_URL, product);
+    // }
 
     fetchProductByID(productID){
         return axios.get(PRODUCT_API_BASE_URL + '/' + productID);

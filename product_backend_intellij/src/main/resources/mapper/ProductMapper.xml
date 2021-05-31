@@ -31,26 +31,26 @@
         </where>
     </select> -->
 
-    <select id="productCategory2" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
-        select * from
-        (select row_number() over(order by p.product_seq) rnum, p.* ,c.product_color, c.product_size as product_size from product p,
-        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) c
-        where p.product_seq = c.product_option_seq)
-        <where>
-            <if test="product_gender != 'null'">
-                and product_gender = #{product_gender}
-            </if>
-            <if test="product_category != 'null'">
-                and product_category = #{product_category}
-            </if>
-            <if test="select_color != 'null'">
-                and product_color like '%'||#{select_color}||'%'
-            </if>
-            <if test="select_size != 'null'">
-                and product_size like '%'||#{select_size}||'%'
-            </if>
-        </where>
-    </select>
+<!--    <select id="productCategory2" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">-->
+<!--        select * from-->
+<!--        (select row_number() over(order by p.product_seq) rnum, p.* ,c.product_color, c.product_size as product_size from product p,-->
+<!--        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) c-->
+<!--        where p.product_seq = c.product_option_seq)-->
+<!--        <where>-->
+<!--            <if test="product_gender != 'null'">-->
+<!--                and product_gender = #{product_gender}-->
+<!--            </if>-->
+<!--            <if test="product_category != 'null'">-->
+<!--                and product_category = #{product_category}-->
+<!--            </if>-->
+<!--            <if test="select_color != 'null'">-->
+<!--                and product_color like '%'||#{select_color}||'%'-->
+<!--            </if>-->
+<!--            <if test="select_size != 'null'">-->
+<!--                and product_size like '%'||#{select_size}||'%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
 
     <select id="productCategory" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
         select * from (
@@ -73,10 +73,34 @@
                 and o.product_size like '%'||#{select_size}||'%'
             </if>
         </where>
-
         ) where rnum between ((#{product_pageNum}-1)*12)+1 and (#{product_pageNum}*12)
-
     </select>
+
+
+    <!-- 페이지 번호 출력 -->
+    <select id="findPageNum" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="int">
+        select max(rownum)
+        from product p,
+        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o
+
+        <where>
+            p.product_seq = o.product_option_seq
+            <if test="product_gender != 'null'">
+                and p.product_gender = #{product_gender}
+            </if>
+            <if test="product_category != 'null'">
+                and p.product_category = #{product_category}
+            </if>
+            <if test="select_color != 'null'">
+                and o.product_color like '%'||#{select_color}||'%'
+            </if>
+            <if test="select_size != 'null'">
+                and o.product_size like '%'||#{select_size}||'%'
+            </if>
+        </where>
+    </select>
+
+
 
 <!--    <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">-->
 <!--        select * from color where product_seq = #{SEQ}-->

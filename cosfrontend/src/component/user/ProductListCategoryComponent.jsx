@@ -17,8 +17,8 @@ class ProductListComponent extends Component{
             product_gender : null,
             product_category : null,
             select_color : null,
-            select_size : null
-
+            select_size : null,
+            total_pageNum : 0
         }
         this.selectPageNumUp = this.selectPageNumUp.bind(this);
         this.selectPageNumDown = this.selectPageNumDown.bind(this);
@@ -26,8 +26,6 @@ class ProductListComponent extends Component{
         this.selectCategory = this.selectCategory.bind(this);
         this.selectColor = this.selectColor.bind(this);
         this.selectSize = this.selectSize.bind(this);
-        
-
     }
 
     onChange = (e) => {
@@ -39,11 +37,12 @@ class ProductListComponent extends Component{
     // 페이지로 넘어오면 가장 먼저 실행되는 함수
     componentDidMount(){
         this.reloadProductList();
+        // this.findPageNum();
     }
 
     // 페이지로 넘어오면 products에 해당 페이지의 json을 가져오게 된다.
     reloadProductList = () => {
-        
+
         ApiService.productsCategory(this.state.product_pageNum, this.state.product_gender, this.state.product_category, this.state.select_color, this.state.select_size)
         .then( res => {
             this.setState({
@@ -53,38 +52,69 @@ class ProductListComponent extends Component{
         .catch(err => {
             console.log('reloadProductList() Error!', err);
         })
+
+        ApiService.findPageNum(this.state.product_gender, this.state.product_category, this.state.select_color, this.state.select_size)
+        .then( res => {
+            this.setState({
+                total_pageNum : res.data,
+            });
+        })
+        .catch(err => {
+            console.log('findPageNum() Error!', err);
+        })
     }
+
+    // findPageNum = () =>{
+    //     ApiService.findPageNum(this.state.product_gender, this.state.product_category, this.state.select_color, this.state.select_size)
+    //     .then( res => {
+    //         this.setState({
+    //             total_pageNum : res.data,
+    //         });
+    //     })
+    //     .catch(err => {
+    //         console.log('findPageNum() Error!', err);
+    //     })
+    // }
 
     // radio버튼을 클릭하게 되면, 해당 값이 넘어간다. 넘어간 값은 reloadProductList에서 파라미터로 넘긴다.
 
     selectGender(e){
         this.state.product_gender = e.target.value;
+        this.state.product_pageNum = 1;
         this.reloadProductList();
     }
 
     selectCategory(e){
         this.state.product_category = e.target.value;
+        this.state.product_pageNum = 1;
         this.reloadProductList();
     }
 
     selectColor(e){
         this.state.select_color = e.target.value;
+        this.state.product_pageNum = 1;
         this.reloadProductList();
     }
 
     selectSize(e){
         this.state.select_size = e.target.value;
+        this.state.product_pageNum = 1;
         this.reloadProductList();
     }
 
     selectPageNumUp(){
-        this.state.product_pageNum = this.state.product_pageNum+1;
-        this.reloadProductList();
+        if(this.state.product_pageNum < this.state.total_pageNum){
+            this.state.product_pageNum = this.state.product_pageNum+1;
+            
+            this.reloadProductList();
+        }
     }
 
     selectPageNumDown(){
-        if(this.state.product_pageNum > 1){this.state.product_pageNum = this.state.product_pageNum-1;}
-        this.reloadProductList();
+        if(this.state.product_pageNum > 1){
+            this.state.product_pageNum = this.state.product_pageNum-1;
+            this.reloadProductList();
+        }
     }
 
     // 한개의 아이템을 클릭하게되면 해당 상세페이지로 이동해야한다. 그렇기 위해서 localStorage에 set으로 값을 담고, 그 값을 상세 페이지에 넘어가서 get으로 불러올 수 있게된다. 
