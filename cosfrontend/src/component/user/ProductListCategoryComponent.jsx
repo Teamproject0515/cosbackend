@@ -2,16 +2,10 @@ import React, { Component } from 'react';
 import ApiService from "../../ApiService";
 import Grid from '@material-ui/core/Grid';
 
-import {Table,TableCell,TableRow,Typography} from '@material-ui/core';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import img01 from '../image/01.PNG';
+import {Table,TableCell,TableRow,Typography, InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
+import img01 from '../image/01.jpg';
 
 class ProductListComponent extends Component{
-
 
     constructor(props){
         super(props);
@@ -19,18 +13,20 @@ class ProductListComponent extends Component{
         this.state = {
             products : [],
             SEQ : 0,
-            product_pageNum : 2,
+            product_pageNum : 1,
             product_gender : null,
             product_category : null,
             select_color : null,
             select_size : null
 
         }
-        this.selectPageNum = this.selectPageNum.bind(this);
+        this.selectPageNumUp = this.selectPageNumUp.bind(this);
+        this.selectPageNumDown = this.selectPageNumDown.bind(this);
         this.selectGender = this.selectGender.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
         this.selectColor = this.selectColor.bind(this);
         this.selectSize = this.selectSize.bind(this);
+        
 
     }
 
@@ -81,8 +77,13 @@ class ProductListComponent extends Component{
         this.reloadProductList();
     }
 
-    selectPageNum(e){
-        this.state.product_pageNum = e.target.value;
+    selectPageNumUp(){
+        this.state.product_pageNum = this.state.product_pageNum+1;
+        this.reloadProductList();
+    }
+
+    selectPageNumDown(){
+        if(this.state.product_pageNum > 1){this.state.product_pageNum = this.state.product_pageNum-1;}
         this.reloadProductList();
     }
 
@@ -96,56 +97,97 @@ class ProductListComponent extends Component{
         return(
             <div>
                 <div style={{}}>
-                <Grid container spacing={3}>
+                <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px'}}>
                     <Grid item xs={12}> 
-                    <Typography variant ="h4" style={style}>Product List2</Typography>
-                        {/* <FormControl component="fieldset">
-                            <FormLabel component="legend">Gender</FormLabel>
-                            <FormControlLabel value="남자" control={<Radio />} label="남자" onClike={this.selectGender}/>
-                            <FormControlLabel value="여자" control={<Radio />} label="여자" onClike={this.selectGender}/>
-                        </FormControl>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Category</FormLabel>
-                            <FormControlLabel value="치마" control={<Radio />} label="치마" onClike={this.selectCategory}/>
-                            <FormControlLabel value="바지" control={<Radio />} label="바지" onClike={this.selectCategory}/>
-                        </FormControl> */}
-                        <input type="radio" value="남자" name="gender" onClick={this.selectGender}/>남자
-                        <input type="radio" value="여자" name="gender" onChange={this.selectGender}/>여자<br/>
-                        <input type="radio" value="치마" name="category" onClick={this.selectCategory}/>치마
-                        <input type="radio" value="바지" name="category" onClick={this.selectCategory}/>바지
-                        <input type="radio" value="상의" name="category" onClick={this.selectCategory}/>상의
-                        <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
-                        <input type="radio" value="신발" name="category" onChange={this.selectCategory}/>신발
-                        <input type="radio" value="모자" name="category" onChange={this.selectCategory}/>모자<br/>
-                        <input type="radio" value="black" name="color" onClick={this.selectColor}/>black
-                        <input type="radio" value="white" name="color" onChange={this.selectColor}/>white
-                        <input type="radio" value="green" name="color" onChange={this.selectColor}/>green
-                        <input type="radio" value="yellow" name="color" onChange={this.selectColor}/>yellow
-                        <input type="radio" value="blue" name="color" onChange={this.selectColor}/>blue<br/>
-                        <input type="radio" value="S" name="Size" onClick={this.selectSize}/>S
-                        <input type="radio" value="M" name="Size" onChange={this.selectSize}/>M
-                        <input type="radio" value="L" name="Size" onChange={this.selectSize}/>L
-                        <input type="radio" value="XL" name="Size" onChange={this.selectSize}/>XL<br/>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>New Arrivals</Typography>
                         
+                    <div>
+                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                            <a href="http://localhost:3000/product-list"> <InputLabel>Clothing</InputLabel></a>
+                        </FormControl>
+                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                            <a href="http://localhost:3000/accessories-list"> <InputLabel>Accessories</InputLabel></a>
+                        </FormControl>
+                    </div>
+
+                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 20px 0px 20px'}}/>
+
+                    <div style={{float:'left'}}>
+                        <ul style={{paddingLeft:'20px'}}>
+                        <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
+                            <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
+                            <Select onChange={this.selectGender}>
+                            <MenuItem value={'M'} style={{fontSize:'14px'}}>Man</MenuItem>
+                            <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl style={{minWidth:'80px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Category</InputLabel>
+                            <Select onChange={this.selectCategory}>
+                            <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
+                            <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
+                            <MenuItem value={'원피스'} style={{fontSize:'14px'}}>원피스</MenuItem>
+                            <MenuItem value={'모자'} style={{fontSize:'14px'}}>모자</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
+                            <Select onChange={this.selectColor}>
+                            <MenuItem value={'BLACK'} style={{fontSize:'14px'}}>Black</MenuItem>
+                            <MenuItem value={'WHITE'} style={{fontSize:'14px'}}>White</MenuItem>
+                            <MenuItem value={'RED'} style={{fontSize:'14px'}}>Red</MenuItem>
+                            <MenuItem value={'YELLOW'} style={{fontSize:'14px'}}>Yellow</MenuItem>
+                            <MenuItem value={'GREEN'} style={{fontSize:'14px'}}>Green</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
+                            <Select onChange={this.selectSize}>
+                            <MenuItem value={'XS'} style={{fontSize:'14px'}}>XS</MenuItem>
+                            <MenuItem value={'S'} style={{fontSize:'14px'}}>S</MenuItem>
+                            <MenuItem value={'M'} style={{fontSize:'14px'}}>M</MenuItem>
+                            <MenuItem value={'L'} style={{fontSize:'14px'}}>L</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
+                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
+                        </FormControl>
+                        </ul>
+                    </div>
+                    
+                    <div style={{float:'right'}}>
+                        <ul style={{paddingRight:'20px'}}>
+                        <FormControl style={{minWidth:'50px'}}>
+                            <buttion onClick={this.selectPageNumDown}><InputLabel style={{fontSize:'14px'}}>이전</InputLabel></buttion>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'50px'}}>
+                            <buttion onClick={this.selectPageNumUp}><InputLabel style={{fontSize:'14px'}}>다음</InputLabel></buttion>
+                        </FormControl>
+                        </ul>
+                    </div>
 
                     </Grid>
 
                     {this.state.products.map(product =>
                     <Grid item xs={6} sm={4}>
-                        <Table style={{backgroundColor:'lightorange'}}>          
+                        <Table style={{marginBottom:'30px'}}>          
                                     <div align="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
 
                                     <TableRow key={product.product_seq}>
-                                        <TableCell component="th" scope="product"> <img src= {img01}/> <br/> {product.product_img} </TableCell>
+                                        <TableCell component="th" scope="product" style={{border:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right">{ product.product_title }</TableCell>
+                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right">{ product.product_price }</TableCell>
+                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_price }</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right">
+                                        <TableCell alingn="right" style={{border:'0px'}}>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
@@ -158,7 +200,6 @@ class ProductListComponent extends Component{
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
-                                            
                                         </TableCell>
                                     </TableRow>
                                     </div>

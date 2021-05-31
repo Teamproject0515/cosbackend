@@ -32,10 +32,15 @@ public class ProductController {
     public List<ProductColorLastVO> productCategory(@PathVariable int product_pageNum, @PathVariable String product_gender, @PathVariable String product_category, @PathVariable String select_color, @PathVariable String select_size){
         ProductColorLastVO productColorLastVO = new ProductColorLastVO();
         productColorLastVO.setProduct_pageNum(product_pageNum);
+        System.out.println(product_pageNum);
         productColorLastVO.setProduct_gender(product_gender);
+        System.out.println(product_gender);
         productColorLastVO.setProduct_category(product_category);
+        System.out.println(product_category);
         productColorLastVO.setSelect_color(select_color);
+        System.out.println(select_color);
         productColorLastVO.setSelect_size(select_size);
+        System.out.println(select_size);
         System.out.println("Product Category Success");
         return productMapper.productCategory(productColorLastVO);
     }
