@@ -4,59 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
-<!--    <select id="productList" resultType="com.example.demo.vo.ProductVO">-->
-<!--        SELECT * FROM product-->
-<!--    </select>-->
-
-<!--    <select id="productList" resultType="com.example.demo.vo.ProductVO">-->
-<!--        select * from product-->
-<!--    </select>-->
-
+    <!-- 해당 상품 클릭시 VO하나 출력 -->
     <select id="fetchProductByID" resultType="com.example.demo.vo.ProductVO"
             parameterType="int">
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>
 
-
-    <!--
-    <select id="productCategory" parameterType="String" resultType="com.example.demo.vo.ProductColorVO">
-        select * from (select p.product_seq, p.product_title, p.product_price, p.product_img, p.product_gender, p.product_size, p.product_saled, p.product_category, p.product_content, c.color1, c.color2, c.color3, c.color4, c.color5, c.color6, c.color7, c.color8, c.color9, c.color10, c.color11, c.color12
-        from product p, product_color c where p.product_seq = c.fk_product_seq)
-        <where>
-            <if test="product_category==null">
-            </if>
-            <if test="product_category!=null">
-                product_category = #{product_category}
-            </if>
-        </where>
-    </select> -->
-
-<!--    <select id="productCategory2" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">-->
-<!--        select * from-->
-<!--        (select row_number() over(order by p.product_seq) rnum, p.* ,c.product_color, c.product_size as product_size from product p,-->
-<!--        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) c-->
-<!--        where p.product_seq = c.product_option_seq)-->
-<!--        <where>-->
-<!--            <if test="product_gender != 'null'">-->
-<!--                and product_gender = #{product_gender}-->
-<!--            </if>-->
-<!--            <if test="product_category != 'null'">-->
-<!--                and product_category = #{product_category}-->
-<!--            </if>-->
-<!--            <if test="select_color != 'null'">-->
-<!--                and product_color like '%'||#{select_color}||'%'-->
-<!--            </if>-->
-<!--            <if test="select_size != 'null'">-->
-<!--                and product_size like '%'||#{select_size}||'%'-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
-
-    <select id="productCategory" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="com.example.demo.vo.ProductColorLastVO">
+    <!-- Product 리스트 출력 -->
+    <select id="productCategory" parameterType="com.example.demo.vo.ProductVO" resultType="com.example.demo.vo.ProductVO">
         select * from (
         select rownum rnum, p.* ,o.product_color, o.product_size from product p,
         (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o
-
 
         <where>
                 p.product_seq = o.product_option_seq
@@ -78,7 +36,7 @@
 
 
     <!-- 페이지 번호 출력 -->
-    <select id="findPageNum" parameterType="com.example.demo.vo.ProductColorLastVO" resultType="int">
+    <select id="findPageNum" parameterType="com.example.demo.vo.ProductVO" resultType="int">
         select max(rownum)
         from product p,
         (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o
@@ -100,17 +58,4 @@
         </where>
     </select>
 
-
-
-<!--    <select id="selectColor" parameterType="int" resultType="com.example.demo.vo.ColorVO">-->
-<!--        select * from color where product_seq = #{SEQ}-->
-<!--    </select>-->
-
-<!--    <select id="color" parameterType="int" resultType="com.example.demo.vo.ColorVO">-->
-<!--        select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color where product_seq = #{product_seq} group by product_seq-->
-<!--    </select>-->
-
-<!--    <select id="colorLast" resultType="com.example.demo.vo.ProductColorLastVO">-->
-<!--        select p.*,c.product_color from product p, (select product_seq, substr(xmlagg(xmlelement(col,',',product_color)).extract('//text()').getstringval(),2)product_color from color group by product_seq) c where p.product_seq = c.product_seq-->
-<!--    </select>-->
 </mapper>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
-import img01 from '../image/01.jpg';
+import img01 from '../images/01.jpg';
 
-import {Table, TableBody, TableCell, TableHead, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid} from '@material-ui/core';
+import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid} from '@material-ui/core';
 
 function ProductListComponent(props){
 
@@ -81,7 +81,7 @@ function ProductListComponent(props){
              
              <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px'}}>
 
-                {/* 헤더 */}
+                {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
                     <Typography variant ="h5" style={{marginTop:'30px'}}>New Arrivals</Typography>
                         
@@ -98,6 +98,8 @@ function ProductListComponent(props){
 
                     <div style={{float:'left'}}>
                         <ul style={{paddingLeft:'20px'}}>
+
+                        {/* 성별 선택 - 필요없어짐 */}
                         {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
                             <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
                             <Select onChange={selectGender}>
@@ -105,6 +107,8 @@ function ProductListComponent(props){
                             <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
                             </Select>
                         </FormControl> */}
+
+                        {/* 스타일 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
                             <Select onChange={selectCategory}>
@@ -115,6 +119,7 @@ function ProductListComponent(props){
                             </Select>
                         </FormControl>
 
+                        {/* 컬러 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select onChange={selectColor}>
@@ -126,6 +131,7 @@ function ProductListComponent(props){
                             </Select>
                         </FormControl>
 
+                        {/* 사이즈 선택 */}
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select onChange={selectSize}>

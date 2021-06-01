@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.mapper.ProductMapper;
-import com.example.demo.vo.ProductColorLastVO;
 import com.example.demo.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductColorLastVO> productCategory(ProductColorLastVO productColorLastVO) {
-        return productMapper.productCategory(productColorLastVO);
+    public List<ProductVO> productCategory(ProductVO productVO) {
+        return productMapper.productCategory(productVO);
     }
 
     @Override
-    public int findPageNum(ProductColorLastVO productColorLastVO) {
-        return productMapper.findPageNum(productColorLastVO);
+    public int findPageNum(ProductVO productVO) {
+        return productMapper.findPageNum(productVO);
     }
 }
