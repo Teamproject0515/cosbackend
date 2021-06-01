@@ -9,14 +9,14 @@ function ProductListComponent(props){
     let [products, setproducts ] = useState([]);
     // let [SEQ, seqSEQ] = useState(0);
     let [product_pageNum, setproduct_pageNum] = useState(1);
-    let [product_gender, setproduct_gender] = useState(null);
+    let [product_gender, setproduct_gender] = useState(window.localStorage.getItem("findGender"));
     let [product_category, setproduct_category] = useState(null);
     let [select_color, setselect_color] = useState(null);
     let [select_size, setselect_size] = useState(null);
     let [total_pageNum, settotal_pageNum] = useState(1);
     
     
-    useEffect ( () => {
+    useEffect (() => {
         ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size)
         .then( res => {
               setproducts(res.data);
@@ -70,10 +70,10 @@ function ProductListComponent(props){
     }
 
 
- function Productinfo(ID){
-    window.localStorage.setItem("ProductID", ID);
-    props.history.push('/product-detail');
-}
+    function Productinfo(ID){
+        window.localStorage.setItem("ProductID", ID);
+        props.history.push('/product-detail');
+    }
 
 
     return (

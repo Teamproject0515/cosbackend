@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/Topbig.css"
 import { Button } from "@material-ui/core";
 import Hnmain from "./images/hnmmain.jpg"
-import {Link} from "react-router-dom";
+import { withRouter } from 'react-router-dom'
 
+function Topbig(props){
 
-function Topbig(){
+    function selectCategoryList(findGender){
+        window.localStorage.setItem("findGender", findGender);
+        props.history.push('/product-list');
+    }
 
     return(
         <div className="top-wrapper">
@@ -16,17 +20,15 @@ function Topbig(){
                 <h1>A summer in style</h1>
                 <h3>절제된 감각으로 완성한 뉴 시즌 컬랙션</h3>
                 <div>
-                <Link to="/product-list" style={{textDecoration:'none'}}><Button variant="contained" color="white">
-                        여성 컬랙션
-                    </Button></Link>
+                    <Button variant="contained" color="white" onClick = {() => {selectCategoryList('W')}}>여성 컬랙션</Button>
                 </div>
                 <div>
-                    <Button variant="contained" color="white">
-                        남성 컬랙션
-                    </Button>
+                    <Button variant="contained" color="white" onClick = {() => {selectCategoryList('M')}}>남성 컬랙션</Button>
                 </div>
             </div>
         </div>
     );
 }
-export default Topbig;
+// export default Topbig;
+export default withRouter(Topbig);
+
