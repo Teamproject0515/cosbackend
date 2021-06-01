@@ -92,8 +92,7 @@ function ProductListComponent(props){
 
     return (
         <div>
-             
-             <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'1080px'}}>
+            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'1080px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
