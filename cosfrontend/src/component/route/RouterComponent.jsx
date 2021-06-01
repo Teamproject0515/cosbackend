@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ProductListComponent from "../product/ProductListCategoryComponent";
+import ProductListCategoryComponent from "../product/ProductListCategoryComponent";
+import ProductListSearchComponent from "../product/ProductListSearchComponent";
 import ProductDetailComponent from "../product/ProductInfoComponet";
 import MainComponent from "../../Maincomponent/Main";
 
@@ -10,8 +11,9 @@ const AppRouter = () => {
             <BrowserRouter>
                     <Switch>
                         <Route exact path="/" component={MainComponent} />
-                        <Route path="/product-list" component={ProductListComponent} />
+                        <Route path="/product-list" component={ProductListCategoryComponent} />
                         <Route path="/product-detail" component={ProductDetailComponent} />
+                        <Route path="/search-keyword" component={ProductListSearchComponent} />
                     </Switch>
             </BrowserRouter>
         </div>

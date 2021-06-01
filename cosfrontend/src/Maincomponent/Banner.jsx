@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CloseIcon from '@material-ui/icons/Close';
-import IconButton from "@material-ui/core/IconButton";
+import {IconButton, TextField} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import Logo from "./images/logo.jpg";
@@ -14,17 +14,23 @@ function Banner(){
 
     const showSidebar = ()=> setSidebar(!sidebar);
 
+    function searchKeyword(e){
+        window.localStorage.setItem("search_keyword", e.target.value);
+    }
 
     return(
         <>
             <div className="banner">
-                    <div className="left_menu">
-                        <IconButton className="menuButton" onClick={showSidebar}>
+                    <div style={{float:'left'}} className="left_menu">
+                        <IconButton style={{float:'left'}} className="menuButton" onClick={showSidebar}>
                             <MenuIcon/>
                         </IconButton>
-                        <IconButton className="menuButton">
+                        <IconButton style={{float:'left'}} className="menuButton">
                             <SearchOutlinedIcon/>
                         </IconButton>
+                        <form style={{float:'left'}} noValidate action="/search-keyword" autoComplete="off">
+                            <TextField id="standard-search" label="Search field" type="search" onChange={searchKeyword} style={{width:'100px'}}/>
+                        </form>
                     </div>
                     <div className="mid_menu">
                     <img

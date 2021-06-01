@@ -25,6 +25,8 @@ public class ProductVO {
     String select_color;
     String select_size;
 
+    String search_keyword;
+    String select_option;
 
     public void setProduct_color(String product_color) {
         colors=product_color.split(",");

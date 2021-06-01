@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
 
-import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid} from '@material-ui/core';
+import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
 function ProductListComponent(props){
 
@@ -13,11 +13,16 @@ function ProductListComponent(props){
     let [select_color, setselect_color] = useState(null);
     let [select_size, setselect_size] = useState(null);
     let [total_pageNum, settotal_pageNum] = useState(1);
+    let [search_keyword, setsearch_keyword] = useState(null);
     
     
     useEffect (() => {
 
-        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size)
+        if(window.localStorage.getItem("search_keyword") != null){
+            setsearch_keyword(window.localStorage.getItem("search_keyword"))
+        }
+
+        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword)
         .then( res => {
               setproducts(res.data);
         })
@@ -25,7 +30,7 @@ function ProductListComponent(props){
             console.log('reloadProductList() Error!', err);
         })
 
-        ApiService.findPageNum(product_gender, product_category, select_color, select_size)
+        ApiService.findPageNum(product_gender, product_category, select_color, select_size, search_keyword)
         .then( res => {
                 settotal_pageNum(res.data);
         })
@@ -88,7 +93,6 @@ function ProductListComponent(props){
         window.localStorage.setItem("ProductID", ID);
         props.history.push('/product-detail');
     }
-
 
     return (
         <div>

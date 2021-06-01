@@ -18,6 +18,9 @@
 
         <where>
                 p.product_seq = o.product_option_seq
+            <if test="search_keyword != 'null'">
+                and (p.product_title like '%'||#{search_keyword}||'%' or p.product_content like '%'||#{search_keyword}||'%' or p.product_category like '%'||#{search_keyword}||'%' or p.product_gender like '%'||#{search_keyword}||'%' or o.product_color like '%'||#{search_keyword}||'%' or o.product_size like '%'||#{search_keyword}||'%')
+            </if>
             <if test="product_gender != 'null'">
                 and p.product_gender = #{product_gender}
             </if>
@@ -31,7 +34,13 @@
                 and o.product_size like '%'||#{select_size}||'%'
             </if>
         </where>
-        ) where rnum between ((#{product_pageNum}-1)*12)+1 and (#{product_pageNum}*12)
+        )
+        <where>
+         rnum between ((#{product_pageNum}-1)*12)+1 and (#{product_pageNum}*12)
+            <if test="select_option != 'null'">
+                order by #{select_option} desc
+            </if>
+        </where>
     </select>
 
 
@@ -43,6 +52,9 @@
 
         <where>
             p.product_seq = o.product_option_seq
+            <if test="search_keyword != 'null'">
+                and (p.product_title like '%'||#{search_keyword}||'%' or p.product_content like '%'||#{search_keyword}||'%' or p.product_category like '%'||#{search_keyword}||'%' or p.product_gender like '%'||#{search_keyword}||'%' or o.product_color like '%'||#{search_keyword}||'%' or o.product_size like '%'||#{search_keyword}||'%')
+            </if>
             <if test="product_gender != 'null'">
                 and p.product_gender = #{product_gender}
             </if>

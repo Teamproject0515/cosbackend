@@ -21,12 +21,19 @@ public class ProductController {
         return productService.ProductByID(product_seq);
     }
 
-    @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}")
+    @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}/{select_option}")
     public List<ProductVO> productCategory(ProductVO productVO){
+        System.out.println(productVO.getProduct_gender());
+        System.out.println(productVO.getProduct_pageNum());
+        System.out.println(productVO.getProduct_category());
+        System.out.println(productVO.getSelect_color());
+        System.out.println(productVO.getSelect_size());
+        System.out.println(productVO.getSearch_keyword());
+        System.out.println(productVO.getSelect_option());
         return productService.productCategory(productVO);
     }
 
-    @GetMapping("/{product_gender}/{product_category}/{select_color}/{select_size}")
+    @GetMapping("/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}")
     public int findPageNum(ProductVO productVO){
         if((productService.findPageNum(productVO)%12)==0){
             return productService.findPageNum(productVO)/12;
