@@ -1,164 +1,206 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
-import Grid from '@material-ui/core/Grid';
+import img01 from '../image/01.jpg';
 
-import Table from '@material-ui/core/Table';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
+import {Table, TableBody, TableCell, TableHead, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid} from '@material-ui/core';
 
+function ProductListComponent(props){
 
-class ProductListComponent extends Component{
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            products : [],
-            message : null,
-            category : null,
-            color : null
-        }
-        this.selectCategory = this.selectCategory.bind(this);
-    }
-
-    componentDidMount(){
-        this.reloadProductList();
-    }
-
-    reloadProductList = () => {
-        ApiService.productsCategory(this.state.category)
+    let [products, setproducts ] = useState([]);
+    // let [SEQ, seqSEQ] = useState(0);
+    let [product_pageNum, setproduct_pageNum] = useState(1);
+    let [product_gender, setproduct_gender] = useState(null);
+    let [product_category, setproduct_category] = useState(null);
+    let [select_color, setselect_color] = useState(null);
+    let [select_size, setselect_size] = useState(null);
+    let [total_pageNum, settotal_pageNum] = useState(1);
+    
+    
+    useEffect ( () => {
+        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size)
         .then( res => {
-            this.setState({
-                products : res.data
-                
-            });
+              setproducts(res.data);
+              console.log('리스트',products);
+              console.log('프로',props);   
         })
         .catch(err => {
             console.log('reloadProductList() Error!', err);
         })
+
+        ApiService.findPageNum(product_gender, product_category, select_color, select_size)
+        .then( res => {
+                settotal_pageNum(res.data);
+        })
+        .catch(err => {
+            console.log('findPageNum() Error!', err);
+        })
+        
+    },[product_pageNum, product_gender, product_category, select_color, select_size]);
+
+    function selectGender(e){
+        setproduct_gender(e.target.value); 
+        setproduct_pageNum(1);
     }
 
-    selectCategory(e){
-        this.state.category = e.target.value;
-        this.reloadProductList();
+    function selectCategory(e){
+        setproduct_category(e.target.value);
+        setproduct_pageNum(1);
     }
 
-    // reloadProductList = () => {
-    //     ApiService.fetchProducts()
-    //     .then( res => {
-    //         this.setState({
-    //             products : res.data
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log('reloadProductList() Error!', err);
-    //     })
-    // }
-
-    // deleteUser = (userID) => {
-    //     ApiService.deleteUser(userID)
-    //     .then( res => {
-    //         this.setState({
-    //             message : 'User Deleted Successfully.'
-    //         });
-    //         this.setState({
-    //             users : this.state.users.filter(user =>
-    //                 user.id !== userID)
-    //         });
-    //     })
-    //     .catch(err =>{
-    //         console.log('deleteUser() Error!', err);
-    //     })
-    // }
-
-    // editUser = (ID) => {
-    //     window.localStorage.setItem("userID", ID);
-    //     this.props.history.push('/edit-user');
-    // }
-
-    // addUser = () => {
-    //     window.localStorage.removeItem("userID");
-    //     this.props.history.push('/add-user');
-    // }
-
-    selectProduct = (SEQ) => {
-        window.localStorage.setItem("ProductSEQ", SEQ);
-        this.props.history.push('product-detail');
+    function selectColor(e){
+        setselect_color(e.target.value);
+        setproduct_pageNum(1);
     }
 
-    render(){
-        return(
-            <div>
-                <div style={{}}>
-                <Grid container spacing={3}>
+    function selectSize(e){
+        setselect_size(e.target.value);
+        setproduct_pageNum(1);
+    }
+
+    function selectPageNumUp(){
+        if(product_pageNum < total_pageNum){
+            setproduct_pageNum(product_pageNum+1);
+        }
+    }
+
+    function selectPageNumDown(){
+        if(product_pageNum > 1){
+            setproduct_pageNum(product_pageNum-1);
+        }
+    }
+
+
+ function Productinfo(ID){
+    window.localStorage.setItem("ProductID", ID);
+    props.history.push('/product-detail');
+}
+
+
+    return (
+        <div>
+             
+             <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px'}}>
+
+                {/* 헤더 */}
                 <Grid item xs={12}> 
-                <Typography variant ="h4" style={style}>Product List test</Typography>
-                </Grid>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>New Arrivals</Typography>
+                        
+                    <div>
+                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                            <a href="http://localhost:3000/product-list"> <InputLabel>Clothing</InputLabel></a>
+                        </FormControl>
+                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                            <a href="http://localhost:3000/accessories-list"> <InputLabel>Accessories</InputLabel></a>
+                        </FormControl>
+                    </div>
 
-                <Grid item xs={12} style={{float:'left'}}> 
+                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 20px 0px 20px'}}/>
 
-                <input type="radio" value="치마" name="category" onChange={this.selectCategory}/>치마
-                <input type="radio" value="바지" name="category" onChange={this.selectCategory}/>바지
-                <input type="radio" value="상의" name="category" onChange={this.selectCategory}/>상의
-                <input type="radio" value="하의" name="category" onChange={this.selectCategory}/>하의
-                <input type="radio" value="신발" name="category" onChange={this.selectCategory}/>신발
-                <input type="radio" value="모자" name="category" onChange={this.selectCategory}/>모자
-                </Grid>
+                    <div style={{float:'left'}}>
+                        <ul style={{paddingLeft:'20px'}}>
+                        <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
+                            <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
+                            <Select onChange={selectGender}>
+                            <MenuItem value={'M'} style={{fontSize:'14px'}}>Man</MenuItem>
+                            <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl style={{minWidth:'80px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Category</InputLabel>
+                            <Select onChange={selectCategory}>
+                            <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
+                            <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
+                            <MenuItem value={'원피스'} style={{fontSize:'14px'}}>원피스</MenuItem>
+                            <MenuItem value={'모자'} style={{fontSize:'14px'}}>모자</MenuItem>
+                            </Select>
+                        </FormControl>
 
-                
-                {this.state.products.map(product =>
-                <Grid item xs={6} sm={4}>
-                    <Table style={{backgroundColor:'orange'}}>          
-                                <div alingn="right" onClick = {() => {this.selectProduct(product.product_seq)}}>
+                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
+                            <Select onChange={selectColor}>
+                            <MenuItem value={'BLACK'} style={{fontSize:'14px'}}>Black</MenuItem>
+                            <MenuItem value={'WHITE'} style={{fontSize:'14px'}}>White</MenuItem>
+                            <MenuItem value={'RED'} style={{fontSize:'14px'}}>Red</MenuItem>
+                            <MenuItem value={'YELLOW'} style={{fontSize:'14px'}}>Yellow</MenuItem>
+                            <MenuItem value={'GREEN'} style={{fontSize:'14px'}}>Green</MenuItem>
+                            </Select>
+                        </FormControl>
 
-                                <TableRow key={product.product_seq}>
-                                    
-                                    <TableCell component="th" scope="product"> {product.product_img} </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">{ product.product_title }</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">{ product.product_price }</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell alingn="right">  
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color1}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color2}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color3}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color4}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color5}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color6}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color7}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color8}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color9}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color10}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color11}}></div>
-                                    <div style={{marginRight:'3px', float : 'left', width:'15px', height:'15px', backgroundColor:product.color12}}></div>
-                                    </TableCell>
-                                </TableRow>
+                        <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
+                            <Select onChange={selectSize}>
+                            <MenuItem value={'XS'} style={{fontSize:'14px'}}>XS</MenuItem>
+                            <MenuItem value={'S'} style={{fontSize:'14px'}}>S</MenuItem>
+                            <MenuItem value={'M'} style={{fontSize:'14px'}}>M</MenuItem>
+                            <MenuItem value={'L'} style={{fontSize:'14px'}}>L</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
+                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
+                        </FormControl>
+                        </ul>
+                    </div>
+                    
+                    <div style={{float:'right'}}>
+                        <ul style={{paddingRight:'20px'}}>
+                        <FormControl style={{minWidth:'50px'}}>
+                            <buttion onClick={selectPageNumDown}><InputLabel style={{fontSize:'14px'}}>이전</InputLabel></buttion>
+                        </FormControl>
+
+                        <FormControl style={{minWidth:'50px'}}>
+                            <buttion onClick={selectPageNumUp}><InputLabel style={{fontSize:'14px'}}>다음</InputLabel></buttion>
+                        </FormControl>
+                        </ul>
+                    </div>
+                    </Grid>
+
+
+
+
+                    {/* 바디 */}
+
+                    {products.map(product =>
+                        <Grid item xs={6} sm={4}>
+                            <Table style={{marginBottom:'30px'}}>     
+                                <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
+                                    <TableRow key={product.product_seq}>
+                                        <TableCell component="th" scope="product" style={{border:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_price }</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell alingn="right" style={{border:'0px'}}>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
+                                        </TableCell>
+
+                                    </TableRow>
                                 </div>
-                    </Table>
+                            </Table>
+                        </Grid>
+                    )}
                 </Grid>
-                )}
-                </Grid>
-                </div>
             </div>
-        );
-    }
-
+    )
+    
 }
 
-const style = {
-    display: 'flex',
-    justifyContent: 'center'
-}
 
-// const root = {
-//     root: {
-//         flexGrow: 1,
-//       },
-// }
+
 
 export default ProductListComponent;

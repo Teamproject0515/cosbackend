@@ -21,7 +21,7 @@ class ProductInfoComponent extends Component{
 
     // 이전 페이지에서 받아온 ProductSEQ를 getItem을 통해서 들고오게된다. 
     loadProduct = () => {
-        ApiService.fetchProductByID(window.localStorage.getItem("ProductSEQ"))
+        ApiService.fetchProductByID(window.localStorage.getItem("ProductID"))
         .then( res => {
             this.setState({
                 product : res.data

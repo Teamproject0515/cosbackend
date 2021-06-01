@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ApiService from "../../ApiService";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
-import {Table,TableCell,TableRow,Typography, InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
+import {Table,TableCell,TableRow,Typography, InputLabel, MenuItem, Select, FormControl, Grid} from '@material-ui/core';
 import img01 from '../image/01.jpg';
 
 class ProductListComponent extends Component{
@@ -28,6 +28,7 @@ class ProductListComponent extends Component{
         this.selectSize = this.selectSize.bind(this);
     }
 
+    // 안쓰는 함수
     onChange = (e) => {
         this.setState({
             [e.target.name] : e.target.value
@@ -37,7 +38,6 @@ class ProductListComponent extends Component{
     // 페이지로 넘어오면 가장 먼저 실행되는 함수
     componentDidMount(){
         this.reloadProductList();
-        // this.findPageNum();
     }
 
     // 페이지로 넘어오면 products에 해당 페이지의 json을 가져오게 된다.
@@ -64,17 +64,6 @@ class ProductListComponent extends Component{
         })
     }
 
-    // findPageNum = () =>{
-    //     ApiService.findPageNum(this.state.product_gender, this.state.product_category, this.state.select_color, this.state.select_size)
-    //     .then( res => {
-    //         this.setState({
-    //             total_pageNum : res.data,
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log('findPageNum() Error!', err);
-    //     })
-    // }
 
     // radio버튼을 클릭하게 되면, 해당 값이 넘어간다. 넘어간 값은 reloadProductList에서 파라미터로 넘긴다.
 
@@ -188,6 +177,7 @@ class ProductListComponent extends Component{
                         </ul>
                     </div>
                     
+
                     <div style={{float:'right'}}>
                         <ul style={{paddingRight:'20px'}}>
                         <FormControl style={{minWidth:'50px'}}>
@@ -201,6 +191,9 @@ class ProductListComponent extends Component{
                     </div>
 
                     </Grid>
+
+
+
 
                     {this.state.products.map(product =>
                     <Grid item xs={6} sm={4}>
