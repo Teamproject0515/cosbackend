@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
 
@@ -7,9 +7,8 @@ import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, Fo
 function ProductListComponent(props){
 
     let [products, setproducts ] = useState([]);
-    // let [SEQ, seqSEQ] = useState(0);
     let [product_pageNum, setproduct_pageNum] = useState(1);
-    let [product_gender, setproduct_gender] = useState(window.localStorage.getItem("findGender"));
+    let [product_gender, setproduct_gender] = useState(window.localStorage.getItem("selectGender"));
     let [product_category, setproduct_category] = useState(null);
     let [select_color, setselect_color] = useState(null);
     let [select_size, setselect_size] = useState(null);
@@ -17,11 +16,10 @@ function ProductListComponent(props){
     
     
     useEffect (() => {
+
         ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size)
         .then( res => {
               setproducts(res.data);
-              console.log('리스트',products);
-              console.log('프로',props);   
         })
         .catch(err => {
             console.log('reloadProductList() Error!', err);
@@ -37,39 +35,55 @@ function ProductListComponent(props){
         
     },[product_pageNum, product_gender, product_category, select_color, select_size]);
 
-    function selectGender(e){
-        setproduct_gender(e.target.value); 
+    // 옵션 선택시 선택된 name확인 후 해당 값 변경
+    function selectOption(e){
+        if(e.target.name === 'product_category'){
+            setproduct_category(e.target.value);
+        }else if(e.target.name === 'select_color'){
+            setselect_color(e.target.value);
+        }else if(e.target.name === 'select_size'){
+            setselect_size(e.target.value);
+        }
         setproduct_pageNum(1);
     }
 
-    function selectCategory(e){
-        setproduct_category(e.target.value);
-        setproduct_pageNum(1);
-    }
+    /* 기존에 각각 select했던 메소드를 selectOption으로 통합 */
 
-    function selectColor(e){
-        setselect_color(e.target.value);
-        setproduct_pageNum(1);
-    }
+    // function selectGender(e){
+    //     setproduct_gender(e.target.value); 
+    //     setproduct_pageNum(1);
+    // }
 
-    function selectSize(e){
-        setselect_size(e.target.value);
-        setproduct_pageNum(1);
-    }
+    // function selectCategory(e){
+    //     setproduct_category(e.target.value);
+    //     setproduct_pageNum(1);
+    // }
 
+    // function selectColor(e){
+    //     setselect_color(e.target.value);
+    //     setproduct_pageNum(1);
+    // }
+
+    // function selectSize(e){
+    //     setselect_size(e.target.value);
+    //     setproduct_pageNum(1);
+    // }
+
+    // 페이지 업
     function selectPageNumUp(){
         if(product_pageNum < total_pageNum){
             setproduct_pageNum(product_pageNum+1);
         }
     }
 
+    // 페이지 다운
     function selectPageNumDown(){
         if(product_pageNum > 1){
             setproduct_pageNum(product_pageNum-1);
         }
     }
 
-
+    // 선택한 상품의 상세 페이지로 이동
     function Productinfo(ID){
         window.localStorage.setItem("ProductID", ID);
         props.history.push('/product-detail');
@@ -79,7 +93,7 @@ function ProductListComponent(props){
     return (
         <div>
              
-             <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px'}}>
+             <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'1080px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -111,7 +125,7 @@ function ProductListComponent(props){
                         {/* 스타일 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
-                            <Select onChange={selectCategory}>
+                            <Select name='product_category' onChange={selectOption}>
                             <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
                             <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
                             <MenuItem value={'원피스'} style={{fontSize:'14px'}}>원피스</MenuItem>
@@ -122,7 +136,7 @@ function ProductListComponent(props){
                         {/* 컬러 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
-                            <Select onChange={selectColor}>
+                            <Select name='select_color' onChange={selectOption}>
                             <MenuItem value={'BLACK'} style={{fontSize:'14px'}}>Black</MenuItem>
                             <MenuItem value={'WHITE'} style={{fontSize:'14px'}}>White</MenuItem>
                             <MenuItem value={'RED'} style={{fontSize:'14px'}}>Red</MenuItem>
@@ -134,7 +148,7 @@ function ProductListComponent(props){
                         {/* 사이즈 선택 */}
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
-                            <Select onChange={selectSize}>
+                            <Select name='select_size' onChange={selectOption}>
                             <MenuItem value={'XS'} style={{fontSize:'14px'}}>XS</MenuItem>
                             <MenuItem value={'S'} style={{fontSize:'14px'}}>S</MenuItem>
                             <MenuItem value={'M'} style={{fontSize:'14px'}}>M</MenuItem>
@@ -150,12 +164,12 @@ function ProductListComponent(props){
                     
                     <div style={{float:'right'}}>
                         <ul style={{paddingRight:'20px'}}>
-                        <FormControl style={{minWidth:'50px'}}>
-                            <buttion onClick={selectPageNumDown}><InputLabel style={{fontSize:'14px'}}>이전</InputLabel></buttion>
+                        <FormControl style={{minWidth:'35px'}}>
+                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown}>🠔</buttion></InputLabel>
                         </FormControl>
 
-                        <FormControl style={{minWidth:'50px'}}>
-                            <buttion onClick={selectPageNumUp}><InputLabel style={{fontSize:'14px'}}>다음</InputLabel></buttion>
+                        <FormControl style={{minWidth:'40px'}}>
+                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumUp}>🠖</buttion></InputLabel>
                         </FormControl>
                         </ul>
                     </div>
@@ -165,7 +179,6 @@ function ProductListComponent(props){
 
 
                     {/* 바디 */}
-
                     {products.map(product =>
                         <Grid item xs={6} sm={4}>
                             <Table style={{marginBottom:'30px'}}>     
@@ -181,8 +194,8 @@ function ProductListComponent(props){
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right" style={{border:'0px'}}>
-                                            {/* product안의 color배열을 다시 map해서 출력하는 것 */}
 
+                                            {/* product안의 color배열을 다시 map해서 출력하는 것 */}
                                             {product.colors.map(color=>
                                                 <div key={color.index}>
                                                     <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     

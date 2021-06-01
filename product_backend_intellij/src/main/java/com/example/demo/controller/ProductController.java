@@ -17,8 +17,8 @@ public class ProductController {
 
 
     @GetMapping("/{product_seq}")
-    public ProductVO fetchProductByID(@PathVariable int product_seq){
-        return productService.fetchProductByID(product_seq);
+    public ProductVO ProductByID(@PathVariable int product_seq){
+        return productService.ProductByID(product_seq);
     }
 
     @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}")

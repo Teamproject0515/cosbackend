@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
     <!-- 해당 상품 클릭시 VO하나 출력 -->
-    <select id="fetchProductByID" resultType="com.example.demo.vo.ProductVO"
+    <select id="ProductByID" resultType="com.example.demo.vo.ProductVO"
             parameterType="int">
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>

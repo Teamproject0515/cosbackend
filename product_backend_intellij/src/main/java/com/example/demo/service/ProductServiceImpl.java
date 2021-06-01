@@ -13,17 +13,17 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     ProductMapper productMapper;
 
-
+    // 해당 시퀀스에 맞는 상품 정보 출력
     @Override
-    public ProductVO fetchProductByID(int product_seq) {
-        return productMapper.fetchProductByID(product_seq);
-    }
+    public ProductVO ProductByID(int product_seq) { return productMapper.ProductByID(product_seq); }
 
+    // 옵션 조건에 맞는 상품 리스트 출력
     @Override
     public List<ProductVO> productCategory(ProductVO productVO) {
         return productMapper.productCategory(productVO);
     }
 
+    // 옵션 조건에 맞는 마지막 페이지 번호 출력
     @Override
     public int findPageNum(ProductVO productVO) {
         return productMapper.findPageNum(productVO);

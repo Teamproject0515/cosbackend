@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom'
 
 function Topbig(props){
 
-    function selectCategoryList(findGender){
-        window.localStorage.setItem("findGender", findGender);
+    function selectCategoryList(selectGender){
+        window.localStorage.setItem("selectGender", selectGender);
         props.history.push('/product-list');
     }
 

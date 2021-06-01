@@ -1,4 +1,4 @@
-import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import AppRouter from './component/route/RouterComponent';
 import Banner from "./Maincomponent/Banner";
 import Footer from "./Maincomponent/Footer";
