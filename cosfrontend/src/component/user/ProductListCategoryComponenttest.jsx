@@ -98,15 +98,15 @@ function ProductListComponent(props){
 
                     <div style={{float:'left'}}>
                         <ul style={{paddingLeft:'20px'}}>
-                        <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
+                        {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
                             <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
                             <Select onChange={selectGender}>
                             <MenuItem value={'M'} style={{fontSize:'14px'}}>Man</MenuItem>
                             <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
                             </Select>
-                        </FormControl>
-                        <FormControl style={{minWidth:'80px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Category</InputLabel>
+                        </FormControl> */}
+                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
                             <Select onChange={selectCategory}>
                             <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
                             <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
@@ -175,7 +175,16 @@ function ProductListComponent(props){
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right" style={{border:'0px'}}>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
+                                            {/* product안의 color배열을 다시 map해서 출력하는 것 */}
+
+                                            {product.colors.map(color=>
+                                                <div key={color.index}>
+                                                    <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
+                                                </div>
+                                            )}
+
+                                            {/* color 출력 기존 방식 */}
+                                            {/* <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
@@ -186,14 +195,14 @@ function ProductListComponent(props){
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
                                             <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div>
-                                        </TableCell>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div> */}
 
+                                        </TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
                         </Grid>
-                    )}
+                    )}                    
                 </Grid>
             </div>
     )
