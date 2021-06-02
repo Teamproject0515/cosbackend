@@ -47,16 +47,16 @@ function Banner(){
 
     return(
         <>
-            <div className="banner">
+            <div className="banner" style={{width:'100%'}}>
                     <div style={{float:'left'}} className="left_menu">
                         <IconButton style={{float:'left', minWidth:'50px', marginRight:'10px'}} className="menuButton" onClick={showSidebar}>
                             <MenuIcon/>
                         </IconButton>
                        
-                        <IconButton style={{width:'30px',paddingTop:'7px'}} className="menuButton">
+                        <IconButton style={{paddingTop:'7px'}} className="menuButton">
                             {['top'].map((anchor) => (
                                 <React.Fragment key={anchor}>
-                                <Button onClick={toggleDrawer(anchor, true)}><SearchOutlinedIcon style={{}}/></Button>
+                                <div onClick={toggleDrawer(anchor, true)} style={{width:'23px',height:'23px',paddingTop:'5px'}}><SearchOutlinedIcon/></div>
                                 <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                                     <form noValidate action="/search-keyword" autoComplete="off" style={{width:'100%', height:'80px'}}>
                                         <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{paddingTop:'30px',width:'90%'}}/>
@@ -96,7 +96,7 @@ function Banner(){
                         return(
                             <li key={index} className={item.cName}>
 
-                            <button style={{border:'0px'}} onClick ={() => {selectCategoryList(item.value)}}>
+                            <button style={{border:'0px', backgroundColor:'white'}} onClick ={() => {selectCategoryList(item.value)}}>
                                 <Link to={item.path} >
                                     <span>{item.title}</span>
                                 </Link>

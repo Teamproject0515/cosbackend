@@ -14,16 +14,16 @@ function Topbig(props){
     return(
         <div className="top-wrapper">
             <div className="top-image">
-                <img src={Hnmain}/>
+                <img src={Hnmain} style={{width:'1560px'}}/>
             </div>
             <div className="top-in">
                 <h1>A summer in style</h1>
-                <h3>절제된 감각으로 완성한 뉴 시즌 컬랙션</h3>
+                <h4>절제된 감각으로 완성한 뉴 시즌 컬랙션</h4>
                 <div>
-                    <Button variant="contained" color="white" onClick = {() => {selectCategoryList('W')}}>여성 컬랙션</Button>
+                    <Button variant="contained" style={{backgroundColor:'white', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px'}} onClick = {() => {selectCategoryList('W')}}>여성 에센셜 컬랙션</Button>
                 </div>
                 <div>
-                    <Button variant="contained" color="white" onClick = {() => {selectCategoryList('M')}}>남성 컬랙션</Button>
+                    <Button variant="contained" style={{backgroundColor:'white', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px'}} onClick = {() => {selectCategoryList('M')}}>남성 에센셜 컬랙션</Button>
                 </div>
             </div>
         </div>

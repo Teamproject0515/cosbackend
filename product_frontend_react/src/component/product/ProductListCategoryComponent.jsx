@@ -24,7 +24,7 @@ function ProductListComponent(props){
               setproducts(res.data);
         })
         .catch(err => {
-            console.log('reloadProductList() Error!', err);
+            console.log('product_list print error!', err);
         })
 
         ApiService.findPageNum(product_gender, product_category, select_color, select_size, search_keyword)
@@ -32,9 +32,8 @@ function ProductListComponent(props){
                 settotal_pageNum(res.data);
         })
         .catch(err => {
-            console.log('findPageNum() Error!', err);
+            console.log('find_LastPage print error!', err);
         })
-        
     },[product_pageNum, product_gender, product_category, select_color, select_size]);
 
     // 옵션 선택시 선택된 name확인 후 해당 값 변경
@@ -91,6 +90,9 @@ function ProductListComponent(props){
         props.history.push('/product-detail');
     }
 
+    
+
+
     return (
         <div>
             <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px', width:'100%'}}>
@@ -100,10 +102,10 @@ function ProductListComponent(props){
                     <Typography variant ="h5" style={{marginTop:'30px'}}>New Arrivals</Typography>
                         
                     <div>
-                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'80px'}}>
                             <a href="http://localhost:3000/product-list"> <InputLabel>Clothing</InputLabel></a>
                         </FormControl>
-                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'80px'}}>
                             <a href="http://localhost:3000/accessories-list"> <InputLabel>Accessories</InputLabel></a>
                         </FormControl>
                     </div>
@@ -180,7 +182,7 @@ function ProductListComponent(props){
 
                     {/* 바디 */}
                     {products.map(product =>
-                        <Grid item xs={6} sm={4}>
+                        <Grid item xs={6} sm={4} style={{margin:'0px'}}>
                             <Table style={{marginBottom:'30px'}}>     
                                 <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
                                     <TableRow key={product.product_seq}>
