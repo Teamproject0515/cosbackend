@@ -93,7 +93,7 @@ function ProductListComponent(props){
 
     return (
         <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px'}}>
+            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px', width:'100%'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -113,7 +113,7 @@ function ProductListComponent(props){
                     <div style={{float:'left'}}>
                         <ul style={{paddingLeft:'20px'}}>
 
-                        {/* 성별 선택 - 필요없어짐 */}
+                        {/* 성별 선택 - 필요없어짐 - 대분류로 사용할 수 있음 */}
                         {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
                             <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
                             <Select onChange={selectGender}>
@@ -123,8 +123,8 @@ function ProductListComponent(props){
                         </FormControl> */}
 
                         {/* 스타일 선택 */}
-                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'12px'}}>Style</InputLabel>
+                        <FormControl style={{minWidth:'60px', marginLeft:'0px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
                             <Select name='product_category' onChange={selectOption}>
                             <MenuItem value={'치마'} style={{fontSize:'12px'}}>치마</MenuItem>
                             <MenuItem value={'바지'} style={{fontSize:'12px'}}>바지</MenuItem>
@@ -135,7 +135,7 @@ function ProductListComponent(props){
 
                         {/* 컬러 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'12px'}}>Color</InputLabel>
+                            <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
                             <MenuItem value={'BLACK'} style={{fontSize:'12px'}}>Black</MenuItem>
                             <MenuItem value={'WHITE'} style={{fontSize:'12px'}}>White</MenuItem>
@@ -147,7 +147,7 @@ function ProductListComponent(props){
 
                         {/* 사이즈 선택 */}
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'12px'}}>Size</InputLabel>
+                            <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
                             <MenuItem value={'XS'} style={{fontSize:'12px'}}>XS</MenuItem>
                             <MenuItem value={'S'} style={{fontSize:'12px'}}>S</MenuItem>
@@ -156,14 +156,14 @@ function ProductListComponent(props){
                             </Select>
                         </FormControl>
 
-                        <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
-                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'12px'}}>Reset</InputLabel></a>
+                        <FormControl style={{minWidth:'20px', marginLeft:'20px', width:'20px'}}>
+                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
                         </FormControl>
                         </ul>
                     </div>
                     
                     <div style={{float:'right'}}>
-                        <ul style={{paddingRight:'20px'}}>
+                        <ul style={{paddingLeft:'20px',paddingRight:'20px'}}>
                         <FormControl style={{minWidth:'35px'}}>
                             <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown}>🠔</buttion></InputLabel>
                         </FormControl>

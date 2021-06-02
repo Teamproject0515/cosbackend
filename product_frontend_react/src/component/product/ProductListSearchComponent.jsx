@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
 
+
 import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
 function ProductListComponent(props){
+
 
     let [products, setproducts ] = useState([]);
     let [product_pageNum, setproduct_pageNum] = useState(1);
@@ -15,7 +17,7 @@ function ProductListComponent(props){
     let [total_pageNum, settotal_pageNum] = useState(1);
     let [search_keyword, setsearch_keyword] = useState(window.localStorage.getItem("search_keyword"));
     let [select_option, setselect_option] = useState(null);
-    let [productvo, setproductvo ] = useState([]);
+    // let [productvo, setproductvo ] = useState([]);
 
     
     useEffect (() => {
@@ -100,7 +102,7 @@ function ProductListComponent(props){
 
     return (
         <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px'}}>
+            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px', width:'100%'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -145,7 +147,7 @@ function ProductListComponent(props){
                         </FormControl> */}
 
                         {/* 컬러 선택 */}
-                        <FormControl style={{minWidth:'55px', marginLeft:'20px'}}>
+                        <FormControl style={{minWidth:'55px',  marginLeft:'0px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
                             <MenuItem value={'BLACK'} style={{fontSize:'12px'}}>Black</MenuItem>
@@ -168,8 +170,8 @@ function ProductListComponent(props){
                         </FormControl>
 
                         {/* 정렬 선택 */}
-                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>SORT</InputLabel>
+                        <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
+                            <InputLabel style={{fontSize:'14px'}}>Sort</InputLabel>
                             <Select name='select_option' onChange={selectOption}>
                             <MenuItem value={'product_saled'} style={{fontSize:'12px'}}>추천순</MenuItem>
                             <MenuItem value={'product_seq'} style={{fontSize:'12px'}}>신상품순</MenuItem>
