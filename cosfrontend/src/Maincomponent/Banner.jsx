@@ -28,8 +28,8 @@ function Banner(){
                         <IconButton style={{float:'left'}} className="menuButton">
                             <SearchOutlinedIcon/>
                         </IconButton>
-                        <form style={{float:'left'}} noValidate action="/search-keyword" autoComplete="off">
-                            <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{width:'100px'}}/>
+                        <form style={{float:'left', width:'150px'}} noValidate action="/search-keyword" autoComplete="off">
+                            <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{}}/>
                         </form>
                     </div>
                     <div className="mid_menu">

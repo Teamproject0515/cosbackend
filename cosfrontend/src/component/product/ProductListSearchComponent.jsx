@@ -15,9 +15,12 @@ function ProductListComponent(props){
     let [total_pageNum, settotal_pageNum] = useState(1);
     let [search_keyword, setsearch_keyword] = useState(window.localStorage.getItem("search_keyword"));
     let [select_option, setselect_option] = useState(null);
-    
+    let [productvo, setproductvo ] = useState([]);
+
     
     useEffect (() => {
+
+        // setproductvo(product_pageNum, product_category)
 
         ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option)
         .then( res => {
