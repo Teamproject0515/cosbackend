@@ -23,13 +23,13 @@ public class ProductController {
 
     @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}/{select_option}")
     public List<ProductVO> productCategory(ProductVO productVO){
-        System.out.println(productVO.getProduct_gender());
-        System.out.println(productVO.getProduct_pageNum());
-        System.out.println(productVO.getProduct_category());
-        System.out.println(productVO.getSelect_color());
-        System.out.println(productVO.getSelect_size());
-        System.out.println(productVO.getSearch_keyword());
-        System.out.println(productVO.getSelect_option());
+        System.out.println("PAGENUM : "+productVO.getProduct_pageNum());
+        System.out.println("GENDER : "+productVO.getProduct_gender());
+        System.out.println("CATEGORY : "+productVO.getProduct_category());
+        System.out.println("COLOR : "+productVO.getSelect_color());
+        System.out.println("SIZE : "+productVO.getSelect_size());
+        System.out.println("KEYWORD : "+productVO.getSearch_keyword());
+        System.out.println("OPTION : "+productVO.getSelect_option());
         return productService.productCategory(productVO);
     }
 

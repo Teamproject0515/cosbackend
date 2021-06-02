@@ -22,6 +22,7 @@ function ProductListComponent(props){
         ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option)
         .then( res => {
               setproducts(res.data);
+              
         })
         .catch(err => {
             console.log('reloadProductList() Error!', err);
@@ -35,7 +36,7 @@ function ProductListComponent(props){
             console.log('findPageNum() Error!', err);
         })
         
-    },[product_pageNum, product_gender, product_category, select_color, select_size]);
+    },[product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option]);
 
     // 옵션 선택시 선택된 name확인 후 해당 값 변경
     function selectOption(e){
@@ -96,7 +97,7 @@ function ProductListComponent(props){
 
     return (
         <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'1080px'}}>
+            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -104,7 +105,7 @@ function ProductListComponent(props){
                     <TextField id="standard-search" label="Search field" type="search" />
                 </form> */}
 
-                    <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}" 검색 결과</Typography>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}+{select_option}" 검색 결과</Typography>
                         
                     <div>
                         <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
@@ -141,14 +142,14 @@ function ProductListComponent(props){
                         </FormControl> */}
 
                         {/* 컬러 선택 */}
-                        <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
+                        <FormControl style={{minWidth:'55px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
-                            <MenuItem value={'BLACK'} style={{fontSize:'14px'}}>Black</MenuItem>
-                            <MenuItem value={'WHITE'} style={{fontSize:'14px'}}>White</MenuItem>
-                            <MenuItem value={'RED'} style={{fontSize:'14px'}}>Red</MenuItem>
-                            <MenuItem value={'YELLOW'} style={{fontSize:'14px'}}>Yellow</MenuItem>
-                            <MenuItem value={'GREEN'} style={{fontSize:'14px'}}>Green</MenuItem>
+                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}>Black</MenuItem>
+                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}>White</MenuItem>
+                            <MenuItem value={'RED'} style={{fontSize:'12px'}}>Red</MenuItem>
+                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}>Yellow</MenuItem>
+                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}>Green</MenuItem>
                             </Select>
                         </FormControl>
 
@@ -156,10 +157,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'} style={{fontSize:'14px'}}>XS</MenuItem>
-                            <MenuItem value={'S'} style={{fontSize:'14px'}}>S</MenuItem>
-                            <MenuItem value={'M'} style={{fontSize:'14px'}}>M</MenuItem>
-                            <MenuItem value={'L'} style={{fontSize:'14px'}}>L</MenuItem>
+                            <MenuItem value={'XS'} style={{fontSize:'12px'}}>XS</MenuItem>
+                            <MenuItem value={'S'} style={{fontSize:'12px'}}>S</MenuItem>
+                            <MenuItem value={'M'} style={{fontSize:'12px'}}>M</MenuItem>
+                            <MenuItem value={'L'} style={{fontSize:'12px'}}>L</MenuItem>
                             </Select>
                         </FormControl>
 
@@ -169,12 +170,13 @@ function ProductListComponent(props){
                             <Select name='select_option' onChange={selectOption}>
                             <MenuItem value={'product_saled'} style={{fontSize:'12px'}}>추천순</MenuItem>
                             <MenuItem value={'product_seq'} style={{fontSize:'12px'}}>신상품순</MenuItem>
-                            <MenuItem value={'price'} style={{fontSize:'12px'}}>높은가격순</MenuItem>
+                            <MenuItem value={'product_low_price'} style={{fontSize:'12px'}}>낮은가격순</MenuItem>
+                            <MenuItem value={'product_high_price'} style={{fontSize:'12px'}}>높은가격순</MenuItem>
                             </Select>
                         </FormControl>
 
                         <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
-                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
+                            <a href="http://localhost:3000/search-keyword"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
                         </FormControl>
                         </ul>
                     </div>

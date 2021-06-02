@@ -14,15 +14,12 @@ function ProductListComponent(props){
     let [select_size, setselect_size] = useState(null);
     let [total_pageNum, settotal_pageNum] = useState(1);
     let [search_keyword, setsearch_keyword] = useState(null);
-    
+    let [select_option, setselect_option] = useState(null);
+
     
     useEffect (() => {
 
-        if(window.localStorage.getItem("search_keyword") != null){
-            setsearch_keyword(window.localStorage.getItem("search_keyword"))
-        }
-
-        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword)
+        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option)
         .then( res => {
               setproducts(res.data);
         })
@@ -96,7 +93,7 @@ function ProductListComponent(props){
 
     return (
         <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'1080px'}}>
+            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -127,40 +124,40 @@ function ProductListComponent(props){
 
                         {/* 스타일 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
+                            <InputLabel style={{fontSize:'12px'}}>Style</InputLabel>
                             <Select name='product_category' onChange={selectOption}>
-                            <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
-                            <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
-                            <MenuItem value={'원피스'} style={{fontSize:'14px'}}>원피스</MenuItem>
-                            <MenuItem value={'모자'} style={{fontSize:'14px'}}>모자</MenuItem>
+                            <MenuItem value={'치마'} style={{fontSize:'12px'}}>치마</MenuItem>
+                            <MenuItem value={'바지'} style={{fontSize:'12px'}}>바지</MenuItem>
+                            <MenuItem value={'원피스'} style={{fontSize:'12px'}}>원피스</MenuItem>
+                            <MenuItem value={'모자'} style={{fontSize:'12px'}}>모자</MenuItem>
                             </Select>
                         </FormControl>
 
                         {/* 컬러 선택 */}
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
+                            <InputLabel style={{fontSize:'12px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
-                            <MenuItem value={'BLACK'} style={{fontSize:'14px'}}>Black</MenuItem>
-                            <MenuItem value={'WHITE'} style={{fontSize:'14px'}}>White</MenuItem>
-                            <MenuItem value={'RED'} style={{fontSize:'14px'}}>Red</MenuItem>
-                            <MenuItem value={'YELLOW'} style={{fontSize:'14px'}}>Yellow</MenuItem>
-                            <MenuItem value={'GREEN'} style={{fontSize:'14px'}}>Green</MenuItem>
+                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}>Black</MenuItem>
+                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}>White</MenuItem>
+                            <MenuItem value={'RED'} style={{fontSize:'12px'}}>Red</MenuItem>
+                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}>Yellow</MenuItem>
+                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}>Green</MenuItem>
                             </Select>
                         </FormControl>
 
                         {/* 사이즈 선택 */}
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
+                            <InputLabel style={{fontSize:'12px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'} style={{fontSize:'14px'}}>XS</MenuItem>
-                            <MenuItem value={'S'} style={{fontSize:'14px'}}>S</MenuItem>
-                            <MenuItem value={'M'} style={{fontSize:'14px'}}>M</MenuItem>
-                            <MenuItem value={'L'} style={{fontSize:'14px'}}>L</MenuItem>
+                            <MenuItem value={'XS'} style={{fontSize:'12px'}}>XS</MenuItem>
+                            <MenuItem value={'S'} style={{fontSize:'12px'}}>S</MenuItem>
+                            <MenuItem value={'M'} style={{fontSize:'12px'}}>M</MenuItem>
+                            <MenuItem value={'L'} style={{fontSize:'12px'}}>L</MenuItem>
                             </Select>
                         </FormControl>
 
                         <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
-                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
+                            <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'12px'}}>Reset</InputLabel></a>
                         </FormControl>
                         </ul>
                     </div>

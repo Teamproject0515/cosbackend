@@ -4,17 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
+
+
     <!-- 해당 상품 클릭시 VO하나 출력 -->
     <select id="ProductByID" resultType="com.example.demo.vo.ProductVO"
             parameterType="int">
         SELECT * FROM product WHERE product_seq = #{product_seq}
     </select>
 
+
+
     <!-- Product 리스트 출력 -->
     <select id="productCategory" parameterType="com.example.demo.vo.ProductVO" resultType="com.example.demo.vo.ProductVO">
         select * from (
-        select rownum rnum, p.* ,o.product_color, o.product_size from product p,
-        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o
+        select rownum rnum, p.* ,o.product_color, o.product_size, o.product_saled from product p,
+        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled) product_saled from product_option group by product_option_seq) o
 
         <where>
                 p.product_seq = o.product_option_seq
@@ -37,11 +41,28 @@
         )
         <where>
          rnum between ((#{product_pageNum}-1)*12)+1 and (#{product_pageNum}*12)
-            <if test="select_option != 'null'">
-                order by #{select_option} desc
+            <if test="select_option != 'null' and select_option == 'product_saled'">
+                order by product_saled desc
+                <!--order by #{select_option} desc-->
+            </if>
+
+            <if test="select_option != 'null' and select_option == 'product_seq'">
+                order by product_seq desc
+                <!--order by #{select_option} desc-->
+            </if>
+
+            <if test="select_option != 'null' and select_option == 'product_low_price'">
+                order by product_price
+                <!--order by #{select_option} desc-->
+            </if>
+
+            <if test="select_option != 'null' and select_option == 'product_high_price'">
+                order by product_price desc
+                <!--order by #{select_option} desc-->
             </if>
         </where>
     </select>
+
 
 
     <!-- 페이지 번호 출력 -->

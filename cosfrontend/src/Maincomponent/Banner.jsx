@@ -29,7 +29,7 @@ function Banner(){
                             <SearchOutlinedIcon/>
                         </IconButton>
                         <form style={{float:'left'}} noValidate action="/search-keyword" autoComplete="off">
-                            <TextField id="standard-search" label="Search field" type="search" onChange={searchKeyword} style={{width:'100px'}}/>
+                            <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{width:'100px'}}/>
                         </form>
                     </div>
                     <div className="mid_menu">
@@ -51,6 +51,9 @@ function Banner(){
                             <CloseIcon/>
                         </IconButton>
                     </li>
+                    <form noValidate action="/search-keyword" autoComplete="off" style={{width:'150px', padding: '8px 0px 8px 30px'}}>
+                        <TextField id="standard-search" label="Search" type="search" onChange={searchKeyword} style={{width:'150px'}}/>
+                    </form>
                     {SidebarData.map((item,index)=>{
                         return(
                             <li key={index} className={item.cName}>
