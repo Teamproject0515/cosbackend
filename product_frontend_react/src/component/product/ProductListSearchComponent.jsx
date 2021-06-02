@@ -108,7 +108,7 @@ function ProductListComponent(props){
                     <TextField id="standard-search" label="Search field" type="search" />
                 </form> */}
 
-                    <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}+{select_option}" 검색 결과</Typography>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}" 검색 결과</Typography>
                         
                     <div>
                         <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
