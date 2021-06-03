@@ -2,6 +2,9 @@ package com.example.demo.vo;
 
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 public class ProductVO {
 
@@ -16,9 +19,11 @@ public class ProductVO {
 
     String product_color;
     String[] colors;
+    Set<String> colorSet = new HashSet<String>();
 
     String product_size;
     String[] sizes;
+    Set<String> sizeSet = new HashSet<String>();
 
     int product_pageNum;
 
@@ -28,8 +33,23 @@ public class ProductVO {
     String search_keyword;
     String select_option;
 
+
+//    public void setProduct_color(String product_color) { colors=product_color.split(","); }
+//
+//    public void setProduct_size(String product_size) { sizes=product_size.split(","); }
+
     public void setProduct_color(String product_color) {
         colors=product_color.split(",");
+        for(String i : colors){
+            colorSet.add(i);
+        }
     }
-    public void setProduct_size(String product_size) { sizes=product_size.split(","); }
+
+    public void setProduct_size(String product_size) {
+        sizes=product_size.split(",");
+        for(String i : sizes){
+            sizeSet.add(i);
+        }
+    }
+
 }

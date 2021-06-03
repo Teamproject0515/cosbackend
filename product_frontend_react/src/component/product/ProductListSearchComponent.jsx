@@ -150,11 +150,11 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'55px',  marginLeft:'0px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
-                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}>Black</MenuItem>
-                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}>White</MenuItem>
-                            <MenuItem value={'RED'} style={{fontSize:'12px'}}>Red</MenuItem>
-                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}>Yellow</MenuItem>
-                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}>Green</MenuItem>
+                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Black</div></MenuItem>
+                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>White</div></MenuItem>
+                            <MenuItem value={'RED'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
+                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
+                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Green</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -162,10 +162,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'} style={{fontSize:'12px'}}>XS</MenuItem>
-                            <MenuItem value={'S'} style={{fontSize:'12px'}}>S</MenuItem>
-                            <MenuItem value={'M'} style={{fontSize:'12px'}}>M</MenuItem>
-                            <MenuItem value={'L'} style={{fontSize:'12px'}}>L</MenuItem>
+                            <MenuItem value={'XS'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
+                            <MenuItem value={'S'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>S</div></MenuItem>
+                            <MenuItem value={'M'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>M</div></MenuItem>
+                            <MenuItem value={'L'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>L</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -173,10 +173,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Sort</InputLabel>
                             <Select name='select_option' onChange={selectOption}>
-                            <MenuItem value={'product_saled'} style={{fontSize:'12px'}}>추천순</MenuItem>
-                            <MenuItem value={'product_seq'} style={{fontSize:'12px'}}>신상품순</MenuItem>
-                            <MenuItem value={'product_low_price'} style={{fontSize:'12px'}}>낮은가격순</MenuItem>
-                            <MenuItem value={'product_high_price'} style={{fontSize:'12px'}}>높은가격순</MenuItem>
+                            <MenuItem value={'product_saled'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Best Seller</div></MenuItem>
+                            <MenuItem value={'product_seq'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
+                            <MenuItem value={'product_low_price'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Low Price</div></MenuItem>
+                            <MenuItem value={'product_high_price'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>High Price</div></MenuItem>
                             </Select>
                         </FormControl>
 

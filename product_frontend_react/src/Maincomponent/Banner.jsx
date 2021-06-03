@@ -70,6 +70,7 @@ function Banner(){
 
                     </div>
                     
+
                     <div className="mid_menu">
                         <img src={ Logo } style={{height:"50px"}} alt='testA' />
                     </div>
