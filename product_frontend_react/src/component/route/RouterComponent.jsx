@@ -4,16 +4,18 @@ import ProductListCategoryComponent from "../product/ProductListCategoryComponen
 import ProductListSearchComponent from "../product/ProductListSearchComponent";
 import ProductDetailComponent from "../product/ProductInfoComponet";
 import MainComponent from "../../Maincomponent/Main";
+import ProductListAccessoryComponent from "../product/ProductListAccessoryComponent";
 
 const AppRouter = () => {
     return(
-        <div style={style}>
-            <BrowserRouter>
-                    <Switch>
+        <div style={style} >
+            <BrowserRouter >
+                    <Switch >
                         <Route exact path="/" component={MainComponent} />
                         <Route path="/product-list" component={ProductListCategoryComponent} />
                         <Route path="/product-detail" component={ProductDetailComponent} />
                         <Route path="/search-keyword" component={ProductListSearchComponent} />
+                        <Route path="/accessories-list" component={ProductListAccessoryComponent} />
                     </Switch>
             </BrowserRouter>
         </div>

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
+import { Link } from 'react-router-dom';
+
 
 import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
@@ -91,12 +93,18 @@ function ProductListComponent(props){
         props.history.push('/product-detail');
     }
 
-    
+    function selectCategoryList(selectCategory){
+        window.localStorage.setItem("selectCategory", selectCategory);
+        window.location.reload();
+    }
 
+    function selectAccessoryList(selectCategory){
+        window.localStorage.setItem("selectCategory", selectCategory);
+    }
 
     return (
-        <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px', width:'100%'}}>
+        <div style={{display:'flex', alignItems:'center', textAlign:'center', justifyContent:'center'}}>
+            <Grid container spacing={3} style={{ paddingLeft:'10px', paddingRight:'10px', minHeight:'800px', width:'100%', maxWidth:'1560px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -104,17 +112,19 @@ function ProductListComponent(props){
                         
                     <div>
                         <FormControl style={{minWidth:'80px'}}>
-                            <a href="http://localhost:3000/product-list"> <InputLabel>Clothing</InputLabel></a>
+                            {/* <a href="http://localhost:3000/product-list">  */}
+                            <Link to="/product-list"><button variant="contained" style={{border:'0px'}} onClick = {() => {selectCategoryList(null)}}><InputLabel>Clothing</InputLabel></button></Link>
+                            {/* </a> */}
                         </FormControl>
                         <FormControl style={{minWidth:'80px'}}>
-                            <a href="http://localhost:3000/accessories-list"> <InputLabel>Accessories</InputLabel></a>
+                            <Link to="/accessories-list"><button variant="contained" style={{border:'0px'}} onClick = {() => {selectAccessoryList('악세사리')}}><InputLabel>Accessories</InputLabel></button></Link>
                         </FormControl>
                     </div>
 
-                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 20px 0px 20px'}}/>
+                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 10px 0px', paddingBottom:'0px'}}/>
 
                     <div style={{float:'left'}}>
-                        <ul style={{paddingLeft:'20px'}}>
+                        <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
 
                         {/* 성별 선택 - 필요없어짐 - 대분류로 사용할 수 있음 */}
                         {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
@@ -126,13 +136,13 @@ function ProductListComponent(props){
                         </FormControl> */}
 
                         {/* 스타일 선택 */}
-                        <FormControl style={{minWidth:'60px', marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'60px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
                             <Select name='product_category' onChange={selectOption}>
-                            <MenuItem value={'치마'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>치마</div></MenuItem>
-                            <MenuItem value={'바지'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>바지</div></MenuItem>
-                            <MenuItem value={'원피스'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>원피스</div></MenuItem>
-                            <MenuItem value={'모자'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>모자</div></MenuItem>
+                            <MenuItem value={'치마'}><div style={{fontSize:'14px'}}>치마</div></MenuItem>
+                            <MenuItem value={'바지'}><div style={{fontSize:'14px'}}>바지</div></MenuItem>
+                            <MenuItem value={'원피스'}><div style={{fontSize:'14px'}}>원피스</div></MenuItem>
+                            <MenuItem value={'모자'}><div style={{fontSize:'14px'}}>모자</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -140,11 +150,11 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
-                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Black</div></MenuItem>
-                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>White</div></MenuItem>
-                            <MenuItem value={'RED'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
-                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
-                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Green</div></MenuItem>
+                            <MenuItem value={'BLACK'}><div style={{fontSize:'14px'}}>Black</div></MenuItem>
+                            <MenuItem value={'WHITE'}><div style={{fontSize:'14px'}}>White</div></MenuItem>
+                            <MenuItem value={'RED'}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
+                            <MenuItem value={'YELLOW'}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
+                            <MenuItem value={'GREEN'}   ><div style={{fontSize:'14px'}}>Green</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -152,10 +162,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
-                            <MenuItem value={'S'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>S</div></MenuItem>
-                            <MenuItem value={'M'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>M</div></MenuItem>
-                            <MenuItem value={'L'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>L</div></MenuItem>
+                            <MenuItem value={'XS'}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
+                            <MenuItem value={'S'}><div style={{fontSize:'14px'}}>S</div></MenuItem>
+                            <MenuItem value={'M'}><div style={{fontSize:'14px'}}>M</div></MenuItem>
+                            <MenuItem value={'L'}><div style={{fontSize:'14px'}}>L</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -166,9 +176,9 @@ function ProductListComponent(props){
                     </div>
                     
                     <div style={{float:'right'}}>
-                        <ul style={{paddingLeft:'20px',paddingRight:'20px'}}>
+                        <ul style={{paddingLeft:'20px', marginTop:'0px'}}>
                         <FormControl style={{minWidth:'35px'}}>
-                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown}>🠔</buttion></InputLabel>
+                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown} style={{width:'100px'}}>🠔</buttion></InputLabel>
                         </FormControl>
 
                         <FormControl style={{minWidth:'40px'}}>
@@ -187,7 +197,7 @@ function ProductListComponent(props){
                             <Table style={{marginBottom:'30px'}}>     
                                 <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
                                     <TableRow key={product.product_seq}>
-                                        <TableCell component="th" scope="product" style={{border:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
+                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>

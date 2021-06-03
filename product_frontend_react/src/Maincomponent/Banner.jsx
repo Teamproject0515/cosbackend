@@ -31,7 +31,7 @@ function Banner(){
 
     const [state, setState] = React.useState({
         top: false,
-      });
+    });
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -48,7 +48,7 @@ function Banner(){
     return(
         <>
             <div className="banner" style={{width:'100%'}}>
-                    <div style={{float:'left'}} className="left_menu">
+                    <div className="left_menu">
                         <IconButton style={{float:'left', minWidth:'50px', marginRight:'10px'}} className="menuButton" onClick={showSidebar}>
                             <MenuIcon/>
                         </IconButton>

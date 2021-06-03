@@ -101,8 +101,8 @@ function ProductListComponent(props){
 
 
     return (
-        <div>
-            <Grid container spacing={3} style={{paddingLeft:'20px', paddingRight:'20px', minHeight:'800px', width:'100%'}}>
+        <div style={{display:'flex', alignItems:'center', textAlign:'center', justifyContent:'center'}}>
+            <Grid container spacing={3} style={{paddingLeft:'10px', paddingRight:'10px', minHeight:'800px', width:'100%', maxWidth:'1560px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
@@ -113,18 +113,18 @@ function ProductListComponent(props){
                     <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}" 검색 결과</Typography>
                         
                     <div>
-                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'80px'}}>
                             <a href="http://localhost:3000/product-list"> <InputLabel>Clothing</InputLabel></a>
                         </FormControl>
-                        <FormControl style={{minWidth:'80px', marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'80px'}}>
                             <a href="http://localhost:3000/accessories-list"> <InputLabel>Accessories</InputLabel></a>
                         </FormControl>
                     </div>
 
-                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 20px 0px 20px'}}/>
+                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 10px 0px', paddingBottom:'0px'}}/>
 
                     <div style={{float:'left'}}>
-                        <ul style={{paddingLeft:'20px'}}>
+                        <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
 
                         {/* 성별 선택 - 필요없어짐 */}
                         {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
@@ -147,14 +147,14 @@ function ProductListComponent(props){
                         </FormControl> */}
 
                         {/* 컬러 선택 */}
-                        <FormControl style={{minWidth:'55px',  marginLeft:'0px'}}>
+                        <FormControl style={{minWidth:'55px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
                             <MenuItem value={'BLACK'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Black</div></MenuItem>
-                            <MenuItem value={'WHITE'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>White</div></MenuItem>
-                            <MenuItem value={'RED'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
-                            <MenuItem value={'YELLOW'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
-                            <MenuItem value={'GREEN'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Green</div></MenuItem>
+                            <MenuItem value={'WHITE'}><div style={{fontSize:'14px'}}>White</div></MenuItem>
+                            <MenuItem value={'RED'}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
+                            <MenuItem value={'YELLOW'}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
+                            <MenuItem value={'GREEN'}><div style={{fontSize:'14px'}}>Green</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -162,10 +162,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
-                            <MenuItem value={'S'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>S</div></MenuItem>
-                            <MenuItem value={'M'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>M</div></MenuItem>
-                            <MenuItem value={'L'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>L</div></MenuItem>
+                            <MenuItem value={'XS'}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
+                            <MenuItem value={'S'}><div style={{fontSize:'14px'}}>S</div></MenuItem>
+                            <MenuItem value={'M'}><div style={{fontSize:'14px'}}>M</div></MenuItem>
+                            <MenuItem value={'L'}><div style={{fontSize:'14px'}}>L</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -173,10 +173,10 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Sort</InputLabel>
                             <Select name='select_option' onChange={selectOption}>
-                            <MenuItem value={'product_saled'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Best Seller</div></MenuItem>
-                            <MenuItem value={'product_seq'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
-                            <MenuItem value={'product_low_price'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Low Price</div></MenuItem>
-                            <MenuItem value={'product_high_price'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>High Price</div></MenuItem>
+                            <MenuItem value={'product_saled'}><div style={{fontSize:'14px'}}>Best Seller</div></MenuItem>
+                            <MenuItem value={'product_seq'}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
+                            <MenuItem value={'product_low_price'}><div style={{fontSize:'14px'}}>Low Price</div></MenuItem>
+                            <MenuItem value={'product_high_price'}><div style={{fontSize:'14px'}}>High Price</div></MenuItem>
                             </Select>
                         </FormControl>
 
@@ -187,7 +187,7 @@ function ProductListComponent(props){
                     </div>
                     
                     <div style={{float:'right'}}>
-                        <ul style={{paddingRight:'20px'}}>
+                        <ul style={{paddingRight:'0px', marginTop:'0px'}}>
                         <FormControl style={{minWidth:'35px'}}>
                             <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown}>🠔</buttion></InputLabel>
                         </FormControl>
@@ -204,11 +204,11 @@ function ProductListComponent(props){
 
                     {/* 바디 */}
                     {products.map(product =>
-                        <Grid item xs={6} sm={4}>
+                        <Grid item xs={6} sm={4} style={{margin:'0px'}}>
                             <Table style={{marginBottom:'30px'}}>     
                                 <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
                                     <TableRow key={product.product_seq}>
-                                        <TableCell component="th" scope="product" style={{border:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
+                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>
@@ -220,7 +220,7 @@ function ProductListComponent(props){
                                         <TableCell alingn="right" style={{border:'0px'}}>
 
                                             {/* product안의 color배열을 다시 map해서 출력하는 것 */}
-                                            {product.colors.map(color=>
+                                            {product.colorSet.map(color=>
                                                 <div key={color.index}>
                                                     <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
                                                 </div>

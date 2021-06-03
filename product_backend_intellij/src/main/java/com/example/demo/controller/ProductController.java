@@ -23,6 +23,7 @@ public class ProductController {
 
     @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}/{select_option}")
     public List<ProductVO> productCategory(ProductVO productVO){
+        System.out.println("Page Move Success");
         System.out.println("PAGENUM : "+productVO.getProduct_pageNum());
         System.out.println("GENDER : "+productVO.getProduct_gender());
         System.out.println("CATEGORY : "+productVO.getProduct_category());

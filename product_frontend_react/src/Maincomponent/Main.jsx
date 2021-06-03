@@ -10,7 +10,7 @@ function Main(){
 
 
     return(
-        <div>
+        <div >
             <Topbig/>
             <Mainmid/>
             <Bottombig/>

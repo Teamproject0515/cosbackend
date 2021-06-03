@@ -6,10 +6,10 @@ import Footer from "./Maincomponent/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Banner/>
-        <AppRouter/>
+    <div className="App" >
+      <Router >
+        <Banner />
+        <AppRouter />
         <Footer/>
       </Router>
     </div>
