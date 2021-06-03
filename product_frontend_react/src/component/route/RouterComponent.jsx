@@ -6,6 +6,7 @@ import ProductDetailComponent from "../product/ProductInfoComponet";
 import MainComponent from "../../Maincomponent/Main";
 import ProductListAccessoryComponent from "../product/ProductListAccessoryComponent";
 import ProductNewArrivalsComponent from "../product/ProductNewArrivalsComponent";
+import MyCosMemberComponent from "../product/MyCosMemberComponent";
 
 const AppRouter = () => {
     return(
@@ -18,6 +19,7 @@ const AppRouter = () => {
                         <Route path="/search-keyword" component={ProductListSearchComponent} />
                         <Route path="/accessories-list" component={ProductListAccessoryComponent} />
                         <Route path="/new-arrivals" component={ProductNewArrivalsComponent} />
+                        <Route path="/mycos-member" component={MyCosMemberComponent} />
                     </Switch>
             </BrowserRouter>
         </div>

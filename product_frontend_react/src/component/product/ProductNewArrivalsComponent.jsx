@@ -53,7 +53,7 @@ function ProductListComponent(props){
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
-                    <Typography variant ="h5" style={{marginTop:'30px'}}>New Arrivals</Typography>
+                    <Typography variant ="h5" style={{margin:'30px 0px 30px 0px'}}>New Arrivals</Typography>
                 </Grid>
 
 
@@ -126,7 +126,7 @@ function ProductListComponent(props){
 
                         <Grid item xs={12}> 
                         <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 50px 0px', paddingBottom:'0px'}}/>
-                        <Typography variant ="h5" style={{margin:'70px 0px 70px 0px'}}>더 많은 아이템 살펴보기</Typography>
+                        <Typography variant ="h5" style={{margin:'70px 0px 40px 0px'}}>더 많은 아이템 살펴보기</Typography>
                         </Grid>
 
                         <Grid item xs={6} sm={3} style={{margin:'0px'}}>

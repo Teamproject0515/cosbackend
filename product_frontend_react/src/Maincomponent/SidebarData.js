@@ -1,7 +1,11 @@
 import React from "react"
 
 export const SidebarData=[
-
+    {
+        title:"Best Arrivals",
+        path:"/best-arrivals",
+        cName:"nav-text"
+    },
     {
         title:"New Arrivals",
         path:"/new-arrivals",
@@ -25,10 +29,6 @@ export const SidebarData=[
         path:"/product-list",
         cName:"nav-text",
         value:"KIDS",
-    },
-    {
-        title:"Magazine",
-        path:"/magazine",
-        cName:"nav-text"
     }
+
 ]

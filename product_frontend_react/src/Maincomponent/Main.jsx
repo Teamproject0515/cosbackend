@@ -1,5 +1,4 @@
 import React from "react";
-import Banner from "./Banner";
 import Topbig from "./Topbig";
 import "./css/Main.css"
 import Mainmid from "./Mainmid";
@@ -10,7 +9,7 @@ function Main(){
 
 
     return(
-        <div >
+        <div>
             <Topbig/>
             <Mainmid/>
             <Bottombig/>

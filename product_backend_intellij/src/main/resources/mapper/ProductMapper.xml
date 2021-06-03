@@ -22,22 +22,22 @@
 
         <where>
                 p.product_seq = o.product_option_seq
-            <if test="search_keyword != 'null'">
+            <if test="search_keyword != 'null' and product_gender != 'undefined'">
                 and (p.product_title like '%'||#{search_keyword}||'%' or p.product_content like '%'||#{search_keyword}||'%' or p.product_category like '%'||#{search_keyword}||'%' or p.product_gender like '%'||#{search_keyword}||'%' or o.product_color like '%'||#{search_keyword}||'%' or o.product_size like '%'||#{search_keyword}||'%')
             </if>
-            <if test="product_gender != 'null'">
+            <if test="product_gender != 'null' and product_gender != 'undefined'">
                 and p.product_gender = #{product_gender}
             </if>
-            <if test="product_category != 'null'">
+            <if test="product_category != 'null' and product_gender != 'undefined'">
                 and p.product_category = #{product_category}
             </if>
             <if test="product_category == 'null'">
                 and p.product_category != '악세사리'
             </if>
-            <if test="select_color != 'null'">
+            <if test="select_color != 'null' and product_gender != 'undefined'">
                 and o.product_color like '%'||#{select_color}||'%'
             </if>
-            <if test="select_size != 'null'">
+            <if test="select_size != 'null' and product_gender != 'undefined'">
                 and o.product_size like '%'||#{select_size}||'%'
             </if>
         </where>
