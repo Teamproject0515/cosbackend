@@ -4,7 +4,7 @@ export const SidebarData=[
 
     {
         title:"New Arrivals",
-        path:"/product-list",
+        path:"/new-arrivals",
         cName:"nav-text",
         value:null,
     },

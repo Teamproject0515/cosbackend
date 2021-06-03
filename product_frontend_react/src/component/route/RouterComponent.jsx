@@ -5,6 +5,7 @@ import ProductListSearchComponent from "../product/ProductListSearchComponent";
 import ProductDetailComponent from "../product/ProductInfoComponet";
 import MainComponent from "../../Maincomponent/Main";
 import ProductListAccessoryComponent from "../product/ProductListAccessoryComponent";
+import ProductNewArrivalsComponent from "../product/ProductNewArrivalsComponent";
 
 const AppRouter = () => {
     return(
@@ -16,6 +17,7 @@ const AppRouter = () => {
                         <Route path="/product-detail" component={ProductDetailComponent} />
                         <Route path="/search-keyword" component={ProductListSearchComponent} />
                         <Route path="/accessories-list" component={ProductListAccessoryComponent} />
+                        <Route path="/new-arrivals" component={ProductNewArrivalsComponent} />
                     </Switch>
             </BrowserRouter>
         </div>

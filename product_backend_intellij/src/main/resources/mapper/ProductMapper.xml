@@ -31,6 +31,9 @@
             <if test="product_category != 'null'">
                 and p.product_category = #{product_category}
             </if>
+            <if test="product_category == 'null'">
+                and p.product_category != '악세사리'
+            </if>
             <if test="select_color != 'null'">
                 and o.product_color like '%'||#{select_color}||'%'
             </if>

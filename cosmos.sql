@@ -619,7 +619,7 @@ select * from product_option;
 
 select rownum rnum, p.* ,o.product_color, o.product_size, o.product_saled from product p, 
 (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled) product_saled from product_option group by product_option_seq) o 
-where p.product_seq = o.product_option_seq and p.product_gender='KIDS';
+where p.product_seq = o.product_option_seq and p.product_category != '¾Ç¼¼»ç¸®';
 
 select 
     product_option_seq, 
