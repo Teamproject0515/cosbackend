@@ -8,6 +8,7 @@ import new05 from '../images/new05.jpg';
 import new06 from '../images/new06.jpg';
 import new07 from '../images/new07.jpg';
 import new08 from '../images/new08.jpg';
+import NewArrivalsComponent from './NewArrivalsComponent';
 
 import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
@@ -56,142 +57,164 @@ function ProductListComponent(props){
                     <Typography variant ="h5" style={{margin:'30px 0px 30px 0px'}}>New Arrivals</Typography>
                 </Grid>
 
+                <NewArrivalsComponent function={() => selectAll("W")} img={new01} title="WOMEN: NEW ARRIVALS" link="쇼핑하기"/>
+
+                <NewArrivalsComponent function={() => selectAccessory("W")} img={new02} title="WOMEN: NEW ACCESSORIES" link="쇼핑하기"/>
+
+                <NewArrivalsComponent function={() => selectAll("M")} img={new03} title="MEN: NEW ARRIVALS" link="쇼핑하기"/>
+
+                <NewArrivalsComponent function={() => selectAccessory("M")} img={new04} title="MEN: NEW ACCESSORIES" link="쇼핑하기"/>
+
+                <Grid item xs={12}> 
+                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 50px 0px', paddingBottom:'0px'}}/>
+                    <Typography variant ="h5" style={{margin:'70px 0px 40px 0px'}}>더 많은 아이템 살펴보기</Typography>
+                </Grid>
+
+                <NewArrivalsComponent function={() => selectAllList('W')} img={new05} title="WOMEN'S COLLECTION" link="여성 컬렉션"/>
+
+                <NewArrivalsComponent function={() => selectAllList('M')} img={new06} title="MEN'S COLLECTION" link="남성 컬렉션"/>
+
+                <NewArrivalsComponent function={() => selectAllList('null')} img={new07} title="ALL COLLECTION" link="ALL PRODUCT"/>
+
+                <NewArrivalsComponent function={() => selectMagazine()} img={new08} title="FASHION FOR THE FUTURE" link="더 보기"/>
+
+
 
                     {/* 바디 여성 상품 */}
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        {/* <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAll('W')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new01} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>WOMEN: NEW ARRIVALS</TableCell>
+                                        <TableCell style={style_tablecell}>WOMEN: NEW ARRIVALS</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>쇼핑하기</TableCell>
+                                        <TableCell style={style_tablecell}>쇼핑하기</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        {/* <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAccessory('W')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new02} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new02} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>WOMEN: NEW ACCESSORIES</TableCell>
+                                        <TableCell style={style_tablecell}>WOMEN: NEW ACCESSORIES</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>쇼핑하기</TableCell>
+                                        <TableCell style={style_tablecell}>쇼핑하기</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
-                        </Grid>
+                        </Grid> */}
 
 
                     {/* 남성 상품 */}
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        {/* <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAll('M')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new03} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new03} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>MEN: NEW ARRIVALS</TableCell>
+                                        <TableCell style={style_tablecell}>MEN: NEW ARRIVALS</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>쇼핑하기</TableCell>
+                                        <TableCell style={style_tablecell}>쇼핑하기</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        {/* <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAccessory('M')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new04} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new04} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>MEN: NEW ACCESSORIES</TableCell>
+                                        <TableCell style={style_tablecell}>MEN: NEW ACCESSORIES</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>쇼핑하기</TableCell>
+                                        <TableCell style={style_tablecell}>쇼핑하기</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={12}> 
+                        {/* <Grid item xs={12}> 
                         <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 50px 0px', paddingBottom:'0px'}}/>
                         <Typography variant ="h5" style={{margin:'70px 0px 40px 0px'}}>더 많은 아이템 살펴보기</Typography>
                         </Grid>
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAllList('W')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new05} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new05} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>WOMEN'S COLLECTION</TableCell>
+                                        <TableCell style={style_tablecell}>WOMEN'S COLLECTION</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>여성 컬렉션</TableCell>
+                                        <TableCell style={style_tablecell}>여성 컬렉션</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
                         </Grid>
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAllList('M')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new06} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new06} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>MEN'S COLLECTION</TableCell>
+                                        <TableCell style={style_tablecell}>MEN'S COLLECTION</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>남성 컬렉션</TableCell>
+                                        <TableCell style={style_tablecell}>남성 컬렉션</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
                         </Grid>
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectAllList('null')}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new07} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new07} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>ALL COLLECTION</TableCell>
+                                        <TableCell style={style_tablecell}>ALL COLLECTION</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>ALL PRODUCT</TableCell>
+                                        <TableCell style={style_tablecell}>ALL PRODUCT</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
                         </Grid>
 
-                        <Grid item xs={6} sm={3} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
+                        <Grid item xs={6} sm={3}>
+                            <Table style={style_table}>     
                                 <div align="right" onClick = {() => {selectMagazine()}}>
                                     <TableRow>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new08} style={{width:'100%'}}/></TableCell>
+                                        <TableCell style={style_tablecell_img}> <img src={new08} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>FASHION FOR THE FUTURE</TableCell>
+                                        <TableCell style={style_tablecell}>FASHION FOR THE FUTURE</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px', fontSize:'12px', padding:'10px 0px 10px 0px'}}>더 보기</TableCell>
+                                        <TableCell style={style_tablecell}>더 보기</TableCell>
                                     </TableRow>
                                 </div>
                             </Table>
-                        </Grid>
+                        </Grid> */}
 
                 </Grid>
             </div>
@@ -199,7 +222,20 @@ function ProductListComponent(props){
     
 }
 
+// const style_tablecell_img = {
+//     border : '0px',
+//     padding : '0px',
+// }
 
+// const style_tablecell = {
+//     border : '0px',
+//     fontSize : '12px',
+//     padding : '10px 0px 10px 0px',
+// }
+
+// const style_table = {
+//     marginBottom:'30px'
+// }
 
 
 export default ProductListComponent;

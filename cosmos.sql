@@ -642,6 +642,9 @@ drop table product1;
 drop table product_option1;
 drop sequence product_seq;
 
+create sequence product_seq increment by 1 start with 0 minvalue 0;
+
+
 
 -- 20210604 테이블 수정 --
 
@@ -657,7 +660,8 @@ product_category varchar2(500) not null,
 product_img varchar2(500) not null,
 product_color varchar2(30) not null,
 product_size varchar2(30) not null,
-product_material varchar2(30) not null
+product_material varchar2(30) not null,
+product_date date default sysdate
 );
 
 
@@ -671,66 +675,66 @@ product_saled number(30) default 0
 );
 
 
-insert into product values(1, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'XL', '면');
-insert into product values(2, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'L', '면');
-insert into product values(3, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'XS', '면');
-insert into product values(4, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면');
-insert into product values(5, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'XL', '우레탄');
-insert into product values(6, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄');
-insert into product values(7, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'WHITE', 'XS', '우레탄');
-insert into product values(8, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론');
-insert into product values(9, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'BLACK', 'XL', '나일론');
-insert into product values(10, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'BLACK', 'L', '나일론');
-insert into product values(11, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'XS', '나일론');
-insert into product values(12, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'M', '나일론');
-insert into product values(13, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'XL', '스판');
-insert into product values(14, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'L', '스판');
-insert into product values(15, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'WHITE', 'XS', '스판');
-insert into product values(16, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'M', '모직');
-insert into product values(17, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직');
-insert into product values(18, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'L', '모직');
-insert into product values(19, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'XS', '모직');
-insert into product values(20, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'WHITE', 'M', '모직');
-insert into product values(21, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'BLACK', 'XL', '모직');
-insert into product values(22, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'L', '면');
-insert into product values(23, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '면');
-insert into product values(24, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면');
-insert into product values(25, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'XL', '면');
-insert into product values(26, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'BLACK', 'L', '면');
-insert into product values(27, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'WHITE', 'XS', '면');
-insert into product values(28, 10, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄');
-insert into product values(29, 11, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '우레탄');
-insert into product values(30, 12, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'WHITE', 'M', '우레탄');
-insert into product values(31, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'RED', 'XL', '면');
-insert into product values(32, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'GREEN', 'L', '면');
-insert into product values(33, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'PINK', 'XS', '면');
-insert into product values(34, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면');
-insert into product values(35, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'YELLOW', 'XL', '우레탄');
-insert into product values(36, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄');
-insert into product values(37, 16, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'ORANGE', 'XS', '우레탄');
-insert into product values(38, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론');
-insert into product values(39, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'GREEN', 'XL', '나일론');
-insert into product values(40, 16, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'YELLOW', 'L', '나일론');
-insert into product values(41, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'PURPLE', 'XS', '나일론');
-insert into product values(42, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'RED', 'M', '나일론');
-insert into product values(43, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'RED', 'XL', '스판');
-insert into product values(44, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'PURPLE', 'L', '스판');
-insert into product values(45, 18, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'YELLOW', 'XS', '스판');
-insert into product values(46, 18, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'PURPLE', 'M', '모직');
-insert into product values(47, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직');
-insert into product values(48, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'RED', 'L', '모직');
-insert into product values(49, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'YELLOW', 'XS', '모직');
-insert into product values(50, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'PURPLE', 'M', '모직');
-insert into product values(51, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'GREEN', 'XL', '모직');
-insert into product values(52, 20, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'PURPLE', 'L', '면');
-insert into product values(53, 21, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'RED', 'XS', '면');
-insert into product values(54, 22, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면');
-insert into product values(55, 23, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XL', '면');
-insert into product values(56, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'PURPLE', 'L', '면');
-insert into product values(57, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'RED', 'XS', '면');
-insert into product values(58, 25, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄');
-insert into product values(59, 25, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XS', '우레탄');
-insert into product values(60, 26, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'RED', 'M', '우레탄');
+insert into product values(1, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'XL', '면', sysdate);
+insert into product values(2, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'L', '면', sysdate);
+insert into product values(3, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'XS', '면', sysdate);
+insert into product values(4, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면', sysdate);
+insert into product values(5, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'XL', '우레탄', sysdate);
+insert into product values(6, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄', sysdate);
+insert into product values(7, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'WHITE', 'XS', '우레탄', sysdate);
+insert into product values(8, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론', sysdate);
+insert into product values(9, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'BLACK', 'XL', '나일론', sysdate);
+insert into product values(10, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'BLACK', 'L', '나일론', sysdate);
+insert into product values(11, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'XS', '나일론', sysdate);
+insert into product values(12, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'M', '나일론', sysdate);
+insert into product values(13, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'XL', '스판', sysdate);
+insert into product values(14, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'L', '스판', sysdate);
+insert into product values(15, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'WHITE', 'XS', '스판', sysdate);
+insert into product values(16, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'M', '모직', sysdate);
+insert into product values(17, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직', sysdate);
+insert into product values(18, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'L', '모직', sysdate);
+insert into product values(19, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'XS', '모직', sysdate);
+insert into product values(20, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'WHITE', 'M', '모직', sysdate);
+insert into product values(21, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'BLACK', 'XL', '모직', sysdate);
+insert into product values(22, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'L', '면', sysdate);
+insert into product values(23, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '면', sysdate);
+insert into product values(24, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면', sysdate);
+insert into product values(25, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'XL', '면', sysdate);
+insert into product values(26, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'BLACK', 'L', '면', sysdate);
+insert into product values(27, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'WHITE', 'XS', '면', sysdate);
+insert into product values(28, 10, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄', sysdate);
+insert into product values(29, 11, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '우레탄', sysdate);
+insert into product values(30, 12, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'WHITE', 'M', '우레탄', sysdate);
+insert into product values(31, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'RED', 'XL', '면', sysdate);
+insert into product values(32, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'GREEN', 'L', '면', sysdate);
+insert into product values(33, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'PINK', 'XS', '면', sysdate);
+insert into product values(34, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면', sysdate);
+insert into product values(35, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'YELLOW', 'XL', '우레탄', sysdate);
+insert into product values(36, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄', sysdate);
+insert into product values(37, 16, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'ORANGE', 'XS', '우레탄', sysdate);
+insert into product values(38, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론', sysdate);
+insert into product values(39, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'GREEN', 'XL', '나일론', sysdate);
+insert into product values(40, 16, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'YELLOW', 'L', '나일론', sysdate);
+insert into product values(41, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'PURPLE', 'XS', '나일론', sysdate);
+insert into product values(42, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'RED', 'M', '나일론', sysdate);
+insert into product values(43, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'RED', 'XL', '스판', sysdate);
+insert into product values(44, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'PURPLE', 'L', '스판', sysdate);
+insert into product values(45, 18, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'YELLOW', 'XS', '스판', sysdate);
+insert into product values(46, 18, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'PURPLE', 'M', '모직', sysdate);
+insert into product values(47, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직', sysdate);
+insert into product values(48, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'RED', 'L', '모직', sysdate);
+insert into product values(49, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'YELLOW', 'XS', '모직', sysdate);
+insert into product values(50, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'PURPLE', 'M', '모직', sysdate);
+insert into product values(51, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'GREEN', 'XL', '모직', sysdate);
+insert into product values(52, 20, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'PURPLE', 'L', '면', sysdate);
+insert into product values(53, 21, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'RED', 'XS', '면', sysdate);
+insert into product values(54, 22, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면', sysdate);
+insert into product values(55, 23, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XL', '면', sysdate);
+insert into product values(56, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'PURPLE', 'L', '면', sysdate);
+insert into product values(57, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'RED', 'XS', '면', sysdate);
+insert into product values(58, 25, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄', sysdate);
+insert into product values(59, 25, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XS', '우레탄', sysdate);
+insert into product values(60, 26, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'RED', 'M', '우레탄', sysdate);
 
 
 insert into product_option values(1, 1, 250, 200);

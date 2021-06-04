@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
-
+import SearchSelectOptionComponent from './SearchSelectOptionComponent';
 
 import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
@@ -66,28 +66,6 @@ function ProductListComponent(props){
         setproduct_pageNum(1);
     }
 
-    /* 기존에 각각 select했던 메소드를 selectOption으로 통합 */
-
-    // function selectGender(e){
-    //     setproduct_gender(e.target.value); 
-    //     setproduct_pageNum(1);
-    // }
-
-    // function selectCategory(e){
-    //     setproduct_category(e.target.value);
-    //     setproduct_pageNum(1);
-    // }
-
-    // function selectColor(e){
-    //     setselect_color(e.target.value);
-    //     setproduct_pageNum(1);
-    // }
-
-    // function selectSize(e){
-    //     setselect_size(e.target.value);
-    //     setproduct_pageNum(1);
-    // }
-
     // 페이지 업
     function selectPageNumUp(){
         if(product_pageNum < total_pageNum){
@@ -115,10 +93,6 @@ function ProductListComponent(props){
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
-                {/* <form noValidate autoComplete="off">
-                    <TextField id="standard-search" label="Search field" type="search" />
-                </form> */}
-
                     <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}" 검색 결과</Typography>
                         
                     <div>
@@ -132,81 +106,10 @@ function ProductListComponent(props){
 
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 10px 0px', paddingBottom:'0px'}}/>
 
-                    <div style={{float:'left'}}>
-                        <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
 
-                        {/* 성별 선택 - 필요없어짐 */}
-                        {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
-                            <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
-                            <Select onChange={selectGender}>
-                            <MenuItem value={'M'} style={{fontSize:'14px'}}>Man</MenuItem>
-                            <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
-                            </Select>
-                        </FormControl> */}
+                    <SearchSelectOptionComponent selectOption={selectOption} selectPageNumDown={selectPageNumDown} selectPageNumUp={selectPageNumUp} />
 
-                        {/* 스타일 선택 */}
-                        {/* <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
-                            <Select name='product_category' onChange={selectOption}>
-                            <MenuItem value={'치마'} style={{fontSize:'14px'}}>치마</MenuItem>
-                            <MenuItem value={'바지'} style={{fontSize:'14px'}}>바지</MenuItem>
-                            <MenuItem value={'원피스'} style={{fontSize:'14px'}}>원피스</MenuItem>
-                            <MenuItem value={'모자'} style={{fontSize:'14px'}}>모자</MenuItem>
-                            </Select>
-                        </FormControl> */}
-
-                        {/* 컬러 선택 */}
-                        <FormControl style={{minWidth:'55px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
-                            <Select name='select_color' onChange={selectOption}>
-                            <MenuItem value={'BLACK'} style={{fontSize:'12px'}}><div style={{fontSize:'14px'}}>Black</div></MenuItem>
-                            <MenuItem value={'WHITE'}><div style={{fontSize:'14px'}}>White</div></MenuItem>
-                            <MenuItem value={'RED'}><div style={{fontSize:'14px'}}>Red</div></MenuItem>
-                            <MenuItem value={'YELLOW'}><div style={{fontSize:'14px'}}>Yellow</div></MenuItem>
-                            <MenuItem value={'GREEN'}><div style={{fontSize:'14px'}}>Green</div></MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        {/* 사이즈 선택 */}
-                        <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
-                            <Select name='select_size' onChange={selectOption}>
-                            <MenuItem value={'XS'}><div style={{fontSize:'14px'}}>XS</div></MenuItem>
-                            <MenuItem value={'S'}><div style={{fontSize:'14px'}}>S</div></MenuItem>
-                            <MenuItem value={'M'}><div style={{fontSize:'14px'}}>M</div></MenuItem>
-                            <MenuItem value={'L'}><div style={{fontSize:'14px'}}>L</div></MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        {/* 정렬 선택 */}
-                        <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
-                            <InputLabel style={{fontSize:'14px'}}>Sort</InputLabel>
-                            <Select name='select_option' onChange={selectOption}>
-                            <MenuItem value={'product_saled'}><div style={{fontSize:'14px'}}>Best Seller</div></MenuItem>
-                            <MenuItem value={'product_id'}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
-                            <MenuItem value={'product_low_price'}><div style={{fontSize:'14px'}}>Low Price</div></MenuItem>
-                            <MenuItem value={'product_high_price'}><div style={{fontSize:'14px'}}>High Price</div></MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        <FormControl style={{minWidth:'20px', marginLeft:'20px'}}>
-                            <a href="http://localhost:3000/search-keyword"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
-                        </FormControl>
-                        </ul>
-                    </div>
-                    
-                    <div style={{float:'right'}}>
-                        <ul style={{paddingRight:'0px', marginTop:'0px'}}>
-                        <FormControl style={{minWidth:'35px'}}>
-                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumDown}>🠔</buttion></InputLabel>
-                        </FormControl>
-
-                        <FormControl style={{minWidth:'40px'}}>
-                            <InputLabel style={{fontSize:'30px'}}><buttion onClick={selectPageNumUp}>🠖</buttion></InputLabel>
-                        </FormControl>
-                        </ul>
-                    </div>
-                    </Grid>
+                </Grid>
 
 
 
@@ -227,28 +130,12 @@ function ProductListComponent(props){
                                     </TableRow>
                                     <TableRow>
                                         <TableCell alingn="right" style={{border:'0px'}}>
-
                                             {/* product안의 color배열을 다시 map해서 출력하는 것 */}
                                             {product.colorSet.map(color=>
                                                 <div key={color.index}>
                                                     <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
                                                 </div>
                                             )}
-
-                                            {/* color 출력 기존 방식 */}
-                                            {/* <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div> */}
-
                                         </TableCell>
                                     </TableRow>
                                 </div>
@@ -258,7 +145,6 @@ function ProductListComponent(props){
                 </Grid>
             </div>
     )
-    
 }
 
 
