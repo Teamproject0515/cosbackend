@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
 import { Link } from 'react-router-dom';
-
+import SelectOptionComponent from './SelectOptionComponent';
 
 import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
 
@@ -30,8 +30,6 @@ function ProductListComponent(props){
     
 
     useEffect (() => {
-
-        
         ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
@@ -125,7 +123,6 @@ function ProductListComponent(props){
                         
                     <div>
                         <FormControl style={{minWidth:'80px'}}>
-                            {/* <a href="http://localhost:3000/product-list">  */}
                             <Link to="/product-list"><button variant="contained" style={{border:'0px'}} onClick = {() => {selectCategoryList(null)}}><InputLabel>Clothing</InputLabel></button></Link>
                             {/* </a> */}
                         </FormControl>
@@ -136,19 +133,11 @@ function ProductListComponent(props){
 
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 10px 0px', paddingBottom:'0px'}}/>
 
-                    <div style={{float:'left'}}>
-                        <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
 
-                        {/* 성별 선택 - 필요없어짐 - 대분류로 사용할 수 있음 */}
-                        {/* <FormControl style={{minWidth:'70px', marginLeft:'0px', textDecoration:'none', border:'0px'}}>
-                            <InputLabel style={{fontSize:'14px', textDecoration:'none'}}>Gender</InputLabel>
-                            <Select onChange={selectGender}>
-                            <MenuItem value={'M'} style={{fontSize:'14px'}}>Man</MenuItem>
-                            <MenuItem value={'W'} style={{fontSize:'14px'}}>Woman</MenuItem>
-                            </Select>
-                        </FormControl> */}
 
-                        {/* 스타일 선택 */}
+                        <SelectOptionComponent selectOption={selectOption} selectPageNumDown={selectPageNumDown} selectPageNumUp={selectPageNumUp}/>
+
+                        {/* 스타일 선택
                         <FormControl style={{minWidth:'60px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Style</InputLabel>
                             <Select name='product_category' onChange={selectOption}>
@@ -159,7 +148,7 @@ function ProductListComponent(props){
                             </Select>
                         </FormControl>
 
-                        {/* 컬러 선택 */}
+                         컬러 선택 
                         <FormControl style={{minWidth:'60px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Color</InputLabel>
                             <Select name='select_color' onChange={selectOption}>
@@ -171,7 +160,7 @@ function ProductListComponent(props){
                             </Select>
                         </FormControl>
 
-                        {/* 사이즈 선택 */}
+                        사이즈 선택 
                         <FormControl style={{minWidth:'50px', marginLeft:'20px'}}>
                             <InputLabel style={{fontSize:'14px'}}>Size</InputLabel>
                             <Select name='select_size' onChange={selectOption}>
@@ -185,9 +174,11 @@ function ProductListComponent(props){
                         <FormControl style={{minWidth:'20px', marginLeft:'20px', width:'20px'}}>
                             <a href="http://localhost:3000/product-list"> <InputLabel style={{fontSize:'14px'}}>Reset</InputLabel></a>
                         </FormControl>
-                        </ul>
-                    </div>
+                        */}
+
+
                     
+                    {/*
                     <div style={{float:'right'}}>
                         <ul style={{paddingLeft:'20px', marginTop:'0px'}}>
                         <FormControl style={{minWidth:'35px'}}>
@@ -199,9 +190,8 @@ function ProductListComponent(props){
                         </FormControl>
                         </ul>
                     </div>
+                    */}
                     </Grid>
-
-
 
 
                     {/* 바디 */}
@@ -227,21 +217,6 @@ function ProductListComponent(props){
                                                     <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
                                                 </div>
                                             )}
-
-                                            {/* color 출력 기존 방식 */}
-                                            {/* <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[0]}}></div>     
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[1]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[2]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[3]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[4]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[5]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[6]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[7]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[8]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[9]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[10]}}></div>
-                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:product.colors[11]}}></div> */}
-
                                         </TableCell>
                                     </TableRow>
                                 </div>
