@@ -878,3 +878,12 @@ from product1 group by product_id, product_title, product_content, product_price
 
 select * from (select rownum rnum, p.* from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
 from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p where product_gender = 'W') where rnum between 1 and 20;
+
+
+
+
+select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product;
+select * from product;
+
+select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
+from product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img;
