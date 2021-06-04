@@ -38,8 +38,10 @@ public class ProductController {
     @PostMapping("/pagenum")
     public int findPageNum(@RequestBody ProductVO productVO){
         if((productService.findPageNum(productVO)%12)==0){
+            System.out.println(productService.findPageNum(productVO));
             return productService.findPageNum(productVO)/12;
         }else{
+            System.out.println(productService.findPageNum(productVO));
             return productService.findPageNum(productVO)/12+1;
         }
     }

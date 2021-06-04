@@ -36,7 +36,7 @@ class ProductInfoComponent extends Component{
     render(){
         return(
             <div>
-                {this.state.product.product_seq}
+                {this.state.product.product_id}
                 {this.state.product.product_title}
                 {this.state.product.product_price}
                 {this.state.product.product_color}

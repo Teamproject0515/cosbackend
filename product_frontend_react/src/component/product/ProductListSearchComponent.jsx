@@ -183,7 +183,7 @@ function ProductListComponent(props){
                             <InputLabel style={{fontSize:'14px'}}>Sort</InputLabel>
                             <Select name='select_option' onChange={selectOption}>
                             <MenuItem value={'product_saled'}><div style={{fontSize:'14px'}}>Best Seller</div></MenuItem>
-                            <MenuItem value={'product_seq'}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
+                            <MenuItem value={'product_id'}><div style={{fontSize:'14px'}}>New Arrivals</div></MenuItem>
                             <MenuItem value={'product_low_price'}><div style={{fontSize:'14px'}}>Low Price</div></MenuItem>
                             <MenuItem value={'product_high_price'}><div style={{fontSize:'14px'}}>High Price</div></MenuItem>
                             </Select>
@@ -215,8 +215,8 @@ function ProductListComponent(props){
                     {products.map(product =>
                         <Grid item xs={6} sm={4} style={{margin:'0px'}}>
                             <Table style={{marginBottom:'30px'}}>     
-                                <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
-                                    <TableRow key={product.product_seq}>
+                                <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
+                                    <TableRow key={product.product_id}>
                                         <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>

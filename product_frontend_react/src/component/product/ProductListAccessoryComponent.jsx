@@ -107,8 +107,8 @@ function ProductListComponent(props){
                     {products.map(product =>
                         <Grid item xs={6} sm={4} style={{margin:'0px'}}>
                             <Table style={{marginBottom:'30px'}}>     
-                                <div align="right" onClick = {() => {Productinfo(product.product_seq)}}>
-                                    <TableRow key={product.product_seq}>
+                                <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
+                                    <TableRow key={product.product_id}>
                                         <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={ace01} style={{width:'100%'}}/></TableCell>
                                     </TableRow>
                                     <TableRow>

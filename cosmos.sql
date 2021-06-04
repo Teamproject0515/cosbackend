@@ -634,3 +634,273 @@ select
 COMMIT;
 
 select product_img from (select rownum rnum, p.* from product p where p.product_gender =#{product_gender}) where rnum between #{product_~} and #{~~};
+
+
+
+
+
+
+-- 테이블 리빌딩
+create table product1(
+product_seq number(20) primary key,
+product_id number(20),
+product_title varchar2(500),
+product_content varchar2(3000),
+product_price number(20),
+product_gender varchar2(500),
+product_category varchar2(500),
+product_img varchar2(500),
+product_color varchar2(30),
+product_size varchar2(30),
+product_material varchar2(30)
+);
+
+
+
+
+
+create table product_option1(
+product_option1_seq number(5),
+constraints product_option1_seq foreign key(product_option1_seq) references product1(product_seq),
+product_option_id number(5),
+product_stock number(30),
+product_saled number(30)
+);
+
+drop table product1;
+drop table product_option1;
+
+select * from product1;
+select * from product_option1;
+
+
+
+insert into product1 values(1, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'XL', '면');
+insert into product1 values(2, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'BLACK', 'L', '면');
+insert into product1 values(3, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'XS', '면');
+insert into product1 values(4, 1, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면');
+insert into product1 values(5, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'XL', '우레탄');
+insert into product1 values(6, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄');
+insert into product1 values(7, 2, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'WHITE', 'XS', '우레탄');
+insert into product1 values(8, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론');
+insert into product1 values(9, 3, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'BLACK', 'XL', '나일론');
+insert into product1 values(10, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'BLACK', 'L', '나일론');
+insert into product1 values(11, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'XS', '나일론');
+insert into product1 values(12, 4, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'WHITE', 'M', '나일론');
+insert into product1 values(13, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'XL', '스판');
+insert into product1 values(14, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'BLACK', 'L', '스판');
+insert into product1 values(15, 5, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'WHITE', 'XS', '스판');
+insert into product1 values(16, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'M', '모직');
+insert into product1 values(17, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직');
+insert into product1 values(18, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'L', '모직');
+insert into product1 values(19, 6, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'WHITE', 'XS', '모직');
+insert into product1 values(20, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'WHITE', 'M', '모직');
+insert into product1 values(21, 7, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'BLACK', 'XL', '모직');
+insert into product1 values(22, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'L', '면');
+insert into product1 values(23, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '면');
+insert into product1 values(24, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면');
+insert into product1 values(25, 8, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'BLACK', 'XL', '면');
+insert into product1 values(26, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'BLACK', 'L', '면');
+insert into product1 values(27, 9, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'WHITE', 'XS', '면');
+insert into product1 values(28, 10, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄');
+insert into product1 values(29, 11, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'XS', '우레탄');
+insert into product1 values(30, 12, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'WHITE', 'M', '우레탄');
+
+insert into product_option1 values(1, 1, 250, 200);
+insert into product_option1 values(2, 1, 230, 100);
+insert into product_option1 values(3, 1, 210, 500);
+insert into product_option1 values(4, 1, 240, 700);
+insert into product_option1 values(5, 2, 250, 200);
+insert into product_option1 values(6, 2, 230, 100);
+insert into product_option1 values(7, 2, 210, 500);
+insert into product_option1 values(8, 3, 240, 700);
+insert into product_option1 values(9, 3, 250, 200);
+insert into product_option1 values(10, 4, 230, 100);
+insert into product_option1 values(11, 4, 210, 500);
+insert into product_option1 values(12, 4, 240, 700);
+insert into product_option1 values(13, 5, 250, 200);
+insert into product_option1 values(14, 5, 230, 100);
+insert into product_option1 values(15, 5, 210, 500);
+insert into product_option1 values(16, 6, 240, 700);
+insert into product_option1 values(17, 6, 250, 200);
+insert into product_option1 values(18, 6, 230, 100);
+insert into product_option1 values(19, 6, 210, 500);
+insert into product_option1 values(20, 7, 240, 700);
+insert into product_option1 values(21, 7, 250, 200);
+insert into product_option1 values(22, 8, 230, 100);
+insert into product_option1 values(23, 8, 210, 500);
+insert into product_option1 values(24, 8, 240, 700);
+insert into product_option1 values(25, 8, 250, 200);
+insert into product_option1 values(26, 9, 230, 100);
+insert into product_option1 values(27, 9, 210, 500);
+insert into product_option1 values(28, 10, 240, 700);
+insert into product_option1 values(29, 11, 240, 700);
+insert into product_option1 values(30, 12, 240, 700);
+
+COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into product1 values(31, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'RED', 'XL', '면');
+insert into product1 values(32, 13, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'GREEN', 'L', '면');
+insert into product1 values(33, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'PINK', 'XS', '면');
+insert into product1 values(34, 14, '아동상품1', '상품1', 20000, 'KIDS', '악세사리', '이미지', 'WHITE', 'M', '면');
+insert into product1 values(35, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'YELLOW', 'XL', '우레탄');
+insert into product1 values(36, 15, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'BLACK', 'L', '우레탄');
+
+insert into product1 values(37, 16, '남자상품1', '상품1', 20000, 'M', '악세사리', '이미지', 'ORANGE', 'XS', '우레탄');
+insert into product1 values(38, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'WHITE', 'M', '나일론');
+insert into product1 values(39, 16, '여자상품1', '상품1', 20000, 'W', '악세사리', '이미지', 'GREEN', 'XL', '나일론');
+insert into product1 values(40, 16, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'YELLOW', 'L', '나일론');
+insert into product1 values(41, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'PURPLE', 'XS', '나일론');
+insert into product1 values(42, 17, '아동상품2', '상품1', 20000, 'KIDS', '바지', '이미지', 'RED', 'M', '나일론');
+insert into product1 values(43, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'RED', 'XL', '스판');
+insert into product1 values(44, 17, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'PURPLE', 'L', '스판');
+insert into product1 values(45, 18, '여자상품2', '상품1', 20000, 'W', '치마', '이미지', 'YELLOW', 'XS', '스판');
+insert into product1 values(46, 18, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'PURPLE', 'M', '모직');
+
+insert into product1 values(47, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'BLACK', 'XL', '모직');
+insert into product1 values(48, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'RED', 'L', '모직');
+insert into product1 values(49, 19, '남자상품2', '상품1', 20000, 'M', '바지', '이미지', 'YELLOW', 'XS', '모직');
+insert into product1 values(50, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'PURPLE', 'M', '모직');
+insert into product1 values(51, 20, '남자상품3', '상품1', 20000, 'M', '모자', '이미지', 'GREEN', 'XL', '모직');
+insert into product1 values(52, 20, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'PURPLE', 'L', '면');
+insert into product1 values(53, 21, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'RED', 'XS', '면');
+insert into product1 values(54, 22, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'WHITE', 'M', '면');
+insert into product1 values(55, 23, '여자상품3', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XL', '면');
+insert into product1 values(56, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'PURPLE', 'L', '면');
+insert into product1 values(57, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', '이미지', 'RED', 'XS', '면');
+insert into product1 values(58, 25, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄');
+insert into product1 values(59, 25, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XS', '우레탄');
+insert into product1 values(60, 26, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'RED', 'M', '우레탄');
+
+
+insert into product_option1 values(31, 13, 250, 200);
+insert into product_option1 values(32, 13, 230, 100);
+insert into product_option1 values(33, 14, 210, 500);
+insert into product_option1 values(34, 14, 240, 700);
+insert into product_option1 values(35, 15, 250, 200);
+insert into product_option1 values(36, 15, 230, 100);
+insert into product_option1 values(37, 16, 210, 500);
+insert into product_option1 values(38, 16, 240, 700);
+insert into product_option1 values(39, 16, 250, 200);
+insert into product_option1 values(40, 16, 230, 100);
+insert into product_option1 values(41, 17, 210, 500);
+insert into product_option1 values(42, 17, 240, 700);
+insert into product_option1 values(43, 17, 250, 200);
+insert into product_option1 values(44, 17, 230, 100);
+insert into product_option1 values(45, 18, 210, 500);
+insert into product_option1 values(46, 18, 240, 700);
+insert into product_option1 values(47, 19, 250, 200);
+insert into product_option1 values(48, 19, 230, 100);
+insert into product_option1 values(49, 19, 210, 500);
+insert into product_option1 values(50, 20, 240, 700);
+insert into product_option1 values(51, 20, 250, 200);
+insert into product_option1 values(52, 20, 230, 100);
+insert into product_option1 values(53, 21, 210, 500);
+insert into product_option1 values(54, 22, 240, 700);
+insert into product_option1 values(55, 23, 250, 200);
+insert into product_option1 values(56, 24, 230, 100);
+insert into product_option1 values(57, 24, 210, 500);
+insert into product_option1 values(58, 25, 240, 700);
+insert into product_option1 values(59, 25, 240, 700);
+insert into product_option1 values(60, 26, 240, 700);
+
+
+
+
+
+
+
+
+
+
+
+
+COMMIT;
+
+
+
+
+
+
+
+select p.product_id, p.product_title, p.product_content, p.product_price, p.product_gender, p.product_category, p.product_img, p.product_color, p.product_size, o.product_stock, o.product_saled from product1 p, product_option1 o where p.product_seq = o.product_option1_seq;
+
+
+select * from product1 p, product_option1 o where p.product_seq = o.product_option1_seq;
+
+select * from product1;
+
+select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img;
+
+select max(rnum) from (select rownum rnum, t.* from (select p.product_title, product_content, product_price, product_gender, product_category, product_img, product_color, product_size, sum(o.product_saled) product_saled from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p, product_option1 o group by product_title, product_content, product_price, product_gender, product_category, product_img, product_color, product_size) t where product_size like '%L%');
+
+commit;
+
+select rownum rnum, p.* ,o.product_color, o.product_size, o.product_saled from product p,
+(select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled) product_saled from product_option group by product_option_seq) o
+ where p.product_seq = o.product_option_seq;
+ 
+ 
+ 
+select max(rownum) 
+from product p, 
+(select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o 
+where p.product_seq = o.product_option_seq;
+
+select * from product;
+select * from product_option;
+
+
+
+select *
+from 
+(select rownum rnum, t.* 
+from 
+(select product_title, product_content, product_price, product_gender, product_category, product_img, product_color, product_size, sum(o.product_saled) product_saled 
+from 
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
+from product1 
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p, product_option1 o 
+group by product_title, product_content, product_price, product_gender, product_category, product_img, product_color, product_size) t 
+where product_size like '%L%');
+
+
+
+
+
+
+
+
+commit;
+
+
+-- 조건에 맞는 상품 리스트 출력 쿼리문
+select * from (select rownum rnum, p.* from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
+from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p where product_category = '치마') where rnum between 1 and 20;
+
+-- 조건에 맞는 상품 페이지 출력 쿼리문
+select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
+from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p;
+
+select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p where product_color like '%BLACK%';
+
+
+select * from (select rownum rnum, p.* from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size 
+from product1 group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p where product_gender = 'W') where rnum between 1 and 20;

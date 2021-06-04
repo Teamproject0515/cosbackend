@@ -25,14 +25,14 @@ function ProductListComponent(props){
 
     function selectAll(selectGender){
         window.localStorage.setItem("selectGender", selectGender);
-        window.localStorage.setItem("selectOption", 'product_seq');
+        window.localStorage.setItem("selectOption", 'product_id');
         props.history.push('/product-list');
     }
 
     function selectAccessory(selectGender){
         window.localStorage.setItem("selectGender", selectGender);
         window.localStorage.setItem("selectCategory", '악세사리');
-        window.localStorage.setItem("selectOption", 'product_seq');
+        window.localStorage.setItem("selectOption", 'product_id');
         props.history.push('/accessories-list');
     }
 

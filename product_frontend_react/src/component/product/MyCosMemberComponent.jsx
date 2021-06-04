@@ -45,33 +45,39 @@ function ProductListComponent(props){
     // function selectMagazine(){
     //     props.history.push('/magazine');
     // }
-    const[user, setUser] = useState(window.localStorage.getItem("user")); //window.localStorage에 저장된 user를 호출해서 user객체에 넣음, 현재 user에는 user_email과 user_password가 들어가있는 상황이 된다. 
+    
+    // const[user, setUser] = useState([]); //window.localStorage에 저장된 user를 호출해서 user객체에 넣음, 현재 user에는 user_email과 user_password가 들어가있는 상황이 된다. 
 
+    
+    let user_id = 'suovj140';
+    let user_name = '구지훈';
+    let user_email = 'design_k@kakao.com';
+    let user_phone = '010-4474-9986';
+    let user_password = 'pw';
 
-    // let user_id;
-    // let user_name;
-    // let user_email;
-    // let user_phone;
-    // let user_password = 'aaa';
+    const user = {
+        user_id,
+        user_name,
+        user_email,
+        user_phone,
+        user_password
+    }
 
-    // let user = {
-    //     user_id,
-    //     user_name,
-    //     user_email,
-    //     user_phone,
-    //     user_password 
-    // }
+    // useEffect(() => {
+    //     setUser( user_id, user_name, user_email, user_phone, user_password );
+    // })
 
     let [check_password, setcheck_password] = useState(null);
-    
+    let [memberinfo, setmemberinfo] = useState(false);
 
     function checkPW(){
-        window.localStorage.setItem("user_password", user.user_password);
-        if(window.localStorage.getItem("user_password") === check_password){
+        
+        if(user.user_password === check_password){
             alert('맞아요 따란');
-            console.log(window.localStorage.getItem(user.user_password));
-            console.log(check_password);
-            props.history.push('/product-list');
+            console.log("user : "+user.user_password);
+            console.log("input : "+check_password);
+
+            props.history.push('#');
         }else{
             alert('틀렸어요 따란');
             console.log(window.localStorage.getItem(user.user_password));
