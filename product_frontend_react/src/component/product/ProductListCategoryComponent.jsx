@@ -18,10 +18,19 @@ function ProductListComponent(props){
     let [search_keyword, setsearch_keyword] = useState(null);
     let [select_option, setselect_option] = useState(window.localStorage.getItem("selectOption"));
 
+    const ProductVO = {
+        product_pageNum,
+        product_gender,
+        product_category,
+        select_color,
+        select_size,
+        search_keyword,
+        select_option
+    }
     
     useEffect (() => {
 
-        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option)
+        ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
               console.log(res.data);
@@ -30,7 +39,7 @@ function ProductListComponent(props){
             console.log('product_list print error!', err);
         })
 
-        ApiService.findPageNum(product_gender, product_category, select_color, select_size, search_keyword)
+        ApiService.findPageNum(ProductVO)
         .then( res => {
                 settotal_pageNum(res.data);
         })

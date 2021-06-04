@@ -22,44 +22,44 @@
 
         <where>
                 p.product_seq = o.product_option_seq
-            <if test="search_keyword != 'null' and product_gender != 'undefined'">
+            <if test="search_keyword != null and product_gender != 'undefined'">
                 and (p.product_title like '%'||#{search_keyword}||'%' or p.product_content like '%'||#{search_keyword}||'%' or p.product_category like '%'||#{search_keyword}||'%' or p.product_gender like '%'||#{search_keyword}||'%' or o.product_color like '%'||#{search_keyword}||'%' or o.product_size like '%'||#{search_keyword}||'%')
             </if>
-            <if test="product_gender != 'null' and product_gender != 'undefined'">
+            <if test="product_gender != null and product_gender != 'undefined' and product_gender != 'null'">
                 and p.product_gender = #{product_gender}
             </if>
-            <if test="product_category != 'null' and product_gender != 'undefined'">
+            <if test="product_category != null and product_gender != 'undefined'">
                 and p.product_category = #{product_category}
             </if>
-            <if test="product_category == 'null'">
+            <if test="product_category == null">
                 and p.product_category != '악세사리'
             </if>
-            <if test="select_color != 'null' and product_gender != 'undefined'">
+            <if test="select_color != null and product_gender != 'undefined'">
                 and o.product_color like '%'||#{select_color}||'%'
             </if>
-            <if test="select_size != 'null' and product_gender != 'undefined'">
+            <if test="select_size != null and product_gender != 'undefined'">
                 and o.product_size like '%'||#{select_size}||'%'
             </if>
         </where>
         )
         <where>
          rnum between ((#{product_pageNum}-1)*12)+1 and (#{product_pageNum}*12)
-            <if test="select_option != 'null' and select_option == 'product_saled'">
+            <if test="select_option != null and select_option == 'product_saled'">
                 order by product_saled desc
                 <!--order by #{select_option} desc-->
             </if>
 
-            <if test="select_option != 'null' and select_option == 'product_seq'">
+            <if test="select_option != null and select_option == 'product_seq'">
                 order by product_seq desc
                 <!--order by #{select_option} desc-->
             </if>
 
-            <if test="select_option != 'null' and select_option == 'product_low_price'">
+            <if test="select_option != null and select_option == 'product_low_price'">
                 order by product_price
                 <!--order by #{select_option} desc-->
             </if>
 
-            <if test="select_option != 'null' and select_option == 'product_high_price'">
+            <if test="select_option != null and select_option == 'product_high_price'">
                 order by product_price desc
                 <!--order by #{select_option} desc-->
             </if>
@@ -76,19 +76,19 @@
 
         <where>
             p.product_seq = o.product_option_seq
-            <if test="search_keyword != 'null'">
+            <if test="search_keyword != null">
                 and (p.product_title like '%'||#{search_keyword}||'%' or p.product_content like '%'||#{search_keyword}||'%' or p.product_category like '%'||#{search_keyword}||'%' or p.product_gender like '%'||#{search_keyword}||'%' or o.product_color like '%'||#{search_keyword}||'%' or o.product_size like '%'||#{search_keyword}||'%')
             </if>
-            <if test="product_gender != 'null'">
+            <if test="product_gender != null">
                 and p.product_gender = #{product_gender}
             </if>
-            <if test="product_category != 'null'">
+            <if test="product_category != null">
                 and p.product_category = #{product_category}
             </if>
-            <if test="select_color != 'null'">
+            <if test="select_color != null">
                 and o.product_color like '%'||#{select_color}||'%'
             </if>
-            <if test="select_size != 'null'">
+            <if test="select_size != null">
                 and o.product_size like '%'||#{select_size}||'%'
             </if>
         </where>

@@ -38,7 +38,7 @@ function ProductListComponent(props){
 
     function selectAllList(selectGender){
         window.localStorage.setItem("selectGender", selectGender);
-        window.localStorage.setItem("selectOption", null);
+        window.localStorage.setItem("selectOption", null); // 최근 상품을 조회하고 모든 상품 조회했을 경우 order by 가 걸리는 것을 막고자함
         props.history.push('/product-list');
     }
 
@@ -163,7 +163,7 @@ function ProductListComponent(props){
 
                         <Grid item xs={6} sm={3} style={{margin:'0px'}}>
                             <Table style={{marginBottom:'30px'}}>     
-                                <div align="right" onClick = {() => {selectAllList(null)}}>
+                                <div align="right" onClick = {() => {selectAllList('null')}}>
                                     <TableRow>
                                         <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={new07} style={{width:'100%'}}/></TableCell>
                                     </TableRow>

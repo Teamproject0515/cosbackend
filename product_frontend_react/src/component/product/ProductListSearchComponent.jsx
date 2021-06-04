@@ -19,12 +19,21 @@ function ProductListComponent(props){
     let [select_option, setselect_option] = useState(null);
     // let [productvo, setproductvo ] = useState([]);
 
+    const ProductVO = {
+        product_pageNum,
+        product_gender,
+        product_category,
+        select_color,
+        select_size,
+        search_keyword,
+        select_option
+    }
     
     useEffect (() => {
 
         // setproductvo(product_pageNum, product_category)
 
-        ApiService.productsCategory(product_pageNum, product_gender, product_category, select_color, select_size, search_keyword, select_option)
+        ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
               
@@ -33,7 +42,7 @@ function ProductListComponent(props){
             console.log('reloadProductList() Error!', err);
         })
 
-        ApiService.findPageNum(product_gender, product_category, select_color, select_size, search_keyword)
+        ApiService.findPageNum(ProductVO)
         .then( res => {
                 settotal_pageNum(res.data);
         })

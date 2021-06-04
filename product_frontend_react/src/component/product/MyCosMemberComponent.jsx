@@ -45,33 +45,36 @@ function ProductListComponent(props){
     // function selectMagazine(){
     //     props.history.push('/magazine');
     // }
-    let id;
-    let name;
-    let email;
-    let phone;
-    let password = 'aaa';
+    const[user, setUser] = useState(window.localStorage.getItem("user")); //window.localStorage에 저장된 user를 호출해서 user객체에 넣음, 현재 user에는 user_email과 user_password가 들어가있는 상황이 된다. 
 
-    let user = {
-        id,
-        name,
-        email,
-        phone,
-        password
-    }
+
+    // let user_id;
+    // let user_name;
+    // let user_email;
+    // let user_phone;
+    // let user_password = 'aaa';
+
+    // let user = {
+    //     user_id,
+    //     user_name,
+    //     user_email,
+    //     user_phone,
+    //     user_password 
+    // }
 
     let [check_password, setcheck_password] = useState(null);
     
 
     function checkPW(){
-        window.localStorage.setItem("user_password", user.password);
+        window.localStorage.setItem("user_password", user.user_password);
         if(window.localStorage.getItem("user_password") === check_password){
             alert('맞아요 따란');
-            console.log(window.localStorage.getItem(user.password));
+            console.log(window.localStorage.getItem(user.user_password));
             console.log(check_password);
             props.history.push('/product-list');
         }else{
             alert('틀렸어요 따란');
-            console.log(window.localStorage.getItem(user.password));
+            console.log(window.localStorage.getItem(user.user_password));
             console.log(check_password);
         };
     }
@@ -93,7 +96,7 @@ function ProductListComponent(props){
 
                 </Grid>
 
-                    {/* 바디 여성 상품 */}
+                    {/* */}
                         <Grid item xs={6} sm={3}>
                             <div style={{textAlign:'left',fontSize:'13px', marginBottom:'8px', color:'#999999'}}>회원정보</div>
                             <div style={{textAlign:'left',fontSize:'13px', marginBottom:'8px', color:'#999999'}}>주문/배송</div>
@@ -102,42 +105,42 @@ function ProductListComponent(props){
                             <div style={{textAlign:'left',fontSize:'13px', marginBottom:'8px', color:'#999999'}}>영수증/세금계산서</div>
                         </Grid>
 
-                        <Grid item xs={6} sm={4}>
+                        <Grid item xs={6} sm={9}>
                            <div style={{fontSize:'13px', textAlign:'left'}}>회원정보변경</div>
+                           <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'20px 0px 20px 0px', paddingBottom:'0px'}}/>
                            <div style={{marginTop:'25px'}}>
                                 <div style={{fontSize:'13px', textAlign:'left', color:'#999999'}}>아이디</div>
-                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={'저장된 아이디 넣기'}></input></div>
+                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={user.user_id}></input></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
                                 <div style={{fontSize:'13px', textAlign:'left', color:'#999999'}}>이름</div>
-                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={'저장된 이름 넣기'}></input></div>
+                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={user.user_name}></input></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
                                 <div style={{fontSize:'13px', textAlign:'left', color:'#999999'}}>이메일</div>
-                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={'저장된 이메일 넣기'}></input></div>
+                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={user.user_email}></input></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
                                 <div style={{fontSize:'13px', textAlign:'left', color:'#999999'}}>휴대폰번호</div>
-                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={'저장된 휴대폰 번호 넣기'}></input></div>
+                                <div style={{textAlign:'left'}}><input disabled style={{border:'0px', backgroundColor:'white', textAlign:'left', fontSize:'12px'}} value={user.user_phone}></input></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
                                 <div style={{fontSize:'13px', textAlign:'left', color:'#999999'}}>비밀번호</div>
-                                <div style={{textAlign:'left'}}><input type="password" style={{textAlign:'left', fontSize:'15px', border:'0px', width:'100%', backgroundColor:'#E7E7E7', padding:'7px', marginTop:'5px'}} onChange={onChangePW}></input></div>
+                                <div style={{textAlign:'left'}}><input type="password" style={{textAlign:'left', fontSize:'15px', border:'0px', width:'100%', backgroundColor:'#E7E7E7', padding:'7px', marginTop:'5px', maxWidth:'256px'}} onChange={onChangePW}></input></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
-                                <div style={{fontSize:'11px', textAlign:'left', color:'#999999'}}><b>고객님의 소중한 회원정보를 환인/변경 하기 위해 비밀번호 재확인이 필요합니다.</b></div>
+                                <div style={{fontSize:'11px', textAlign:'left', color:'#999999', maxWidth:'270px'}}><b>고객님의 소중한 회원정보를 환인/변경 하기 위해 비밀번호 재확인이 필요합니다.</b></div>
                            </div>
                            <div style={{marginTop:'25px'}}>
-                                <div style={{fontSize:'11px', textAlign:'left', color:'#999999'}}><b>카카오 로그인 등으로 가입하신 고객님은 로그아웃 후 '비밀번호 찾기'를 통해 비밀번호 재설정이 필요합니다.</b></div>
+                                <div style={{fontSize:'11px', textAlign:'left', color:'#999999', maxWidth:'270px'}}><b>카카오 로그인 등으로 가입하신 고객님은 로그아웃 후 '비밀번호 찾기'를 통해 비밀번호 재설정이 필요합니다.</b></div>
                            </div>
                            <div style={{marginTop:'25px', marginBottom:'100px'}}>
-                               <Button style={{color:'#FFFFFF', backgroundColor:'#444444', border:'0px', fontSize:'13px', width:'100%', padding:'7px 0px 7px 0px'}} onClick={checkPW}>확인</Button>
+                               <Button style={{display:'flex', color:'#FFFFFF', backgroundColor:'#444444', border:'0px', fontSize:'13px', width:'100%', padding:'7px 0px 7px 0px', maxWidth:'270px'}} onClick={checkPW}>확인</Button>
                            </div>
                         </Grid>
                 </Grid>
             </div>
     )
-    
 }
 
 

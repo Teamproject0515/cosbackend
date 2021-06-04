@@ -21,8 +21,8 @@ public class ProductController {
         return productService.ProductByID(product_seq);
     }
 
-    @GetMapping("/{product_pageNum}/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}/{select_option}")
-    public List<ProductVO> productCategory(ProductVO productVO){
+    @PostMapping("/list")
+    public List<ProductVO> productCategory(@RequestBody ProductVO productVO){
         System.out.println("Page Move Success");
         System.out.println("PAGENUM : "+productVO.getProduct_pageNum());
         System.out.println("GENDER : "+productVO.getProduct_gender());
@@ -35,8 +35,8 @@ public class ProductController {
         return productService.productCategory(productVO);
     }
 
-    @GetMapping("/{product_gender}/{product_category}/{select_color}/{select_size}/{search_keyword}")
-    public int findPageNum(ProductVO productVO){
+    @PostMapping("/pagenum")
+    public int findPageNum(@RequestBody ProductVO productVO){
         if((productService.findPageNum(productVO)%12)==0){
             return productService.findPageNum(productVO)/12;
         }else{
