@@ -5,13 +5,16 @@ import {InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
 function MemberInfoComponent(props) {
     return (
         <>
-           <Grid item xs={6} sm={9}>
+           <Grid item xs={6} sm={7}>
                     <div style={{fontSize:'13px', textAlign:'left'}}>회원정보변경</div>
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'20px 0px 20px 0px', paddingBottom:'0px'}}/>
 
                     <div style={centerDiv}>
-                        <div style={centerLabel}>이메일 주소</div>
-                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_email}></input></div>변경하기
+                        <div style={centerDivBetween}>
+                            <div style={centerLabel}>이메일 주소</div>
+                            <div>변경하기</div>
+                        </div>
+                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_email}></input></div>
                     </div>
 
                     <div style={centerDiv}>
@@ -25,13 +28,18 @@ function MemberInfoComponent(props) {
                     </div>
 
                     <div style={centerDiv}>
-                        <div style={centerLabel}>휴대폰번호</div>
-                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_phone}></input></div>변경하기
+                        <div style={centerDivBetween}>
+                            <div style={centerLabel}>휴대폰번호</div>
+                            <div>변경하기</div>
+                        </div>
+                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_phone}></input></div>
                     </div>
 
                     <div style={centerDiv}>
-                        <div style={centerLabel}>비밀번호</div>
-                        변경하기
+                        <div style={centerDivBetween}>
+                            <div style={centerLabel}>비밀번호</div>
+                            <div>변경하기</div>
+                        </div>
                     </div>
 
                     <div style={{fontSize:'13px', textAlign:'left', marginTop:'50px'}}>부가정보(선택)</div>
@@ -87,6 +95,10 @@ function MemberInfoComponent(props) {
                 </Grid>
         </>
     )    
+}
+
+const centerDivBetween = {
+    display:'flex', justifyContent:'space-between'
 }
 
 const centerDiv = {

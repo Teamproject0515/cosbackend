@@ -3,7 +3,7 @@ import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@m
 
 function DeliveryInfoComponent({productDetailOpen}) {
     return (
-        <Grid item xs={6} sm={9}>
+        <Grid item xs={6} sm={7}>
             <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>주문/배송</div>
             <div style={{minHeight:'800px'}}>
 

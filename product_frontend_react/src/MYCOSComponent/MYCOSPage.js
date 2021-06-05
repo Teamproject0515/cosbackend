@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import './managerCss/managermain.css'
-import ManagerSidebar from './ManagerSidebar';
+import ManagerSidebar from './MyCOSSidebar';
 import MemberInfoComponent from './Product/MemberInfoComponent';
 import DeliveryInfoComponent from './Product/DeliveryInfoComponent';
 import AddressinfoComponent from './Product/AddressinfoComponent';
