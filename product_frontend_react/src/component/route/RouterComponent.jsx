@@ -7,19 +7,26 @@ import MainComponent from "../../Maincomponent/Main";
 import ProductListAccessoryComponent from "../product/ProductListAccessoryComponent";
 import ProductNewArrivalsComponent from "../product/ProductNewArrivalsComponent";
 import MyCosMemberComponent from "../product/MyCosMemberComponent";
+import ManagerPage from '../../manager_component/ManagerPage';
 
 const AppRouter = () => {
     return(
         <div style={style} >
             <BrowserRouter >
                     <Switch >
+                        {/* 메인 페이지 */}
                         <Route exact path="/" component={MainComponent} />
+
+                        {/* 상품 리스트 페이지 */}
                         <Route path="/product-list" component={ProductListCategoryComponent} />
                         <Route path="/product-detail" component={ProductDetailComponent} />
                         <Route path="/search-keyword" component={ProductListSearchComponent} />
                         <Route path="/accessories-list" component={ProductListAccessoryComponent} />
                         <Route path="/new-arrivals" component={ProductNewArrivalsComponent} />
                         <Route path="/mycos-member" component={MyCosMemberComponent} />
+
+                        {/* MYCOS 페이지 */}
+                        <Route path="/manager" component={ManagerPage} />
                     </Switch>
             </BrowserRouter>
         </div>
