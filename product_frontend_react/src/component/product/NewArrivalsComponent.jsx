@@ -1,13 +1,4 @@
 import React from 'react';
-import new01 from '../images/new01.jpg';
-import new02 from '../images/new02.jpg';
-import new03 from '../images/new03.jpg';
-import new04 from '../images/new04.jpg';
-import new05 from '../images/new05.jpg';
-import new06 from '../images/new06.jpg';
-import new07 from '../images/new07.jpg';
-import new08 from '../images/new08.jpg';
-
 
 import {Grid, Table, TableRow, TableCell} from '@material-ui/core';
 

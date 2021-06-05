@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
 import img01 from '../images/01.jpg';
-import SearchSelectOptionComponent from './SearchSelectOptionComponent';
+import SelectOptionComponenttest from './SelectOptionComponent';
+import SortByComponent from './SortByComponent';
+import OptionResetComponent from './OptionResetComponent';
+import PageNumComponent from './PageNumComponent';
 
-import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
+import {Table, TableCell, TableRow, Typography, InputLabel, FormControl, Grid} from '@material-ui/core';
 
 function ProductListComponent(props){
 
@@ -17,7 +20,6 @@ function ProductListComponent(props){
     let [total_pageNum, settotal_pageNum] = useState(1);
     let [search_keyword, setsearch_keyword] = useState(window.localStorage.getItem("search_keyword"));
     let [select_option, setselect_option] = useState(null);
-    // let [productvo, setproductvo ] = useState([]);
 
     const ProductVO = {
         product_pageNum,
@@ -30,13 +32,9 @@ function ProductListComponent(props){
     }
     
     useEffect (() => {
-
-        // setproductvo(product_pageNum, product_category)
-
         ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
-              
         })
         .catch(err => {
             console.log('reloadProductList() Error!', err);
@@ -93,7 +91,7 @@ function ProductListComponent(props){
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
-                    <Typography variant ="h5" style={{marginTop:'30px'}}>"{search_keyword}" 검색 결과</Typography>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>{search_keyword}</Typography>
                         
                     <div>
                         <FormControl style={{minWidth:'80px'}}>
@@ -106,46 +104,56 @@ function ProductListComponent(props){
 
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'50px 0px 10px 0px', paddingBottom:'0px'}}/>
 
+                    <div style={{float:'left'}}>
+                        <ul style={{paddingLeft:'0px', marginTop:'0px'}}>
+                            <SelectOptionComponenttest selectOption={selectOption} label="Color" name="select_color" items={['BLACK','WHITE','RED','YELLO','GREEN']}/>
 
-                    <SearchSelectOptionComponent selectOption={selectOption} selectPageNumDown={selectPageNumDown} selectPageNumUp={selectPageNumUp} />
+                            <SelectOptionComponenttest selectOption={selectOption} label="Size" name="select_size" items={['XS','S','M','L','XL']}/>
 
+                            <SortByComponent selectOption={selectOption} label="Sort" name="select_option" />
+
+                            <OptionResetComponent />
+                        </ul>
+                    </div>
+
+
+                    <div style={{float:'right'}}>
+                        <ul style={{marginTop:'0px'}}>
+                            <PageNumComponent selectPageNumDown={selectPageNumDown} selectPageNumUp={selectPageNumUp}/>
+                        </ul>
+                    </div>
                 </Grid>
-
-
-
 
                     {/* 바디 */}
-                    {products.map(product =>
-                        <Grid item xs={6} sm={4} style={{margin:'0px'}}>
-                            <Table style={{marginBottom:'30px'}}>     
-                                <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
-                                    <TableRow key={product.product_id}>
-                                        <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px'}}>{ product.product_price }</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell alingn="right" style={{border:'0px'}}>
-                                            {/* product안의 color배열을 다시 map해서 출력하는 것 */}
-                                            {product.colorSet.map(color=>
-                                                <div key={color.index}>
-                                                    <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
-                                                </div>
-                                            )}
-                                        </TableCell>
-                                    </TableRow>
-                                </div>
-                            </Table>
-                        </Grid>
-                    )}                    
+                {products.map(product =>
+                <Grid item xs={6} sm={4} style={{margin:'0px'}}>
+                    <Table style={{marginBottom:'30px'}}>     
+                        <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
+                            <TableRow key={product.product_id}>
+                                <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>
+                            </TableRow>                                    <TableRow>
+                                    <TableCell alingn="right" style={{border:'0px'}}>{ product.product_price }</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell alingn="right" style={{border:'0px'}}>
+                                    {/* product안의 color배열을 다시 map해서 출력하는 것 */}
+                                {product.colorSet.map(color=>
+                                        <div key={color.index}>
+                                            <div style={{marginRight:'3px', float:'left', width:'15px', height:'15px', backgroundColor:color}}></div>     
+                                        </div>
+                                    )}
+                                </TableCell>
+                            </TableRow>
+                        </div>
+                    </Table>
                 </Grid>
-            </div>
-    )
-}
+            )}                    
+        </Grid>
+    </div>
+)}
 
 
 

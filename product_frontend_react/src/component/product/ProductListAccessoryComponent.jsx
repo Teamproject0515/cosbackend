@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ApiService from "../../ApiService";
-import img01 from '../images/01.jpg';
 import ace01 from '../images/ace01.jpg';
 
-import {Table, TableCell, TableRow, Typography, InputLabel, MenuItem, Select, FormControl, Grid, TextField} from '@material-ui/core';
+import {Table, TableCell, TableRow, Typography, InputLabel, FormControl, Grid } from '@material-ui/core';
 
 function ProductListComponent(props){
 
@@ -67,16 +66,13 @@ function ProductListComponent(props){
         props.history.push('/product-detail');
     }
 
-    
-
-
     return (
         <div style={{display:'flex', alignItems:'center', textAlign:'center', justifyContent:'center'}}>
             <Grid container spacing={3} style={{ paddingLeft:'10px', paddingRight:'10px', minHeight:'800px', width:'100%', maxWidth:'1560px'}}>
 
                 {/* 옵션 선택 사항 */}
                 <Grid item xs={12}> 
-                    <Typography variant ="h5" style={{marginTop:'30px'}}>Accessories Item</Typography>
+                    <Typography variant ="h5" style={{marginTop:'30px'}}>Accessories Items</Typography>
                         
                     <div>
                         <FormControl style={{minWidth:'80px'}}>
