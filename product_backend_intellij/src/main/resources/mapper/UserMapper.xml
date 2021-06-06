@@ -17,9 +17,18 @@
 
     <!-- 해당 유저의 정보 변경 -->
     <update id="UpdateUserInfo" parameterType="com.example.demo.vo.UserVO">
-        update cos_user set
-        <if test="change_email != null and change_email != 'null'">
-            user_email = #{change_email} where user_email = #{user_email}
-        </if>
+        update cos_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="change_email != null">
+                user_email = #{change_email},
+            </if>
+            <if test="change_phone != null">
+                user_phone = #{change_phone},
+            </if>
+            <if test="change_password != null">
+                user_password = #{change_password},
+            </if>
+        </trim>
+        where user_email = #{user_email}
     </update>
 </mapper>

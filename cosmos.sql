@@ -930,24 +930,26 @@ from product group by product_id, product_title, product_content, product_price,
 
 -- 고객
 CREATE TABLE cos_user (
-   user_email VARCHAR2(200) primary key, -- 이메일,
-   user_password VARCHAR2(200) NOT NULL, -- 비밀번호,
-   user_name VARCHAR2(200) NOT NULL, -- 이름,
-   user_birthday VARCHAR2(200) NOT NULL, -- 생년월일,
-   user_phone VARCHAR2(200) NOT NULL, -- 핸드폰,
-   user_regdate date default sysdate, -- 가입일자
-   user_role varchar2(200) -- 고객권한
+    user_seq number(20) primary key, -- 기본키
+    user_email VARCHAR2(200) not null, -- 이메일,
+    user_password VARCHAR2(200) NOT NULL, -- 비밀번호,
+    user_name VARCHAR2(200) NOT NULL, -- 이름,
+    user_birthday VARCHAR2(200) NOT NULL, -- 생년월일,
+    user_phone VARCHAR2(200) NOT NULL, -- 핸드폰,
+    user_regdate date default sysdate, -- 가입일자
+    user_role varchar2(200) -- 고객권한
 );
 
 
 -- 고객 주소
 CREATE TABLE cos_address (
-   user_email VARCHAR2(100) not null, -- 이메일
-   constraints user_email foreign key(user_email) references cos_user(user_email),
-   address_name varchar2(100) not null,
-   postcode NUMERIC NULL, -- 우편번호,
-   address VARCHAR2(200) NULL, -- 주소,
-   detailAddress VARCHAR2(200) NULL -- 상세주소
+    user_seq number(20),
+    constraints user_seq foreign key(user_seq) references cos_user(user_seq),
+    user_email VARCHAR2(100) not null, -- 이메일
+    address_name varchar2(100) not null,
+    postcode NUMERIC NULL, -- 우편번호,
+    address VARCHAR2(200) NULL, -- 주소,
+    detailAddress VARCHAR2(200) NULL -- 상세주소
 );
 
 select * from cos_user;
@@ -957,17 +959,17 @@ select * from cos_address;
 drop table cos_user;
 drop table cos_address;
 
-insert into cos_user values('suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986', sysdate, 'costomer');
-insert into cos_user values('test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979', sysdate, 'costomer');
+insert into cos_user values(1, 'suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986', sysdate, 'costomer');
+insert into cos_user values(2, 'test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979', sysdate, 'costomer');
 
-insert into cos_address values('suovj140@gmail.com', '내집', 95554, '서울특별시 영등포구 당산동 121-289', '가온빌 701호');
-insert into cos_address values('suovj140@gmail.com', '본가', 95554, '서울특별시 마포구 이대', '학원 301호');
-insert into cos_address values('suovj140@gmail.com', '자취방', 95554, '서울특별시 서초구 고터', '고터 1층');
-insert into cos_address values('suovj140@gmail.com', '친구집', 95554, '서울특별시 어딘가 여기', '아파트 44층');
+insert into cos_address values(1, 'suovj140@gmail.com', '내집', 95554, '서울특별시 영등포구 당산동 121-289', '가온빌 701호');
+insert into cos_address values(1, 'suovj140@gmail.com', '본가', 95554, '서울특별시 마포구 이대', '학원 301호');
+insert into cos_address values(1, 'suovj140@gmail.com', '자취방', 95554, '서울특별시 서초구 고터', '고터 1층');
+insert into cos_address values(1, 'suovj140@gmail.com', '친구집', 95554, '서울특별시 어딘가 여기', '아파트 44층');
 
 
-insert into cos_address values('test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니');
-insert into cos_address values('test1@gmail.com', '어딘가2', 46748, '이세상은 맞냐', '어딘지몰라');
+insert into cos_address values(2, 'test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니');
+insert into cos_address values(2, 'test1@gmail.com', '어딘가2', 46748, '이세상은 맞냐', '어딘지몰라');
 
 
 commit;
@@ -978,11 +980,19 @@ select * from cos_address where user_email = 'suovj140@gmail.com';
 
 
 
+update cos_user set user_email = '변경할값' where user_email = '넘어온값'
+
+vo에 change_email, change_phone, change_password 필요함;
 
 
 
 
 
 
+select * from cos_user;
+select * from cos_address;
 
+update cos_user set user_email = 'test2@gmail.com' where user_email = 'suovj140@gmail.com';
+update cos_user set user_email = 'suovj140@gmail.com' where user_email = 'test2@gmail.com';
 
+commit;

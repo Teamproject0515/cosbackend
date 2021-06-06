@@ -32,8 +32,8 @@ class ApiService {
         return axios.get(USER_API_BASE_URL+'/useraddressinfo/'+user_email);
     }
 
-    updateUserInfo(user_email, change_email, change_phone, change_password){
-        return axios.get(USER_API_BASE_URL+'/updateuserinfo/'+user_email+'/'+change_email+'/'+change_phone+'/'+change_password);
+    updateUserInfo(Change_user){
+        return axios.post(USER_API_BASE_URL+'/updateuserinfo', Change_user);
     }
 
 }
