@@ -11,4 +11,7 @@ public interface UserService {
     
     // 해당 유저의 주소 모두 들고오기
     public List<UserVO> UserAddressList(String user_email);
+
+    // 해당 유저의 정보 수정
+    public void UpdateUserInfo(UserVO userVO);
 }

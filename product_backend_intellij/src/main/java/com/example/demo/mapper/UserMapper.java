@@ -14,4 +14,6 @@ public interface UserMapper {
     // 해당 회원의 주소 리스트 출력
     List<UserVO> UserAddressList(String user_email);
 
+    // 해당 회원 정보 수정
+    void UpdateUserInfo(UserVO userVO);
 }

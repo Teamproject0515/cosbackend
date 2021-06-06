@@ -7,6 +7,17 @@ import ApiService from '../../ApiService';
 
 function MemberInfoComponent(props) {
 
+    const [modalOpen, setmodalOpen] = useState(false);
+    const [change_email, setchange_email] = useState(null);
+    const [change_phone, setchange_phone] = useState(null);
+    const [change_password, setchange_password] = useState(null);
+    function updateButton(){
+        alert('변경창 띄우기');
+        ApiService.updateUserInfo(props.user.user_email, change_email, change_phone, change_password);
+    };
+
+
+
     return (
         <>
            <Grid item xs={6} sm={7}>
@@ -16,7 +27,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>이메일 주소</div>
-                            <div>변경하기</div>
+                            <div><button onClick={() => updateButton()}>변경하기</button></div>
                         </div>
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_email}></input></div>
                     </div>
@@ -34,7 +45,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>휴대폰번호</div>
-                            <div>변경하기</div>
+                            <div><button onClick={() => updateButton()}>변경하기</button></div>
                         </div>
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_phone}></input></div>
                     </div>
@@ -42,7 +53,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>비밀번호</div>
-                            <div>변경하기</div>
+                            <div><button onClick={() => updateButton()}>변경하기</button></div>
                         </div>
                     </div>
 

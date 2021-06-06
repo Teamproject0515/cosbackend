@@ -7,6 +7,7 @@ import java.sql.Date;
 @Data
 public class UserVO {
         // 유저 기본 정보 출력
+        private int user_seq;
         private String user_email;
         private String user_password;
         private String user_name;
@@ -19,5 +20,10 @@ public class UserVO {
         private int postcode;
         private String address;
         private String detailaddress;
+
+        // 변경할 유저 정보
+        private String change_email;
+        private String change_phone;
+        private String change_password;
 
 }

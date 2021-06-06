@@ -10,8 +10,16 @@
         SELECT * FROM cos_user WHERE user_email = #{user_email}
     </select>
 
-
+    <!-- 해당 유저의 배송지 리스트 출력 -->
     <select id="UserAddressList" resultType="com.example.demo.vo.UserVO" parameterType="String">
         select * from cos_address where user_email = #{user_email}
     </select>
+
+    <!-- 해당 유저의 정보 변경 -->
+    <update id="UpdateUserInfo" parameterType="com.example.demo.vo.UserVO">
+        update cos_user set
+        <if test="change_email != null and change_email != 'null'">
+            user_email = #{change_email} where user_email = #{user_email}
+        </if>
+    </update>
 </mapper>

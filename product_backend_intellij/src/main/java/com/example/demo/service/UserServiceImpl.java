@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService{
     public List<UserVO> UserAddressList(String user_email) {
         return userMapper.UserAddressList(user_email);
     }
+
+    @Override
+    public void UpdateUserInfo(UserVO userVO) {
+        userMapper.UpdateUserInfo(userVO);
+    }
 }
