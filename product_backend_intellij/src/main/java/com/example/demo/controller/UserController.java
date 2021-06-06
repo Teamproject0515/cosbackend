@@ -16,7 +16,7 @@ public class UserController {
     UserService userService;
 
 
-    @GetMapping("{user_email}")
+    @GetMapping("/userinfo/{user_email}")
     public UserVO UserByID(@PathVariable String user_email){
         System.out.println("UserInfo Success!");
         return userService.UserByID(user_email);
