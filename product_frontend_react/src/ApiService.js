@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const PRODUCT_API_BASE_URL = "http://localhost:8080/products";
+const USER_API_BASE_URL = "http://localhost:8080/mycos";
 
 class ApiService {
 
@@ -18,6 +19,19 @@ class ApiService {
     fetchProductByID(productID){
         return axios.get(PRODUCT_API_BASE_URL + '/' + productID);
     }
+
+
+    // 해당 유저 정보 출력하기
+    getUserByID(user_email){
+        return axios.get(USER_API_BASE_URL+'/'+user_email);
+    }
+
+    // 해당 유저의 배송지 리스트 출력하기
+
+    getUserAddressList(user_email){
+        return axios.get(USER_API_BASE_URL+'/useraddressinfo/'+user_email);
+    }
+
 }
 
 export default new ApiService();

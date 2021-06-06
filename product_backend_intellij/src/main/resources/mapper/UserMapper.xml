@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+
+    <!-- 해당 유저 정보 출력 -->
+    <select id="UserByID" resultType="com.example.demo.vo.UserVO" parameterType="String">
+        SELECT * FROM cos_user WHERE user_email = #{user_email}
+    </select>
+
+
+    <select id="UserAddressList" resultType="com.example.demo.vo.UserVO" parameterType="String">
+        select * from cos_address where user_email = #{user_email}
+    </select>
+</mapper>

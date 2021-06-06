@@ -1,11 +1,12 @@
-import React,{useState} from 'react'
-import './managerCss/managermain.css'
+import React,{useState, useEffect} from 'react'
 import ManagerSidebar from './MyCOSSidebar';
 import MemberInfoComponent from './Product/MemberInfoComponent';
 import DeliveryInfoComponent from './Product/DeliveryInfoComponent';
 import AddressinfoComponent from './Product/AddressinfoComponent';
 import MyCOSDashBoardComponent from './MyCOSDashBoardComponent';
-import {Grid, Button} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
+import ApiService from '../ApiService';
+
 
 function ManagerPage() {
 
@@ -54,20 +55,22 @@ function ManagerPage() {
         setMemberinfo(false);
     }
 
-    let user_id = 'suovj140';
-    let user_name = '구지훈';
-    let user_email = 'design_k@kakao.com';
-    let user_phone = '010-4474-9986';
-    let user_password = 'pw';
-    let user_birthday = '1993-06-15'
-    const user = {
-        user_id,
-        user_name,
-        user_email,
-        user_phone,
-        user_password,
-        user_birthday
-    }
+
+
+    let user_email = 'suovj140@gmail.com';
+
+    let [userinfo, setuserinfo ] = useState([]);
+
+    useEffect(() => {
+        ApiService.getUserByID(user_email)
+        .then( res => {
+            setuserinfo(res.data);
+            console.log(userinfo);
+        })
+        .catch(err => {
+            console.log('userinfo print error!', err);
+        })
+    },[user_email]);
 
     let [check_password, setcheck_password] = useState(null);
 
@@ -79,11 +82,13 @@ function ManagerPage() {
     }
 
     function checkPW(){
-        if(user.user_password === check_password){
+        if(userinfo.user_password === check_password){
             window.localStorage.setItem("checkpw", true);
+            alert('맞아요 따란');
             setSidebarshow(true);
             memberinfoOpen();
         }else{
+            alert('틀렸어요 따란');
             window.localStorage.setItem("checkpw", false);
         };
     }
@@ -99,11 +104,11 @@ function ManagerPage() {
                 <Grid item xs={12} style={{height:'60px'}}> 
                     <div style={{textAlign:'left',fontSize:'25px', marginBottom:'20px'}} onClick={() => dashBoardOpen()}>My COS</div>
                 </Grid>
-                {dashBoard && <MyCOSDashBoardComponent user={user} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
+                {dashBoard && <MyCOSDashBoardComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
                 {sidebarshow && <ManagerSidebar memberinfoOpen={memberinfoOpen} deliveryinfoOpen={deliveryinfoOpen} addressinfoOpen={addressinfoOpen}/>}
-                {memberinfo && <MemberInfoComponent user={user} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
-                {deliveryinfo && <DeliveryInfoComponent />}
-                {addressinfo && <AddressinfoComponent/>}
+                {memberinfo && <MemberInfoComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
+                {deliveryinfo && <DeliveryInfoComponent  user={userinfo}/>}
+                {addressinfo && <AddressinfoComponent  user={userinfo}/>}
             </Grid>
         </div>
     )

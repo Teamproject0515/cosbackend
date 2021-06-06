@@ -1,19 +1,26 @@
 import React, {useState,useEffect} from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import ApiService from '../../ApiService';
 
-function AddressinfoComponent() {
-    //서버에서 받아올 유저 저장소
+function AddressinfoComponent(props) {
+
     const [useraddresses,setuseraddresses] = useState([]);
+
+    useEffect(() => {
+        alert('넘어오는 이메일 확인 : '+props.user.user_email);
+        ApiService.getUserAddressList(props.user.user_email)
+        .then( res => {
+            setuseraddresses(res.data);
+            console.log(useraddresses);
+        })
+        .catch(err => {
+            console.log('userinfo print error!', err);
+        })
+    },[props.user.user_email]);
+
+
+    //서버에서 받아올 유저 저장소
     
-    //새로고침시에만 실행
-    useEffect(()=>{
-        getUserAddressList()
-    },[])
-
-    // 서버에서 해당 유저의 배송지 목록 조회 - 이게 필요한가? 바로 api써서 돌리면 될듯
-    function getUserAddressList(){
-
-    }
 
     function AddressModify(){
         alert('정보 수정 모달 띄우기');
@@ -31,38 +38,25 @@ function AddressinfoComponent() {
             </div>
             <div style={{minHeight:'800px'}}>
 
-                {/* 해당 유저의 배송지 테이블에서 배송지목록 list로 받아서 map으로 반복문 돌릴 예정 */}
+                {useraddresses.map(useraddress => 
+                        
                 <Table style={{marginBottom:'30px'}}>
                     <TableBody style={{borderRadius:'10px', padding:'10px', minWidth:'600px'}}>
-                        <TableRow style={{display:'flex', alignItems:'center'}}>
-                            <TableCell style={{fontSize:'12px', border:'0px', padding:'0px', color:'black', paddingBottom:'10px', paddingRight:'50px'}}>나의 집</TableCell><TableCell style={{border:'0px', padding:'0px', paddingBottom:'10px'}}><Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressModify()}>수정</Button></TableCell>
+                        <TableRow key={useraddress.user_email}                      
+                        style={{display:'flex', alignItems:'center'}}>
+                            <TableCell style={{fontSize:'12px', border:'0px', padding:'0px', color:'black', paddingBottom:'10px', paddingRight:'50px'}}>{useraddress.address_name}</TableCell><TableCell style={{border:'0px', padding:'0px', paddingBottom:'10px'}}><Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressModify()}>수정</Button></TableCell>
                         </TableRow>
 
                         <TableRow>
-                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>010-4474-9986</TableCell>
+                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>{useraddress.address}</TableCell>
                         </TableRow>
 
                         <TableRow>
-                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>서울특별시 영등포구 당산동 121-289번지 가온빌 701호</TableCell>
+                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>{useraddress.detailaddress}</TableCell>
                         </TableRow>   
                     </TableBody>
                 </Table>
-
-                <Table style={{marginBottom:'30px'}}>
-                    <TableBody style={{borderRadius:'10px', padding:'10px', minWidth:'600px'}}>
-                        <TableRow style={{display:'flex', alignItems:'center'}}>
-                            <TableCell style={{fontSize:'12px', border:'0px', padding:'0px', color:'black', paddingBottom:'10px', paddingRight:'50px'}}>고향 집</TableCell><TableCell style={{border:'0px', padding:'0px', paddingBottom:'10px'}}><Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressModify()}>수정</Button></TableCell>
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>010-4474-9986</TableCell>
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell style={{fontSize:'12px', border:'0px', margin:'0px', padding:'0px', color:'gray'}}>대구광역시 수성구 만촌1동 1327-13번지 1층</TableCell>
-                        </TableRow>   
-                    </TableBody>
-                </Table>
+                )}
             </div>
         </Grid>
         </>

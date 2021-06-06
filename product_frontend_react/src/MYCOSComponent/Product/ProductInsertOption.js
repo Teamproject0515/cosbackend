@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import '../managerCss/productinsert.css'
 import {useHistory} from "react-router-dom";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

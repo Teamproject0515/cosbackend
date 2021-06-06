@@ -1,7 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow, Grid, Button} from '@material-ui/core';
+import ApiService from '../../ApiService';
 
-function DeliveryInfoComponent({productDetailOpen}) {
+function DeliveryInfoComponent(props) {
+
     return (
         <Grid item xs={6} sm={7}>
             <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>주문/배송</div>
