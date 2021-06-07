@@ -31,11 +31,18 @@ public class UserController {
 
     @PostMapping("/updateuserinfo")
     public void UpdateUserInfo(@RequestBody UserVO userVO){
-        System.out.println("user_email : "+userVO.getUser_email());
-        System.out.println("change_email : "+userVO.getChange_email());
-        System.out.println("change_phone : "+userVO.getChange_phone());
-        System.out.println("change_password : "+userVO.getChange_password());
-        System.out.println("UpdateUserInfo Success!");
+        System.out.println("회원 정보 수정 user_email : "+userVO.getUser_email());
+        System.out.println("회원 정보 수정 change_email : "+userVO.getChange_email());
+        System.out.println("회원 정보 수정 change_phone : "+userVO.getChange_phone());
+        System.out.println("회원 정보 수정 change_password : "+userVO.getChange_password());
+        System.out.println("회원 정보 수정 UpdateUserInfo Success!");
         userService.UpdateUserInfo(userVO);
+    }
+
+    @PostMapping("/deleteuserinfo")
+    public void DeleteUserInfo(@RequestBody UserVO userVO){
+        System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
+        System.out.println("회원탈퇴 DeleteUserInfo Success!");
+        userService.DeleteUserInfo(userVO);
     }
 }

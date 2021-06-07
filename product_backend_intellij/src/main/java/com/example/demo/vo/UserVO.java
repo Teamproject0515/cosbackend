@@ -13,6 +13,7 @@ public class UserVO {
         private String user_name;
         private String user_birthday;
         private String user_phone;
+        private String user_gender;
         private Date user_regdate;
 
         // 유저 주소 리스트 출력

@@ -27,4 +27,11 @@ public class UserServiceImpl implements UserService{
     public void UpdateUserInfo(UserVO userVO) {
         userMapper.UpdateUserInfo(userVO);
     }
+
+    @Override
+    public void DeleteUserInfo(UserVO userVO) {
+        userMapper.DeleteUserInfo(userVO);
+    }
+
+
 }

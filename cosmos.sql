@@ -959,8 +959,8 @@ select * from cos_address;
 drop table cos_user;
 drop table cos_address;
 
-insert into cos_user values(1, 'suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986', sysdate, 'costomer');
-insert into cos_user values(2, 'test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979', sysdate, 'costomer');
+insert into cos_user values(1, 'suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986','M',sysdate, 'costomer');
+insert into cos_user values(2, 'test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979','W',sysdate, 'costomer');
 
 insert into cos_address values(1, 'suovj140@gmail.com', '내집', 95554, '서울특별시 영등포구 당산동 121-289', '가온빌 701호');
 insert into cos_address values(1, 'suovj140@gmail.com', '본가', 95554, '서울특별시 마포구 이대', '학원 301호');
@@ -996,3 +996,94 @@ update cos_user set user_email = 'test2@gmail.com' where user_email = 'suovj140@
 update cos_user set user_email = 'suovj140@gmail.com' where user_email = 'test2@gmail.com';
 
 commit;
+
+
+
+SELECT P.PRODUCT_ID, P.PRODUCT_TITLE, P.PRODUCT_PRICE, P.PRODUCT_GENDER, P.PRODUCT_CATEGORY, P.PRODUCT_IMG, 
+    SUBSTR(XMLAGG(XMLELEMENT(COL,',',P.PRODUCT_COLOR)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_COLOR, 
+    SUBSTR(XMLAGG(XMLELEMENT(COL,',',P.PRODUCT_SIZE)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SIZE,
+    SUBSTR(XMLAGG(XMLELEMENT(COL,',',PO.PRODUCT_STOCK)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_STOCK,
+    SUBSTR(XMLAGG(XMLELEMENT(COL,',',PO.PRODUCT_SALED)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SALED 
+    FROM PRODUCT P, PRODUCT_OPTION PO 
+    WHERE P.PRODUCT_ID=PO.PRODUCT_OPTION_ID 
+    GROUP BY P.PRODUCT_ID,PO.PRODUCT_OPTION_ID, P.PRODUCT_TITLE, P.PRODUCT_PRICE, P.PRODUCT_GENDER, P.PRODUCT_CATEGORY, P.PRODUCT_IMG,PO.PRODUCT_OPTION_ID
+   ;
+   
+select * from (select product_id, product_title, product_price, product_gender, product_category, product_img,
+SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_COLOR)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_COLOR, 
+SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_SIZE)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SIZE from product group by product_id, product_title, product_price, product_gender, product_category, product_img) p;
+
+select  * from (select product_option_id, SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_STOCK)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_STOCK,
+    SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_SALED)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SALED 
+    from product_option group by product_option_id) o;
+
+
+
+
+
+
+
+select * from 
+(select product_id, product_title, product_price, product_gender, product_category, product_img,
+SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_COLOR)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_COLOR, 
+SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_SIZE)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SIZE 
+from product group by product_id, product_title, product_price, product_gender, product_category, product_img) p, 
+(select product_option_id, SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_STOCK)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_STOCK,
+SUBSTR(XMLAGG(XMLELEMENT(COL,',',PRODUCT_SALED)).EXTRACT('//text()').GETSTRINGVAL(),2) PRODUCT_SALED 
+from product_option group by product_option_id) o where p.product_id = o.product_option_id;
+
+
+drop table cos_address;
+drop table cos_user;
+
+
+CREATE TABLE cos_user (
+    user_seq number(20) primary key, -- 기본키
+    user_email VARCHAR2(200) not null, -- 이메일,
+    user_password VARCHAR2(200) NOT NULL, -- 비밀번호,
+    user_name VARCHAR2(200) NOT NULL, -- 이름,
+    user_birthday VARCHAR2(200) NOT NULL, -- 생년월일,
+    user_phone VARCHAR2(200) NOT NULL, -- 핸드폰,
+    user_gender VARCHAR2(50) NULL, --성별
+    user_regdate date default sysdate, -- 가입일자
+    user_role varchar2(200) -- 고객권한
+);
+
+COMMIT;
+
+
+select * from cos_user;
+select * from cos_address;
+
+
+-- order table --
+
+
+create table tbl_order(
+
+order_id number(20) not null primary key, --order_id를 null값이 오지못하게 하고 기본키로 설정함
+
+user_email varchar2(100) not null, --user_email를 null값이 오지못하게 설정
+
+product_seq number(20) not null, --product_seq를 null값이 오지못하게 설정
+
+amount number(20) default 0, --amount속성을 기본값을 0으로 설정
+
+total_price number(20) default 0
+);
+
+alter table tbl_order add constraint order_user_email_fk
+foreign key(user_email) references cos_user(user_email);
+
+alter table tbl_order add constraint order_product_seq_fk
+foreign key(product_seq) references product(product_seq);
+
+select * from product;
+select * from tbl_order;
+
+insert into tbl_order values(1, 'suovj140@gmail.com', 1, 0, 0);
+
+-- 
+select product_title, p.product_price, p.product_img from product p, (select * from tbl_order where user_email = 'suovj140@gmail.com') o where p.product_seq = o.product_seq;
+
+select * from product where ;

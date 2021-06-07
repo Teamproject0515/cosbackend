@@ -36,6 +36,10 @@ class ApiService {
         return axios.post(USER_API_BASE_URL+'/updateuserinfo', Change_user);
     }
 
+    deleteUserInfo(Change_user){
+        return axios.post(USER_API_BASE_URL+'/deleteuserinfo', Change_user);
+    }
+
 }
 
 export default new ApiService();

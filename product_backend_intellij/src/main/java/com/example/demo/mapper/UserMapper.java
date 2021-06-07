@@ -16,4 +16,7 @@ public interface UserMapper {
 
     // 해당 회원 정보 수정
     void UpdateUserInfo(UserVO userVO);
+
+    // 해당 회원 탈퇴
+    void DeleteUserInfo(UserVO userVO);
 }

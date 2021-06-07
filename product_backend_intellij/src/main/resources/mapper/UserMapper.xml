@@ -31,4 +31,18 @@
         </trim>
         where user_email = #{user_email}
     </update>
+
+    <!-- 해당 유저 회원 탈퇴 -->
+    <delete id="DeleteUserInfo" parameterType="com.example.demo.vo.UserVO">
+        <if test="user_email != null">
+            {call
+                declare
+                begin
+                    delete from cos_address where user_email = #{user_email};
+                    delete from cos_user where user_email = #{user_email};
+                end
+            }
+        </if>
+    </delete>
+
 </mapper>

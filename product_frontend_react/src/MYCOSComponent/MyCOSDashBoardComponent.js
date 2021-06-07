@@ -8,10 +8,10 @@ function MyCOSDashBoardComponent(props) {
         <Grid item xs={6} sm={12}>
                     <div style={{fontSize:'13px', textAlign:'left'}}>회원정보확인</div>
                     <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'20px 0px 20px 0px', paddingBottom:'0px'}}/>
-                    <div style={centerDiv}>
+                    {/* <div style={centerDiv}>
                         <div style={centerLabel}>아이디</div>
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_id}></input></div>
-                    </div>
+                    </div> */}
                     <div style={centerDiv}>
                         <div style={centerLabel}>이름</div>
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_name}></input></div>
