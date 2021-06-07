@@ -72,6 +72,7 @@ function ManagerPage() {
     },[user_email]);
 
     let [check_password, setcheck_password] = useState(null);
+    const [openErrorPassword, setOpenErrorPassword] = useState(false);
 
     // 비밀번호 입력창에서 enter치면 checkPW 함수 불러오기
     const onKeyPress = (e) => {
@@ -83,11 +84,11 @@ function ManagerPage() {
     function checkPW(){
         if(userinfo.user_password === check_password){
             window.localStorage.setItem("checkpw", true);
-            alert('맞아요 따란');
+            // alert('맞아요 따란');
             setSidebarshow(true);
             memberinfoOpen();
         }else{
-            alert('틀렸어요 따란');
+            setOpenErrorPassword(true);
             window.localStorage.setItem("checkpw", false);
         };
     }
@@ -103,7 +104,7 @@ function ManagerPage() {
                 <Grid item xs={12} style={{height:'60px'}}> 
                     <div style={{textAlign:'left',fontSize:'25px', marginBottom:'20px'}} onClick={() => dashBoardOpen()}>My COS</div>
                 </Grid>
-                {dashBoard && <MyCOSDashBoardComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
+                {dashBoard && <MyCOSDashBoardComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress} openErrorPassword={openErrorPassword}/>}
                 {sidebarshow && <ManagerSidebar memberinfoOpen={memberinfoOpen} deliveryinfoOpen={deliveryinfoOpen} addressinfoOpen={addressinfoOpen}/>}
                 {memberinfo && <MemberInfoComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
                 {deliveryinfo && <DeliveryInfoComponent  user={userinfo}/>}

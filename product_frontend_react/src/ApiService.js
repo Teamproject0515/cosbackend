@@ -27,7 +27,6 @@ class ApiService {
     }
 
     // 해당 유저의 배송지 리스트 출력하기
-
     getUserAddressList(user_email){
         return axios.get(USER_API_BASE_URL+'/useraddressinfo/'+user_email);
     }
@@ -39,6 +38,18 @@ class ApiService {
     deleteUserInfo(Change_user){
         return axios.post(USER_API_BASE_URL+'/deleteuserinfo', Change_user);
     }
+
+    insertUserAccount(userAccount){
+        return axios.post(USER_API_BASE_URL+'/insertuseraccount', userAccount);
+    }
+
+    userAccount(user_email){
+        return axios.get(USER_API_BASE_URL+'/useraccount/'+user_email);
+    }
+
+    updateUserAccount(userAccount){
+        return axios.post(USER_API_BASE_URL+'/updateuseraccount', userAccount);
+    };
 
 }
 

@@ -1087,3 +1087,16 @@ insert into tbl_order values(1, 'suovj140@gmail.com', 1, 0, 0);
 select product_title, p.product_price, p.product_img from product p, (select * from tbl_order where user_email = 'suovj140@gmail.com') o where p.product_seq = o.product_seq;
 
 select * from product where ;
+
+
+create table user_account(
+user_email varchar2(100) primary key,
+user_name varchar2(100),
+user_bank varchar2(100),
+user_account number(30)
+);
+
+drop table user_account;
+commit;
+
+select * from user_account;

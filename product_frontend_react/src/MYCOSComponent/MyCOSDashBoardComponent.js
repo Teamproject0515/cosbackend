@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {Grid, Button} from '@material-ui/core';
-
+import ErrorPasswordComponent from './Product/ErrorPasswordComponent';
 function MyCOSDashBoardComponent(props) {
-
     
     return (
         <Grid item xs={6} sm={12}>
@@ -27,6 +26,7 @@ function MyCOSDashBoardComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerLabel}>비밀번호</div>
                         <div style={{textAlign:'left'}}><input type="password" style={{textAlign:'left', fontSize:'15px', border:'0px', width:'100%', backgroundColor:'#E7E7E7', padding:'7px', marginTop:'5px', maxWidth:'256px'}} onChange={props.onChangePW} onKeyPress={props.onKeyPress}></input></div>
+                        {props.openErrorPassword && <ErrorPasswordComponent />}
                     </div>
                     <div style={centerDiv}>
                         <div style={centerInfo}><b>고객님의 소중한 회원정보를 환인/변경 하기 위해 비밀번호 재확인이 필요합니다.</b></div>

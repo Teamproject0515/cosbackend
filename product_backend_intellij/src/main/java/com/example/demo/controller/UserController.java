@@ -45,4 +45,33 @@ public class UserController {
         System.out.println("회원탈퇴 DeleteUserInfo Success!");
         userService.DeleteUserInfo(userVO);
     }
+
+    @PostMapping("/insertuseraccount")
+    public void InsertUserAccount(@RequestBody UserVO userVO){
+        System.out.println("user account insert");
+        System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_email());
+        System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_name());
+        System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_bank());
+        System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_account());
+        userService.InsertUserAccount(userVO);
+    }
+
+    @GetMapping("/useraccount/{user_email}")
+    public UserVO UserAccount(@PathVariable String user_email){
+        UserVO userVO = new UserVO();
+        userVO.setUser_email(user_email);
+        System.out.println("user account select");
+        System.out.println("회원 환불 계좌 조회 : "+userVO.getUser_email());
+        return userService.UserAccount(userVO);
+    }
+
+    @PostMapping("/updateuseraccount")
+    public void UpdateUserAccount(@RequestBody UserVO userVO){
+        System.out.println("user account select");
+        System.out.println("회원 환불 계좌 수정 : "+userVO.getUser_email());
+        System.out.println("회원 환불 계좌 수정 : "+userVO.getUser_name());
+        System.out.println("회원 환불 계좌 수정 : "+userVO.getUser_bank());
+        System.out.println("회원 환불 계좌 수정 : "+userVO.getUser_account());
+        userService.UpdateUserAccount(userVO);
+    }
 }
