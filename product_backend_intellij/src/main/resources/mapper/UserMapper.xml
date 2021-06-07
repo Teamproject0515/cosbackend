@@ -56,4 +56,8 @@
     <update id="UpdateUserAccount" parameterType="com.example.demo.vo.UserVO">
         update user_account set user_bank = #{user_bank}, user_account = #{user_account}
     </update>
+
+    <insert id="InsertUserAccountPAY" parameterType="com.example.demo.vo.UserVO">
+        insert into user_account
+    </insert>
 </mapper>

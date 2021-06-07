@@ -28,4 +28,6 @@ public interface UserMapper {
     
     // 해당 유저의 계좌 정보 수정
     void UpdateUserAccount(UserVO userVO);
+
+    void InsertUserAccountPAY(UserVO userVO);
 }

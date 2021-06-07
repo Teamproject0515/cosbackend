@@ -48,5 +48,10 @@ public class UserServiceImpl implements UserService{
         userMapper.UpdateUserAccount(userVO);
     }
 
+    @Override
+    public void InsertUserAccountPAY(UserVO userVO) {
+        userMapper.InsertUserAccountPAY(userVO);
+    }
+
 
 }

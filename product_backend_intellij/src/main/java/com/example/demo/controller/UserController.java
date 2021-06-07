@@ -74,4 +74,13 @@ public class UserController {
         System.out.println("회원 환불 계좌 수정 : "+userVO.getUser_account());
         userService.UpdateUserAccount(userVO);
     }
+
+    @PostMapping("/insertuseraccountpay")
+    public void InsertUserAccountPAY(@RequestBody UserVO userVO){
+        System.out.println("InsertUserAccountPAY success!");
+        System.out.println("소득공제용 정보 입력 : "+userVO.getUser_email());
+        System.out.println("소득공제용 정보 입력 : "+userVO.getUser_name());
+        System.out.println("소득공제용 정보 입력 : "+userVO.getUser_phone());
+        userService.InsertUserAccountPAY(userVO);
+    }
 }

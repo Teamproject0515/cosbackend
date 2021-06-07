@@ -4,6 +4,7 @@ import {InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
 import ApiService from '../../ApiService';
 import UserAccount from './InsertUserAccount';
 import UpdateUserAccount from './UpdateUserAccount';
+import InsertUserAccountPAY from './InsertUserAccountPAYComponent';
 
 function MemberInfoComponent(props) {
 
@@ -35,9 +36,6 @@ function MemberInfoComponent(props) {
             .catch(err => {
                 console.log('user_account print error!', err);
             })
-        
-
-
     },[]);
 
    
@@ -84,12 +82,13 @@ function MemberInfoComponent(props) {
 
     const classes = useStyles();
 
-    const [open, setOpen] = React.useState(false);
-    const [openChangePhone, setOpenChangePhone] = React.useState(false);
-    const [openChangePassword, setOpenChangePassword] = React.useState(false);
-    const [openUserDelete, setOpenUserDelete] = React.useState(false);
-    const [openUserAccountInsert, setOpenUserAccountInsert] = React.useState(false);
-    const [openReCheckUserDelete, setOpenReCheckUserDelete] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [openChangePhone, setOpenChangePhone] = useState(false);
+    const [openChangePassword, setOpenChangePassword] = useState(false);
+    const [openUserAccountInsert, setOpenUserAccountInsert] = useState(false);
+    const [openUserSNSConnect, setOpenUserSNSConnect] = useState(false);
+    const [openUserDelete, setOpenUserDelete] = useState(false);
+    const [openReCheckUserDelete, setOpenReCheckUserDelete] = useState(false);
 
     const handleOpen = (e) => {
         if(e.target.name === "change_email"){
@@ -104,6 +103,8 @@ function MemberInfoComponent(props) {
             setOpenReCheckUserDelete(true);
         }if(e.target.name === "user_account_insert"){
             setOpenUserAccountInsert(true);
+        }if(e.target.name === "user_sns_connect"){
+            setOpenUserSNSConnect(true);
         }
     };
     
@@ -121,6 +122,7 @@ function MemberInfoComponent(props) {
         setOpenUserDelete(false);
         // 회원 탈퇴 다시 묻는 모달 띄우기
         setOpenReCheckUserDelete(false);
+        setOpenUserSNSConnect(false);
         
     };
 
@@ -251,7 +253,7 @@ function MemberInfoComponent(props) {
                     <div style={spaceBetween}><span>환불계좌/현금영수증</span> <span><button name="user_account_insert" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>더보기</button></span></div>
                     <hr style={bottomHr}/>
 
-                    <div style={spaceBetween}><span>개인계정 연결관리</span> <span><button name="user_delete" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>더보기</button></span></div>
+                    <div style={spaceBetween}><span>개인계정 연결관리</span> <span><button name="user_sns_connect" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>더보기</button></span></div>
                     <hr style={bottomHr}/>
 
                     <div style={spaceBetween}><span>회원탈퇴</span> <span><button name="user_delete" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>신청</button></span></div>
@@ -341,9 +343,10 @@ function MemberInfoComponent(props) {
                         BackdropProps={{
                             timeout: 500,
                         }}
+                        
                     >
                         <Fade in={openUserAccountInsert}>
-                            <div className={classes.paper}>
+                            <div className={classes.paper} style={{width:'640px'}}>
                                 <div style={{height:'20px'}}></div>
                                 <div style={centerDivBetween}>
                                     <h5 style={{margin:'0px'}}>{props.user.user_name}님의 환불계좌 정보</h5><Button style={{fontSize:'12px', margin:'0px', padding:'0px', color:'gray'}} onClick={() => openAccountButton()}>등록</Button>
@@ -390,12 +393,49 @@ function MemberInfoComponent(props) {
                                 <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px', paddingTop:'0px'}}/>
 
                                 <div style={{fontSize:'11px'}}>
-                                    <div style={{textAlign:'left', marginBottom:'30px'}}>[등록된 환불 계좌]</div>
-                                    <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 본인 명의의 계좌번호만 등록/변경 가능합니다.</div>
-                                    <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 저장하시면, 추후 이용 시 별도의 계좌입력 없이 이용하실 수 있습니다.</div>
-                                    <div style={{textAlign:'left', marginBottom:'50px'}}>* 정보 입력 또는 수정일로부터 1년간 환불기록이 없을 경우, 금융정보보호정책에 따라 환불계좌 정보는 삭제됩니다.</div>
+                                    <div style={{textAlign:'left', marginBottom:'30px'}}>[등록된 소득공제용 현금영수증]</div>
+
+                                    <InsertUserAccountPAY></InsertUserAccountPAY>
+                                   
                                 </div>
                                 
+                            </div>
+                        </Fade>
+                    </Modal>
+
+
+                    {/* SNS 연동 모달 */}
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={openUserSNSConnect}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={openUserSNSConnect}>
+                            <div className={classes.paper} style={{width:'640px'}}>
+                                <h5>개인계정 연결관리</h5>
+                                <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px'}}/>
+                                <div>
+                                    <div style={{display:'flex'}}>
+                                        <div  style={{fontSize:'12px', textAlign:'left', width:'40px'}}>NAVER</div><div style={{fontSize:'12px', width:'60px'}}> : </div><div style={{fontSize:'12px', textAlign:'left', width:'60px'}}>등록하기</div>
+                                    </div>
+                                    <div style={{display:'flex'}}>
+                                        <div  style={{fontSize:'12px', textAlign:'left', width:'40px'}}>KAKAO</div><div style={{fontSize:'12px', width:'60px'}}> : </div><div style={{fontSize:'12px', textAlign:'left', width:'60px'}}>등록하기</div>
+                                    </div>
+                                    <div style={{display:'flex'}}>
+                                        <div  style={{fontSize:'12px', textAlign:'left', width:'40px'}}>FACEBOOK</div><div style={{fontSize:'12px', width:'60px'}}> : </div><div style={{fontSize:'12px', textAlign:'left', width:'60px'}}>등록하기</div>
+                                    </div>
+                                    <div style={{display:'flex'}}>
+                                        <div  style={{fontSize:'12px', textAlign:'left', width:'40px'}}>GOOGLE</div><div style={{fontSize:'12px', width:'60px'}}> : </div><div style={{fontSize:'12px', textAlign:'left', width:'60px'}}>등록하기</div>
+                                    </div>
+                                    <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px'}}/>
+                                </div>
                             </div>
                         </Fade>
                     </Modal>
@@ -415,7 +455,7 @@ function MemberInfoComponent(props) {
                         }}
                     >
                         <Fade in={openUserDelete}>
-                            <div className={classes.paper}>
+                            <div className={classes.paper} style={{width:'640px'}}>
                                 <h5>회원 탈퇴</h5>
                                 <div style={{fontSize:'12px', textAlign:'left'}}>
                                 이용해 주셔서 감사합니다.<br/>

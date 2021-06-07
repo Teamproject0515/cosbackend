@@ -9,7 +9,7 @@ function InsertUserAccount(props) {
     const [user_name, setuser_name] = useState(props.user_name);
     const [user_email, setuser_email] = useState(props.user_email);
 
-    
+
 
     function insertUserAccount(){
         const userAccount = {

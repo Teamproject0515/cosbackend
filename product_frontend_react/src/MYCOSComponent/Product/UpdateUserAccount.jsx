@@ -19,10 +19,13 @@ function UpdateUserAccount(props) {
             user_email : user_email,
         }
         console.log(userAccount);
-
-        ApiService.updateUserAccount(userAccount);
-        alert('수정 완료됐습니다.');
-        props.handleClose();
+        if(userAccount.user_bank === null | userAccount.user_account === null){
+            alert('은행과 계좌번호를 확인해주세요.');
+        }else{
+            ApiService.updateUserAccount(userAccount);
+            alert('수정 완료됐습니다.');
+            props.handleClose();
+        }
     }
 
     const onChangeAccount = (e) =>{
@@ -31,6 +34,12 @@ function UpdateUserAccount(props) {
 
     const onChangeBank = (e) =>{
         setuser_bank(e.target.value);
+    }
+
+    const onKeyPress = (e) => {
+        if(e.key === 'Enter'){
+            updateUserAccount();
+        }
     }
 
     return (
@@ -57,7 +66,7 @@ function UpdateUserAccount(props) {
 
             <div style={{textAlign:'left'}}>
                 <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'5px'}}>계좌번호</div>
-                <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'170px', marginBottom:'10px'}} type="text" placeholder="'-' 를 제외한 숫자만 입력해주세요." onChange={onChangeAccount}/>
+                <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'170px', marginBottom:'10px'}} type="text" placeholder="'-' 를 제외한 숫자만 입력해주세요." onChange={onChangeAccount} onKeyPress={onKeyPress}/>
                 <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => updateUserAccount()}>수정하기</Button>
             </div>
         </div>

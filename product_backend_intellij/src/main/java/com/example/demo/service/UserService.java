@@ -27,4 +27,7 @@ public interface UserService {
 
     // 해당 유저 환불 계좌 정보 수정
     public void UpdateUserAccount(UserVO userVO);
+
+    // 해당 유저의 소득공제용 번호 입력
+    public void InsertUserAccountPAY(UserVO userVO);
 }
