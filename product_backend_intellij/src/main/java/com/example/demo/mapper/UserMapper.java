@@ -29,5 +29,9 @@ public interface UserMapper {
     // 해당 유저의 계좌 정보 수정
     void UpdateUserAccount(UserVO userVO);
 
+    // 해당 유저의 소득공제용 정보 입력
     void InsertUserAccountPAY(UserVO userVO);
+
+    // 해당 유저의 소득공제용 정보 수정
+    void UpdateUserRepay(UserVO userVO);
 }

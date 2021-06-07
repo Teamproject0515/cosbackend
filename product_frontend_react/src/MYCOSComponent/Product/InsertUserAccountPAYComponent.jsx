@@ -4,25 +4,26 @@ import ApiService from '../../ApiService';
 
 function InsertUserAccount(props) {
 
-    const [user_name, setuser_name] = useState(props.user_name);
     const [user_email, setuser_email] = useState(props.user_email);
-    const [user_phone, setuser_phone] = useState(null);
+    const [user_repay, setuser_repay] = useState(null);
 
 
 
     function insertUserAccount(){
         const userAccount = {
-            user_name : user_name,
             user_email : user_email,
-            user_phone : user_phone,
+            user_repay : user_repay,
         }
         console.log(userAccount);
 
         ApiService.insertUserAccountPAY(userAccount);
+        alert('소득공제용 현금영수증 번호가 등록됐습니다.')
+        props.handleClose();
     }
 
     const onChangePhone = (e) =>{
-        setuser_phone(e.target.value);
+        setuser_repay(e.target.value);
+        console.log("user_repay : " + user_repay);
     }
 
     return (

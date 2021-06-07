@@ -21,6 +21,8 @@ function InsertUserAccount(props) {
         console.log(userAccount);
 
         ApiService.insertUserAccount(userAccount);
+        alert('환불 계좌 등록에 성공했습니다.')
+        props.handleClose();
     }
 
     const onChangeAccount = (e) =>{

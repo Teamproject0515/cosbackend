@@ -30,5 +30,6 @@ public class UserVO {
         // 환불 계좌 등록
         private String user_bank;
         private String user_account;
+        private String user_repay;
 
 }

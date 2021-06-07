@@ -7,17 +7,17 @@
 
     <!-- 해당 유저 정보 출력 -->
     <select id="UserByID" resultType="com.example.demo.vo.UserVO" parameterType="String">
-        SELECT * FROM cos_user WHERE user_email = #{user_email}
+        SELECT * FROM tbl_user WHERE user_email = #{user_email}
     </select>
 
     <!-- 해당 유저의 배송지 리스트 출력 -->
     <select id="UserAddressList" resultType="com.example.demo.vo.UserVO" parameterType="String">
-        select * from cos_address where user_email = #{user_email}
+        select * from tbl_address where user_email = #{user_email}
     </select>
 
     <!-- 해당 유저의 정보 변경 -->
     <update id="UpdateUserInfo" parameterType="com.example.demo.vo.UserVO">
-        update cos_user
+        update tbl_user
         <trim prefix="set" suffixOverrides=",">
             <if test="change_email != null">
                 user_email = #{change_email},
@@ -38,26 +38,30 @@
             {call
                 declare
                 begin
-                    delete from cos_address where user_email = #{user_email};
-                    delete from cos_user where user_email = #{user_email};
+                    delete from tbl_address where user_email = #{user_email};
+                    delete from tbl_user where user_email = #{user_email};
                 end
             }
         </if>
     </delete>
 
-    <insert id="InsertUserAccount" parameterType="com.example.demo.vo.UserVO">
-        insert into user_account values(#{user_email}, #{user_name}, #{user_bank}, #{user_account})
-    </insert>
+    <update id="InsertUserAccount" parameterType="com.example.demo.vo.UserVO">
+        update tbl_user set user_bank = #{user_bank}, user_account = #{user_account} where user_email = #{user_email}
+    </update>
 
     <select id="UserAccount" parameterType="com.example.demo.vo.UserVO" resultType="com.example.demo.vo.UserVO">
-        select * from user_account where user_email = #{user_email}
+        select * from tbl_user where user_email = #{user_email}
     </select>
 
     <update id="UpdateUserAccount" parameterType="com.example.demo.vo.UserVO">
-        update user_account set user_bank = #{user_bank}, user_account = #{user_account}
+        update tbl_user set user_bank = #{user_bank}, user_account = #{user_account} where user_email = #{user_email}
     </update>
 
-    <insert id="InsertUserAccountPAY" parameterType="com.example.demo.vo.UserVO">
-        insert into user_account
-    </insert>
+    <update id="InsertUserAccountPAY" parameterType="com.example.demo.vo.UserVO">
+        update tbl_user set user_repay = #{user_repay} where user_email = #{user_email}
+    </update>
+
+    <update id="UpdateUserRepay" parameterType="com.example.demo.vo.UserVO">
+        update tbl_user set user_repay = #{user_repay} where user_email = #{user_email}
+    </update>
 </mapper>

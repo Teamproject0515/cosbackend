@@ -5,6 +5,13 @@ import ApiService from '../../ApiService';
 import UserAccount from './InsertUserAccount';
 import UpdateUserAccount from './UpdateUserAccount';
 import InsertUserAccountPAY from './InsertUserAccountPAYComponent';
+import UpdateUserRepay from './UpdateUserRepay';
+import ModalPhone from './ModalUpdatePhoneComponent';
+import ModalEmail from './ModalUpdateEmailComponent';
+import ModalPassword from './ModalUpdatePasswordComponent';
+import ModalAccount from './ModalUpdateAccountComponent';
+import ModalSNS from './ModalUpdateSNSComponent';
+import ModalDeleteUser from './ModalDeleteUserComponent';
 
 function MemberInfoComponent(props) {
 
@@ -14,6 +21,7 @@ function MemberInfoComponent(props) {
     const [user_email, setuser_email] = useState(props.user.user_email);
     const [user_account, setuser_account] = useState('');
     const [updateUserAccount, setUpdateUserAccount] = useState(false);
+    const [user_name, setuser_name] = useState(props.user.user_name);
 
     const Change_user = {
         user_email : user_email,
@@ -45,6 +53,7 @@ function MemberInfoComponent(props) {
         console.log(Change_user);
         ApiService.updateUserInfo(Change_user);
         alert('업데이트 성공');
+        handleClose();
     };
 
     function onChange(e){
@@ -89,23 +98,26 @@ function MemberInfoComponent(props) {
     const [openUserSNSConnect, setOpenUserSNSConnect] = useState(false);
     const [openUserDelete, setOpenUserDelete] = useState(false);
     const [openReCheckUserDelete, setOpenReCheckUserDelete] = useState(false);
+    const [openInsertUserAccountPAY, setOpenInsertUserAccountPAY] = useState(false);
+    const [openUpdateUserRepay, setOpenUpdateUserRepay] = useState(false);
 
     const handleOpen = (e) => {
         if(e.target.name === "change_email"){
             setOpen(true);
-        }if(e.target.name === "change_phone"){
+        }else if(e.target.name === "change_phone"){
             setOpenChangePhone(true);
-        }if(e.target.name === "change_password"){
+        }else if(e.target.name === "change_password"){
             setOpenChangePassword(true);
-        }if(e.target.name === "user_delete"){
+        }else if(e.target.name === "user_delete"){
             setOpenUserDelete(true);
-        }if(e.target.name === "recheck_user_delete"){
+        }else if(e.target.name === "recheck_user_delete"){
             setOpenReCheckUserDelete(true);
-        }if(e.target.name === "user_account_insert"){
+        }else if(e.target.name === "user_account_insert"){
             setOpenUserAccountInsert(true);
-        }if(e.target.name === "user_sns_connect"){
+        }else if(e.target.name === "user_sns_connect"){
             setOpenUserSNSConnect(true);
         }
+        
     };
     
     const handleClose = (e) => {
@@ -123,7 +135,9 @@ function MemberInfoComponent(props) {
         // 회원 탈퇴 다시 묻는 모달 띄우기
         setOpenReCheckUserDelete(false);
         setOpenUserSNSConnect(false);
-        
+
+        setUpdateUserAccount(false);
+
     };
 
 
@@ -146,7 +160,7 @@ function MemberInfoComponent(props) {
 
     // 환불 계좌 등록 버튼 눌렀을 때 onoff버튼
     function openAccountButton(){
-        if(user_account != '' && user_account != null){
+        if(user_account.user_bank != '' && user_account.user_bank != null){
             alert('이미 등록된 계좌가 있습니다.');
         }else{
             setUserAccount01(true);
@@ -166,7 +180,17 @@ function MemberInfoComponent(props) {
         setUpdateUserAccount(true);
     }
 
+    function update_user_repay(){
+        setOpenUpdateUserRepay(true);
+    }
 
+    function insertUserRepay(){
+        if(user_account.user_repay != '' && user_account.user_repay != null){
+            alert('이미 등록된 정보가 있습니다.');
+        }else{
+        setOpenInsertUserAccountPAY(true);
+       }
+    }
 
 
 
@@ -179,14 +203,15 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>이메일 주소</div>
-                            <div><button name="change_email" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>변경하기</button></div>
+                            <div><button name="change_email" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>변경하기</button></div>
                         </div>
-                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_email}></input></div>
+
+                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={user_email}></input></div>
                     </div>
 
                     <div style={centerDiv}>
                         <div style={centerLabel}>이름</div>
-                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_name}></input></div>
+                        <div style={{textAlign:'left'}}><input disabled style={centerInput} value={user_name}></input></div>
                     </div>
 
                     <div style={centerDiv}>
@@ -197,7 +222,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>휴대폰번호</div>
-                            <div><button name="change_phone" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>변경하기</button></div>
+                            <div><button name="change_phone" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>변경하기</button></div>
                         </div>
                         <div style={{textAlign:'left'}}><input disabled style={centerInput} value={props.user.user_phone}></input></div>
                     </div>
@@ -205,7 +230,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerDivBetween}>
                             <div style={centerLabel}>비밀번호</div>
-                            <div><button name="change_password" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>변경하기</button></div>
+                            <div><button name="change_password" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>변경하기</button></div>
                         </div>
                     </div>
 
@@ -250,13 +275,13 @@ function MemberInfoComponent(props) {
                     </div> */}
 
 
-                    <div style={spaceBetween}><span>환불계좌/현금영수증</span> <span><button name="user_account_insert" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>더보기</button></span></div>
+                    <div style={spaceBetween}><span>환불계좌/현금영수증</span> <span><button name="user_account_insert" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>더보기</button></span></div>
                     <hr style={bottomHr}/>
 
-                    <div style={spaceBetween}><span>개인계정 연결관리</span> <span><button name="user_sns_connect" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>더보기</button></span></div>
+                    <div style={spaceBetween}><span>개인계정 연결관리</span> <span><button name="user_sns_connect" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>더보기</button></span></div>
                     <hr style={bottomHr}/>
 
-                    <div style={spaceBetween}><span>회원탈퇴</span> <span><button name="user_delete" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray'}}>신청</button></span></div>
+                    <div style={spaceBetween}><span>회원탈퇴</span> <span><button name="user_delete" onClick={handleOpen} style={{border:'0px', fontSize:'12px', borderRadius:'0px', color:'gray', backgroundColor:'white'}}>신청</button></span></div>
                     <hr style={bottomHr}/>
 
                     <div style={{marginBottom:'80px'}}></div>
@@ -266,7 +291,7 @@ function MemberInfoComponent(props) {
 
                     {/* 모달 모아두기 - 나중에 줄일 예정 */}
                     {/* 회원 이메일 변경 모달 */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -281,36 +306,55 @@ function MemberInfoComponent(props) {
 
                         <Fade in={open}>
                             <div className={classes.paper}>
-                                <h5>변경할 이메일 주소</h5>
-                                <p><input style={{padding:'10px', borderRadius:'0px', border:'1px solid gray'}} type="text" name="change_email" onChange={onChange} onKeyPress={onKeyPress}></input></p>
+                                <div style={{textAlign:'left', marginTop:'10px'}}>
+                                    <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'5px'}}>변경할 이메일 주소</div>
+                                    <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'170px', marginBottom:'10px'}} type="email" placeholder="이메일 주소를 입력해주세요." name="change_email" onChange={onChange} onKeyPress={onKeyPress}/>
+                                    <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => updateButton()}>수정하기</Button>
+                                </div>
                             </div>
                             </Fade>
-                    </Modal>
+                    </Modal> */}
 
+                        <ModalEmail open={open} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
 
+                        <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
+
+                        <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
+
+                        <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay}/>
+
+                        <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose}/>
+
+                        <ModalDeleteUser openUserDelete={openUserDelete} handleClose={handleClose} handleOpen={handleOpen} openReCheckUserDelete={openReCheckUserDelete} deleteUser={deleteUser}/>
                     {/* 휴대전화번호 변경 모달 */}
-                    <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
+                    {/* <Modal
+                        // aria-labelledby="transition-modal-title"
+                        // aria-describedby="transition-modal-description"
                         className={classes.modal}
                         open={openChangePhone}
                         onClose={handleClose}
                         closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                            timeout: 500,
-                        }}
+                        // BackdropComponent={Backdrop}
+                        // BackdropProps={{
+                        //     timeout: 500,
+                        // }}
                     >
                         <Fade in={openChangePhone}>
                             <div className={classes.paper}>
+                                <div style={{textAlign:'left', marginTop:'10px'}}>
+                                    <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'5px'}}>변경할 휴대폰 번호</div>
+                                    <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'170px', marginBottom:'10px'}} type="text" placeholder="휴대폰 번호를 입력해주세요." name="change_phone" onChange={onChange} onKeyPress={onKeyPress}/>
+                                    <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => updateButton()}>수정하기</Button>
+                                </div>
                                 <h5>변경할 휴대폰 번호</h5>
                                 <p><input style={{padding:'10px', borderRadius:'0px', border:'1px solid gray'}} type="text" name="change_phone" onChange={onChange} onKeyPress={onKeyPress}></input></p>
                             </div>
                             </Fade>
-                    </Modal>
+                    </Modal> */}
+
 
                     {/* 비밀번호 변경 모달 */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -324,17 +368,18 @@ function MemberInfoComponent(props) {
                     >
                         <Fade in={openChangePassword}>
                             <div className={classes.paper}>
-                                <h5>변경할 비밀번호</h5>
-                                <p><input style={{padding:'10px', borderRadius:'0px', border:'1px solid gray'}} type="text" name="change_password" onChange={onChange} onKeyPress={onKeyPress}></input></p>
+                                <div style={{textAlign:'left', marginTop:'10px'}}>
+                                    <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'5px'}}>변경할 비밀번호</div>
+                                    <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'170px', marginBottom:'10px'}} type="text" placeholder="비밀번호를 입력해주세요." name="change_password" onChange={onChange} onKeyPress={onKeyPress}/>
+                                    <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => updateButton()}>수정하기</Button>
+                                </div>
                             </div>
                             </Fade>
-                    </Modal>
+                    </Modal> */}
 
-
+                    
                     {/* 환불 계좌 등록 모달 */}
-                    <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
+                    {/* <Modal
                         className={classes.modal}
                         open={openUserAccountInsert}
                         onClose={handleClose}
@@ -349,15 +394,15 @@ function MemberInfoComponent(props) {
                             <div className={classes.paper} style={{width:'640px'}}>
                                 <div style={{height:'20px'}}></div>
                                 <div style={centerDivBetween}>
-                                    <h5 style={{margin:'0px'}}>{props.user.user_name}님의 환불계좌 정보</h5><Button style={{fontSize:'12px', margin:'0px', padding:'0px', color:'gray'}} onClick={() => openAccountButton()}>등록</Button>
+                                    <h5 style={{margin:'0px'}}>{user_name}님의 환불계좌 정보</h5><Button style={{fontSize:'12px', margin:'0px', padding:'0px', color:'gray'}} onClick={() => openAccountButton()}>등록</Button>
                                 </div>
                                 
-                                {userAccount01 && <UserAccount user_name={props.user.user_name} user_email={props.user.user_email}/>}
+                                {userAccount01 && <UserAccount user_name={user_name} user_email={user_email} handleClose={handleClose}/>}
 
                                 <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px', paddingTop:'0px'}}/>
 
                                 <div style={{fontSize:'11px'}}>
-                                    <div style={{textAlign:'left', marginBottom:'30px'}}>[등록된 환불 계좌]</div>
+                                    <div style={{textAlign:'left', marginBottom:'10px'}}>[등록된 환불 계좌]</div>
                                     
                                         <div style={{border:'1px solid lightgray', marginBottom:'10px', padding:'10px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                             <div style={{textAlign:'left'}}>
@@ -367,45 +412,40 @@ function MemberInfoComponent(props) {
                                             </div>
                                             <div><Button onClick={() => update_user_account()} style={{fontSize:'12px', color:'gray'}}>수정</Button></div>
                                         </div>
-                                        {updateUserAccount && <UpdateUserAccount user_name={props.user.user_name} user_email={props.user.user_email} handleClose={handleClose}/>}
+                                        {updateUserAccount && <UpdateUserAccount user_name={user_name} user_email={user_email} handleClose={handleClose}/>}
+                                    <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌 등록 및 수정 확인은 재로그인이 필요합니다.</div>
                                     <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 본인 명의의 계좌번호만 등록/변경 가능합니다.</div>
                                     <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 저장하시면, 추후 이용 시 별도의 계좌입력 없이 이용하실 수 있습니다.</div>
                                     <div style={{textAlign:'left', marginBottom:'50px'}}>* 정보 입력 또는 수정일로부터 1년간 환불기록이 없을 경우, 금융정보보호정책에 따라 환불계좌 정보는 삭제됩니다.</div>
                                 </div>
-
-                                {/* <div style={centerDivBetween}>
-                                    <h5 style={{margin:'0px'}}>기본 가상계좌 관리</h5><Button style={{fontSize:'12px', margin:'0px', padding:'0px'}}>등록</Button>
-                                </div>
-                                
-                                <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px', paddingTop:'0px'}}/>
-
-                                <div style={{fontSize:'11px'}}>
-                                    <div style={{textAlign:'left', marginBottom:'30px'}}>[등록된 환불 계좌]</div>
-                                    <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 본인 명의의 계좌번호만 등록/변경 가능합니다.</div>
-                                    <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌는 저장하시면, 추후 이용 시 별도의 계좌입력 없이 이용하실 수 있습니다.</div>
-                                    <div style={{textAlign:'left', marginBottom:'50px'}}>* 정보 입력 또는 수정일로부터 1년간 환불기록이 없을 경우, 금융정보보호정책에 따라 환불계좌 정보는 삭제됩니다.</div>
-                                </div> */}
 
                                 <div style={centerDivBetween}>
-                                    <h5 style={{margin:'0px'}}>소득공제용 현금영수증</h5><Button style={{fontSize:'12px', margin:'0px', padding:'0px', color:'gray'}}>등록</Button>
+                                    <h5 style={{margin:'0px'}}>소득공제용 현금영수증</h5>
+                                    <Button style={{fontSize:'12px', margin:'0px', padding:'0px', color:'gray', backgroundColor:'white'}} onClick={() => insertUserRepay()}>등록</Button>
                                 </div>
                                 
                                 <hr style={{height:'1px', backgroundColor:'lightgray', border:'0px', opacity:'70%', margin:'10px 0px 10px 0px', paddingBottom:'0px', paddingTop:'0px'}}/>
 
                                 <div style={{fontSize:'11px'}}>
-                                    <div style={{textAlign:'left', marginBottom:'30px'}}>[등록된 소득공제용 현금영수증]</div>
-
-                                    <InsertUserAccountPAY></InsertUserAccountPAY>
+                                    <div style={{textAlign:'left', marginBottom:'10px'}}>[등록된 소득공제용 현금영수증]</div>
+                                    <div style={{border:'1px solid lightgray', marginBottom:'10px', padding:'10px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                            <div style={{textAlign:'left'}}>
+                                                소득공제용 정보 : {user_account.user_repay}<br/>
+                                            </div>
+                                            <div><Button onClick={() => update_user_repay()} style={{fontSize:'12px', color:'gray', backgroundColor:'white'}}>수정</Button></div>
+                                        </div>
+                                        {openUpdateUserRepay && <UpdateUserRepay user_email={user_email} handleClose={handleClose}/>}
+                                    {openInsertUserAccountPAY && <InsertUserAccountPAY user_email={user_email} handleClose={handleClose}/>}
                                    
                                 </div>
                                 
                             </div>
                         </Fade>
-                    </Modal>
+                    </Modal> */}
 
 
                     {/* SNS 연동 모달 */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -438,11 +478,11 @@ function MemberInfoComponent(props) {
                                 </div>
                             </div>
                         </Fade>
-                    </Modal>
+                    </Modal> */}
 
 
                     {/* 회원 탈퇴 모달 */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -484,10 +524,10 @@ function MemberInfoComponent(props) {
                                     <Button variant="contained" style={{backgroundColor:'#444', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', color:'white'}} name='recheck_user_delete' onClick={handleOpen}><span name='recheck_user_delete' onClick={handleOpen}>회원 탈퇴</span></Button><br/>
                                 </div>
                             </Fade>
-                    </Modal>
+                    </Modal> */}
 
                     {/* 회원 탈퇴 확인 모달 */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -506,7 +546,7 @@ function MemberInfoComponent(props) {
                                     <Button variant="contained" style={{backgroundColor:'#444', width:'200px', height:'40px', borderRadius:'0px', marginBottom:'10px', boxShadow:'none', fontSize:'13px', color:'white'}} name='recheck_user_delete' onClick={deleteUser}>회원 탈퇴</Button><br/>
                             </div>
                             </Fade>
-                    </Modal>
+                    </Modal> */}
         </>
     )    
 }

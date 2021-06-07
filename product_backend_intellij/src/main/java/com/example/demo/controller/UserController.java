@@ -83,4 +83,12 @@ public class UserController {
         System.out.println("소득공제용 정보 입력 : "+userVO.getUser_phone());
         userService.InsertUserAccountPAY(userVO);
     }
+
+    @PostMapping("/updateuserrepay")
+    public void UpdateUserRepay(@RequestBody UserVO userVO){
+        System.out.println("UpdateUserRepay Start!");
+        System.out.println("EMAIL : "+userVO.getUser_email());
+        System.out.println("REPAY : "+userVO.getUser_repay());
+        userService.UpdateUserRepay(userVO);
+    }
 }

@@ -23,7 +23,7 @@ function UpdateUserAccount(props) {
             alert('은행과 계좌번호를 확인해주세요.');
         }else{
             ApiService.updateUserAccount(userAccount);
-            alert('수정 완료됐습니다.');
+            alert('환불 계좌가 등록됐습니다.');
             props.handleClose();
         }
     }
@@ -45,7 +45,7 @@ function UpdateUserAccount(props) {
     return (
         <div style={{fontSize:'11px', textAlign:'left', marginTop:'20px'}}>
             [환불 계좌 수정]
-            <div style={{textAlign:'left', marginTop:'20px'}}>
+            <div style={{textAlign:'left', marginTop:'10px'}}>
                 <div style={{fontSize:'11px', color:'gray', textAlign:'left', marginBottom:'5px'}}>예금주</div>
                 <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'10px'}} type="text" value={props.user_name} disabled/><br/>
             </div>
