@@ -1122,7 +1122,12 @@ drop table cos_user;
 
 -- 2021 06 07 테이블 구조
 
-
+drop table cos_user;
+drop table cos_address;
+drop table tbl_order;
+drop table test2;
+drop table test1;
+drop table user_account;
 CREATE TABLE tbl_user (
     user_seq number(20) primary key, -- 기본키
     user_email VARCHAR2(200) not null, -- 이메일,
@@ -1157,14 +1162,11 @@ insert into tbl_address values(1, 'suovj140@gmail.com', '내집', 95554, '서울특별
 insert into tbl_address values(1, 'suovj140@gmail.com', '본가', 95554, '서울특별시 마포구 이대', '학원 301호');
 insert into tbl_address values(1, 'suovj140@gmail.com', '자취방', 95554, '서울특별시 서초구 고터', '고터 1층');
 insert into tbl_address values(1, 'suovj140@gmail.com', '친구집', 95554, '서울특별시 어딘가 여기', '아파트 44층');
-
-
 insert into tbl_address values(2, 'test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니');
 insert into tbl_address values(2, 'test1@gmail.com', '어딘가2', 46748, '이세상은 맞냐', '어딘지몰라');
 
 
 create table tbl_order(
-
 order_id number(20) not null primary key, --order_id를 null값이 오지못하게 하고 기본키로 설정함
 user_email varchar2(100) not null, --user_email를 null값이 오지못하게 설정
 product_seq number(20) not null, --product_seq를 null값이 오지못하게 설정
@@ -1174,6 +1176,16 @@ total_price number(20) default 0
 
 select * from tbl_user;
 select * from tbl_address;
-
+select * from tbl_order;
 
 commit;
+
+select * from product;
+select * from product_option;
+select * from
+(select rownum rnum, p.*
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+from
+product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p);
+        
