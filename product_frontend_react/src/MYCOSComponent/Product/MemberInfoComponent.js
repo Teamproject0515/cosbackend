@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Grid, Button, makeStyles, Modal, Backdrop, Fade} from '@material-ui/core';
+import {InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
 import ApiService from '../../ApiService';
 import UserAccount from './InsertUserAccount';
 import UpdateUserAccount from './UpdateUserAccount';
@@ -150,6 +151,7 @@ function MemberInfoComponent(props) {
 
     const checkGender = (e) => {
         if(props.user.user_gender === e.target.value){
+            console.log('aaaa');
             return e.target.checked;
         }
     }
@@ -238,7 +240,7 @@ function MemberInfoComponent(props) {
                     <div style={centerDiv}>
                         <div style={centerLabel}>성별</div>
                         <div style={{fontSize:'14px', marginTop:'10px', justifyContent:'left', display:'flex'}}>
-                            <input type='radio' name='gender' value='M' onChange={checkGender} checked disabled/> 남 
+                            <input type='radio' name='gender' value='M' onChange={checkGender} disabled/> 남 
                             <input type='radio' name='gender' value='W' onChange={checkGender} disabled/> 여
                         </div>
                     </div>

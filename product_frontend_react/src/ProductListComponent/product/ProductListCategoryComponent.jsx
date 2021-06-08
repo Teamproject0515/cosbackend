@@ -37,7 +37,6 @@ function ProductListComponent(props){
         ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
-              console.log("products : "+products);
         })
         .catch(err => {
             console.log('product_list print error!', err);
@@ -148,7 +147,6 @@ function ProductListComponent(props){
                     <Table style={{marginBottom:'30px'}}>     
                         <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
                             <TableRow key={product.product_id}>
-                                {console.log("product_id 출력 : "+product.product_id)}
                                 <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
                             </TableRow>
                             <TableRow>

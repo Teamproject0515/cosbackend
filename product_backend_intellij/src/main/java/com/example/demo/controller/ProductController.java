@@ -17,16 +17,13 @@ public class ProductController {
 
 
     @GetMapping("/{product_seq}")
-
     public ProductVO ProductByID(@PathVariable int product_seq){
-        System.out.println("Product Select Print Success!");
-        System.out.println("PRODUCT_SEQ : " + product_seq);
         return productService.ProductByID(product_seq);
     }
 
     @PostMapping("/list")
     public List<ProductVO> productCategory(@RequestBody ProductVO productVO){
-        System.out.println("Product List Print Success!");
+        System.out.println("Page Move Success");
         System.out.println("PAGENUM : "+productVO.getProduct_pageNum());
         System.out.println("GENDER : "+productVO.getProduct_gender());
         System.out.println("CATEGORY : "+productVO.getProduct_category());

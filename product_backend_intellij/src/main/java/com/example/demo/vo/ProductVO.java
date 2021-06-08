@@ -10,7 +10,6 @@ public class ProductVO {
 
     int rnum;
     int product_seq;
-    int product_id;
     String product_title;
     String product_content;
     int product_price;
