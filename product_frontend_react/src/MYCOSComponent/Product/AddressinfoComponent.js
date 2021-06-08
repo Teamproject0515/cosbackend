@@ -7,7 +7,7 @@ function AddressinfoComponent(props) {
     const [useraddresses,setuseraddresses] = useState([]);
 
     useEffect(() => {
-        alert('넘어오는 이메일 확인 : '+props.user.user_email);
+        // alert('넘어오는 이메일 확인 : '+props.user.user_email);
         ApiService.getUserAddressList(props.user.user_email)
         .then( res => {
             setuseraddresses(res.data);

@@ -29,7 +29,7 @@ public interface UserService {
     public void UpdateUserAccount(UserVO userVO);
 
     // 해당 유저의 소득공제용 번호 입력
-    public void InsertUserAccountPAY(UserVO userVO);
+    public void InsertUserRepay(UserVO userVO);
 
     // 해당 유저의 소득공제용 번호 수정
     public void UpdateUserRepay(UserVO userVO);

@@ -57,7 +57,7 @@
         update tbl_user set user_bank = #{user_bank}, user_account = #{user_account} where user_email = #{user_email}
     </update>
 
-    <update id="InsertUserAccountPAY" parameterType="com.example.demo.vo.UserVO">
+    <update id="InsertUserRepay" parameterType="com.example.demo.vo.UserVO">
         update tbl_user set user_repay = #{user_repay} where user_email = #{user_email}
     </update>
 

@@ -1,7 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, Button, makeStyles, Modal, Backdrop, Fade} from '@material-ui/core';
 
 function ModalUpdateAccountComponent(props) {
+
+    const [openAccountModify, setOpenAccountModify] = useState(false);
+    const [openRepayModify, setOpenRepayModify] = useState(false);
+
+    useEffect(() => {
+        if(props.user_account.user_bank != null && props.user_account.user_account != null){
+            console.log('a');
+            setOpenAccountModify(true);
+        }
+        if(props.user_account.user_repay != null){
+            setOpenRepayModify(true);
+        }
+    })
 
     // 모달
     const useStyles = makeStyles((theme) => ({
@@ -53,7 +66,7 @@ function ModalUpdateAccountComponent(props) {
                                                 은행 : {props.user_account.user_bank}<br/>
                                                 계좌번호 : {props.user_account.user_account}<br/>
                                             </div>
-                                            <div><Button onClick={() => props.update_user_account()} style={{fontSize:'12px', color:'gray'}}>수정</Button></div>
+                                            <div>{openAccountModify && <Button onClick={() => props.update_user_account()} style={{fontSize:'12px', color:'gray'}}>수정</Button>}</div>
                                         </div>
                                         {props.updateUserAccount && <props.UpdateUserAccount user_name={props.user_name} user_email={props.user_email} handleClose={props.handleClose}/>}
                                     <div style={{textAlign:'left', marginBottom:'10px'}}>* 환불계좌 등록 및 수정 확인은 재로그인이 필요합니다.</div>
@@ -75,7 +88,7 @@ function ModalUpdateAccountComponent(props) {
                                             <div style={{textAlign:'left'}}>
                                                 소득공제용 정보 : {props.user_account.user_repay}<br/>
                                             </div>
-                                            <div><Button onClick={() => props.update_user_repay()} style={{fontSize:'12px', color:'gray', backgroundColor:'white'}}>수정</Button></div>
+                                            <div>{openRepayModify && <Button onClick={() => props.update_user_repay()} style={{fontSize:'12px', color:'gray', backgroundColor:'white'}}>수정</Button>}</div>
                                         </div>
                                         {props.openUpdateUserRepay && <props.UpdateUserRepay user_email={props.user_email} handleClose={props.handleClose}/>}
                                     {/* <div style={{textAlign:'left', marginBottom:'30px'}}>{props.user.user_repay}</div> */}

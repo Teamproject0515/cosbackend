@@ -10,13 +10,13 @@ function InsertUserAccount(props) {
 
 
     function insertUserAccount(){
-        const userAccount = {
+        const userRepay = {
             user_email : user_email,
             user_repay : user_repay,
         }
-        console.log(userAccount);
+        console.log(userRepay);
 
-        ApiService.insertUserAccountPAY(userAccount);
+        ApiService.insertUserRepay(userRepay);
         alert('소득공제용 현금영수증 번호가 등록됐습니다.')
         props.handleClose();
     }

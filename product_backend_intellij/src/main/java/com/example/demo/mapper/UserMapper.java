@@ -30,7 +30,7 @@ public interface UserMapper {
     void UpdateUserAccount(UserVO userVO);
 
     // 해당 유저의 소득공제용 정보 입력
-    void InsertUserAccountPAY(UserVO userVO);
+    void InsertUserRepay(UserVO userVO);
 
     // 해당 유저의 소득공제용 정보 수정
     void UpdateUserRepay(UserVO userVO);

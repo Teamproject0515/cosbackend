@@ -51,8 +51,8 @@ class ApiService {
         return axios.post(USER_API_BASE_URL+'/updateuseraccount', userAccount);
     };
 
-    insertUserAccountPAY(userAccount){
-        return axios.post(USER_API_BASE_URL+'/insertuseraccountpay', userAccount);
+    insertUserRepay(userRepay){
+        return axios.post(USER_API_BASE_URL+'/insertuserrepay', userRepay);
     }
 
     updateUserRepay(userRepay){
