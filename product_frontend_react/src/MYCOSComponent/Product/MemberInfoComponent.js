@@ -47,7 +47,7 @@ function MemberInfoComponent(props) {
             .catch(err => {
                 console.log('user_account print error!', err);
             })
-    },[]);
+    },[open, openChangePhone, openChangePassword, openUserAccountInsert, openUserSNSConnect, openUserDelete, openReCheckUserDelete, openInsertUserAccountPAY, openUpdateUserRepay]);
 
 
    
@@ -189,7 +189,6 @@ function MemberInfoComponent(props) {
     }
 
     function update_user_account(){
-        // alert('수정버튼 클릭');
         setUpdateUserAccount(true);
     }
 
@@ -333,7 +332,7 @@ function MemberInfoComponent(props) {
                         <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
 
                         <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
-
+                    
                         <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay} setState={props.setState}/>
 
                         <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose} setState={props.setState}/>

@@ -71,6 +71,7 @@ function ManagerPage() {
         .catch(err => {
             console.log('userinfo print error!', err);
         })
+        setState(0);
     },[user_email, state]);
 
     let [check_password, setcheck_password] = useState(null);
