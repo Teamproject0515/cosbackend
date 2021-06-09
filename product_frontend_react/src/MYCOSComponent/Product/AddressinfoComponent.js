@@ -17,8 +17,29 @@ function AddressinfoComponent(props) {
     const [isOpenPost, setIsOpenPost] = useState(false);
     const [openDetailAddress, setOpenDetailAddress] = useState(false);
     const [UserAddressBySeq, setUserAddressBySeq] = useState('');
+    const [state, setState] = useState(0);
 
-    const user_email = props.user.user_email; // 유저 이메일
+
+    const [user_email, setUser_email] = useState(props.user.user_email);
+    const [user_phone, setUser_phone] = useState(null);
+    const [user_phone2, setUser_phone2] = useState(null);
+    const [detailaddress, setDetailAddress] = useState(null);
+
+    const [changePostcode, setChangePostcode] = useState('');
+
+    const [user_info, setUserinfo] = useState([]);
+    //const user_email = props.user.user_email; // 유저 이메일
+
+    useEffect(() => {
+        ApiService.getUserAddressList(user_email)
+        .then( res => {
+            setuseraddresses(res.data);
+        })
+        .catch(err => {
+            console.log('userinfo print error!', err);
+        })
+        
+    },[user_email, isOpenUpdatePost, isOpenPost, state, openDetailAddress]);
 
     // 수정 누르면 뜨는 모달 데이터
     function toggleUpdatePost(address_seq){
@@ -50,49 +71,56 @@ function AddressinfoComponent(props) {
         setIsOpenUpdatePost(false);
     };
 
-    function onPostcode(e){
-        setPostcode(e.currentTarget.value)
-    }
-    function onAddress(e){
-        setAddress(e.currentTarget.value)
+//    function onPostcode(e){
+//        setPostcode(e.currentTarget.value)
+//    }
+//    function onAddress(e){
+//        setAddress(e.currentTarget.value)
+//    }
+
+    const onChange = (e) => {
+        if(e.target.name === "change_email"){
+            setUser_email(e.target.value);
+            console.log(user_email);
+        }else if(e.target.name === "change_phone"){
+            setUser_phone(e.target.value);
+            console.log(user_phone);
+        }else if(e.target.name === "change_phone2"){
+            setUser_phone2(e.target.value);
+            console.log(user_phone2);
+        }else if(e.target.name === "change_postcode"){
+            setPostcode(e.target.value);
+            console.log(postcode);
+        }else if(e.target.name === "change_address"){
+            setAddress(e.target.value);
+            console.log(address);
+        }else if(e.target.name === "change_detailaddress"){
+            setDetailAddress(e.target.value);
+            console.log(detailaddress);
+        }
     }
 
-    useEffect(() => {
-        ApiService.getUserAddressList(user_email)
-        .then( res => {
-            setuseraddresses(res.data);
-            console.log(useraddresses);
-        })
-        .catch(err => {
-            console.log('userinfo print error!', err);
-        })
-    },[user_email, isOpenUpdatePost, isOpenPost]);
-
-
-    function AddressAdd(){
-        console.log(useraddresses);
-        alert('배송지 추가 버튼');
-    }
+//    function AddressAdd(){
+//        console.log(useraddresses);
+//        alert('배송지 추가 버튼');
+//    }
     
-
-
-
-        // 모달
-        const useStyles = makeStyles((theme) => ({
-            modal: {
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            paper: {
-              backgroundColor: theme.palette.background.paper,
-              boxShadow: theme.shadows[5],
-              padding: theme.spacing(5, 5, 5),
-              borderRadius:'10px'
-            },
-          }));
+    // 모달
+    const useStyles = makeStyles((theme) => ({
+        modal: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        paper: {
+            backgroundColor: theme.palette.background.paper,
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(5, 5, 5),
+            borderRadius:'10px'
+        },
+    }));
     
-        const classes = useStyles();
+    const classes = useStyles();
 
 
     //카카오 주소 api
@@ -112,31 +140,36 @@ function AddressinfoComponent(props) {
             fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
             }
 
-            const zz = zonecode;
-            const bb = fullAddress;
+            const postcode = zonecode;
+            const address = fullAddress;
             setPostcode(zonecode);
             setAddress(fullAddress);
-            setIsOpenPost(false);
-            console.log(isOpenPost);
-            console.log("카카오에 넘어오는 회원 이메일 : "+user_email);
-            console.log("우편 번호 : "+zonecode+"는 postcode에 입력했음");
-            console.log("전체 주소 : "+fullAddress+"는 address에 입력했음");
-            setOpenDetailAddress(true);
+//            console.log(isOpenPost);
+//            console.log("카카오에 넘어오는 회원 이메일 : "+user_email);
+//            console.log("우편 번호 : "+zonecode+"는 postcode에 입력했음");
+//            console.log("전체 주소 : "+fullAddress+"는 address에 입력했음");
 
             const useraddress = {
                 address_seq : UserAddressBySeq.address_seq,
                 user_email : user_email,
-                postcode : zz,
-                address : bb,
-                // detailAddress : detailAddress,
+                postcode : postcode,
+                address : address,
+                user_phone : user_phone,
+                user_phone2 : user_phone2,
+                detailaddress : detailaddress,
             }
-            console.log("0 : " + useraddress.address_seq);
-            console.log("1 : " + useraddress.user_email);
-            console.log("2 : " + useraddress.postcode);
-            console.log("4 : " + useraddress.address);
-            ApiService.UpdateUserAddress(useraddress);
+
+            //UpdateUserAddress(useraddress);
+            setIsOpenPost(false);
+            setIsOpenUpdatePost(false);
+            setOpenDetailAddress(true);
+
+
         }     
 
+        //function UpdateUserAddress(useraddress){
+        //    ApiService.UpdateUserAddress(useraddress);
+        //}
 
 
     
@@ -189,7 +222,9 @@ function AddressinfoComponent(props) {
         <>
         <Grid item xs={6} sm={7}>
             <div style={{display:'flex', justifyContent:'space-between'}}>
-                <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>배송지 정보</div><div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}><Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressAdd()}>배송지 추가</Button></div>
+                <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>배송지 정보</div><div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>
+                    {/*<Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressAdd()}>배송지 추가</Button>*/}
+                </div>
             </div>
             <div style={{minHeight:'800px'}}>
 
@@ -220,8 +255,8 @@ function AddressinfoComponent(props) {
                 )}
 
                 {isOpenPost && <ModalKAKAOPost isOpenPost={isOpenPost} setIsOpenPost={setIsOpenPost} handleClose={handleClose} user_email={user_email} setOpenDetailAddress={setOpenDetailAddress} seachAddress={seachAddress}/>}
-                {isOpenUpdatePost && <ModalUpdateAddress isOpenUpdatePost={isOpenUpdatePost} handleClose={handleClose} UserAddressBySeq={UserAddressBySeq} toggleNav={toggleNav}/>}
-                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose}/>}
+                {isOpenUpdatePost && <ModalUpdateAddress isOpenUpdatePost={isOpenUpdatePost} handleClose={handleClose} UserAddressBySeq={UserAddressBySeq} toggleNav={toggleNav} onChange={onChange}/>}
+                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} postcode={postcode} address={address} toggleNav={toggleNav} user_phone2={user_phone2}  onChange={onChange} detailaddress={detailaddress} postcode={postcode} address={address}/>}
             </div>
         </Grid>
         </>

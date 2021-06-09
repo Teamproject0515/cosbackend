@@ -1140,23 +1140,26 @@ CREATE TABLE tbl_user (
 
 
 CREATE TABLE tbl_address (
+    address_seq number(20) primary key,
     user_seq number(20),
     constraints user_seq foreign key(user_seq) references tbl_user(user_seq),
     user_email VARCHAR2(100) not null, -- 이메일
     address_name varchar2(100) not null,
-    postcode NUMERIC NULL, -- 우편번호,
+    postcode varchar2(50) NULL, -- 우편번호,
     address VARCHAR2(200) NULL, -- 주소,
-    detailAddress VARCHAR2(200) NULL -- 상세주소
+    detailAddress VARCHAR2(200) NULL, -- 상세주소
+    user_phone varchar2(200) not null,
+    user_phone2 varchar2(200)
 );
 
 
 insert into tbl_user values(1, 'suovj140@gmail.com', 'rnwlgns2', '구지훈', '1993-06-15', '010-4474-9986','M',sysdate, 'costomer', null, null, null);
 insert into tbl_user values(2, 'test1@gmail.com', 'test1', 'test1', '1966-04-85', '010-4357-7979','W',sysdate, 'costomer', null, null, null);
 
-insert into tbl_address values(1, 'suovj140@gmail.com', '내집', 95554, '서울특별시 영등포구 당산동 121-289', '가온빌 701호');
-insert into tbl_address values(1, 'suovj140@gmail.com', '본가', 95554, '서울특별시 마포구 이대', '학원 301호');
-insert into tbl_address values(1, 'suovj140@gmail.com', '자취방', 95554, '서울특별시 서초구 고터', '고터 1층');
-insert into tbl_address values(1, 'suovj140@gmail.com', '친구집', 95554, '서울특별시 어딘가 여기', '아파트 44층');
+insert into tbl_address values(1, 1, 'suovj140@gmail.com', '내집', '95554', '서울특별시 영등포구 당산동 121-289', '가온빌 701호', '010-4474-9986', null);
+insert into tbl_address values(2, 1, 'suovj140@gmail.com', '본가', '95554', '서울특별시 마포구 이대', '학원 301호', '010-4444-7897', null);
+insert into tbl_address values(3, 1, 'suovj140@gmail.com', '자취방', '95554', '서울특별시 서초구 고터', '고터 1층', '010-0044-4979', null);
+insert into tbl_address values(4, 1, 'suovj140@gmail.com', '친구집', '95554', '서울특별시 어딘가 여기', '아파트 44층', '010-4949-7797', null);
 
 
 insert into tbl_address values(2, 'test1@gmail.com', '어딘가1', 54354, '이세상 어딘가 1', '여긴어디니');
@@ -1176,8 +1179,10 @@ select * from tbl_user;
 select * from tbl_address;
 
 
+drop table tbl_address;
 commit;
 
 update tbl_user set user_repay = null where user_email = 'suovj140@gmail.com';
+
 
 

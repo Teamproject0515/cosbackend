@@ -103,8 +103,11 @@ public class UserController {
         System.out.println("UpdateUserAddress Start!");
         System.out.println("Address_seq : "+userVO.getAddress_seq());
         System.out.println("EMAIL : "+userVO.getUser_email());
+        System.out.println("PHONE : "+userVO.getUser_phone());
+        System.out.println("PHONE2 : "+userVO.getUser_phone2());
         System.out.println("POSTCODE : "+userVO.getPostcode());
         System.out.println("ADDRESS : "+userVO.getAddress());
+        System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
         userService.UpdateUserAddress(userVO);
     }
 }

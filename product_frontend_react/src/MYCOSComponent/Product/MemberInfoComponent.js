@@ -58,6 +58,7 @@ function MemberInfoComponent(props) {
         ApiService.updateUserInfo(Change_user);
         alert('업데이트 성공');
         handleClose();
+        window.location.reload();
     };
 
     function onChange(e){

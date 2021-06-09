@@ -9,6 +9,7 @@ import java.util.Set;
 public class ProductVO {
 
     int rnum;
+    int product_id;
     int product_seq;
     String product_title;
     String product_content;

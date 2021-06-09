@@ -55,7 +55,6 @@ function ManagerPage() {
         setMemberinfo(false);
     }
 
-
     let user_email = 'suovj140@gmail.com';
 
     let [userinfo, setuserinfo ] = useState([]);
