@@ -68,5 +68,10 @@ public class UserServiceImpl implements UserService{
         userMapper.UpdateUserAddress(userVO);
     }
 
+    @Override
+    public void DeleteUserAddress(int address_seq) {
+        userMapper.DeleteUserAddress(address_seq);
+    }
+
 
 }

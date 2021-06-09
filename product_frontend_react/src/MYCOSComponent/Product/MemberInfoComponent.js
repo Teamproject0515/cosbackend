@@ -56,9 +56,9 @@ function MemberInfoComponent(props) {
     function updateButton(){
         console.log(Change_user);
         ApiService.updateUserInfo(Change_user);
-        alert('업데이트 성공');
+        // alert('업데이트 성공');
         handleClose();
-        window.location.reload();
+        props.setState(10);
     };
 
     function onChange(e){

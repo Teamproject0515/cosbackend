@@ -1184,5 +1184,8 @@ commit;
 
 update tbl_user set user_repay = null where user_email = 'suovj140@gmail.com';
 
+create sequence tbl_address_seq increment by 1 start with 0 minvalue 0;
+
+
 
 

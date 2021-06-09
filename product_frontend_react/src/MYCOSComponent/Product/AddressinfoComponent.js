@@ -24,6 +24,7 @@ function AddressinfoComponent(props) {
     const [user_phone, setUser_phone] = useState(null);
     const [user_phone2, setUser_phone2] = useState(null);
     const [detailaddress, setDetailAddress] = useState(null);
+    const [address_name, setAddress_name] = useState(null);
 
     const [changePostcode, setChangePostcode] = useState('');
 
@@ -34,12 +35,15 @@ function AddressinfoComponent(props) {
         ApiService.getUserAddressList(user_email)
         .then( res => {
             setuseraddresses(res.data);
+            setState(0);
+
         })
         .catch(err => {
             console.log('userinfo print error!', err);
         })
         
     },[user_email, isOpenUpdatePost, isOpenPost, state, openDetailAddress]);
+
 
     // 수정 누르면 뜨는 모달 데이터
     function toggleUpdatePost(address_seq){
@@ -48,13 +52,15 @@ function AddressinfoComponent(props) {
         ApiService.getUserAddressByAddress_seq(address_seq)
         .then( res => {
             setUserAddressBySeq(res.data);
-            console.log(UserAddressBySeq);
+            // console.log(UserAddressBySeq);
+            setState(1);
+            console.log(state);
         })
         .catch(err => {
             console.log('UserAddressBySeq print error!', err);
         })
         setIsOpenUpdatePost(isOpenUpdatePost => !isOpenUpdatePost);
-        console.log(isOpenUpdatePost);
+        // console.log(isOpenUpdatePost);
     }
 
 
@@ -62,13 +68,17 @@ function AddressinfoComponent(props) {
         // e.preventDefault();
         //사용자가 클릭시 falue면 true로 true면 falue로 토글
         setIsOpenPost(isOpenPost => !isOpenPost);
-        console.log(isOpenPost);
+        setState(2);
+        // console.log(state);
+        // console.log(isOpenPost);
     }
 
     const handleClose = (e) => {
         setIsOpenPost(false);
         setOpenDetailAddress(false);
         setIsOpenUpdatePost(false);
+        setState(3);
+        // console.log(state);
     };
 
 //    function onPostcode(e){
@@ -81,29 +91,34 @@ function AddressinfoComponent(props) {
     const onChange = (e) => {
         if(e.target.name === "change_email"){
             setUser_email(e.target.value);
-            console.log(user_email);
+            // console.log(user_email);
         }else if(e.target.name === "change_phone"){
             setUser_phone(e.target.value);
-            console.log(user_phone);
+            // console.log(user_phone);
         }else if(e.target.name === "change_phone2"){
             setUser_phone2(e.target.value);
-            console.log(user_phone2);
+            // console.log(user_phone2);
         }else if(e.target.name === "change_postcode"){
             setPostcode(e.target.value);
-            console.log(postcode);
+            // console.log(postcode);
         }else if(e.target.name === "change_address"){
             setAddress(e.target.value);
-            console.log(address);
+            // console.log(address);
         }else if(e.target.name === "change_detailaddress"){
             setDetailAddress(e.target.value);
-            console.log(detailaddress);
+            // console.log(detailaddress);
+        }else if(e.target.name === "change_address_name"){
+            setAddress_name(e.target.value);
+            // console.log(address_name);
         }
+        setState(4);
+        // console.log(state);
     }
 
-//    function AddressAdd(){
-//        console.log(useraddresses);
-//        alert('배송지 추가 버튼');
-//    }
+   function AddressAdd(){
+       console.log(useraddresses);
+       alert('배송지 추가 버튼');
+   }
     
     // 모달
     const useStyles = makeStyles((theme) => ({
@@ -148,7 +163,8 @@ function AddressinfoComponent(props) {
 //            console.log("카카오에 넘어오는 회원 이메일 : "+user_email);
 //            console.log("우편 번호 : "+zonecode+"는 postcode에 입력했음");
 //            console.log("전체 주소 : "+fullAddress+"는 address에 입력했음");
-
+            setState(5);
+            // console.log(state);
             const useraddress = {
                 address_seq : UserAddressBySeq.address_seq,
                 user_email : user_email,
@@ -163,9 +179,9 @@ function AddressinfoComponent(props) {
             setIsOpenPost(false);
             setIsOpenUpdatePost(false);
             setOpenDetailAddress(true);
-
-
         }     
+
+
 
         //function UpdateUserAddress(useraddress){
         //    ApiService.UpdateUserAddress(useraddress);
@@ -204,8 +220,22 @@ function AddressinfoComponent(props) {
     }    
 
 
+    function onNextButton(){
+        setIsOpenPost(false);
+        setIsOpenUpdatePost(false);
+        setOpenDetailAddress(true);
+        setState(6);
+        // console.log(state);
+    }
 
-
+    function deleteUserAddress(address_seq){
+        setState(7);
+        console.log(state);
+        ApiService.deleteUserAddress(address_seq);
+        setState(8);
+        alert("주소가 삭제됐습니다.");
+        console.log(state);
+    }
 
 
 
@@ -223,7 +253,7 @@ function AddressinfoComponent(props) {
         <Grid item xs={6} sm={7}>
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>배송지 정보</div><div style={{fontSize:'13px', textAlign:'left', marginBottom:'20px'}}>
-                    {/*<Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressAdd()}>배송지 추가</Button>*/}
+                    <Button style={{fontSize:'13px', padding:'0px'}} onClick={() => AddressAdd()}>배송지 추가</Button>
                 </div>
             </div>
             <div style={{minHeight:'800px'}}>
@@ -232,11 +262,11 @@ function AddressinfoComponent(props) {
                         
                 <Table style={{marginBottom:'30px'}}>
                     <TableBody style={{borderRadius:'10px', padding:'10px', minWidth:'600px'}}>
-                        <TableRow key={useraddress.user_email}                      
-                        style={{display:'flex', alignItems:'center'}}>
+                        <TableRow key={useraddress.user_email} style={{display:'flex', alignItems:'center'}}>
                             <TableCell style={{fontSize:'11px', border:'0px', padding:'0px', color:'black', paddingBottom:'10px', paddingRight:'50px'}}>{useraddress.address_name}</TableCell><TableCell style={{border:'0px', padding:'0px', paddingBottom:'10px'}}>
                                 <Button style={{fontSize:'11px', padding:'0px'}} onClick={() => toggleUpdatePost(useraddress.address_seq)}>수정</Button>
-                                </TableCell>
+                                <Button style={{fontSize:'11px', padding:'0px'}} onClick={() => deleteUserAddress(useraddress.address_seq)}>삭제</Button>
+                            </TableCell>
                         </TableRow>
 
                         <TableRow>
@@ -255,8 +285,8 @@ function AddressinfoComponent(props) {
                 )}
 
                 {isOpenPost && <ModalKAKAOPost isOpenPost={isOpenPost} setIsOpenPost={setIsOpenPost} handleClose={handleClose} user_email={user_email} setOpenDetailAddress={setOpenDetailAddress} seachAddress={seachAddress}/>}
-                {isOpenUpdatePost && <ModalUpdateAddress isOpenUpdatePost={isOpenUpdatePost} handleClose={handleClose} UserAddressBySeq={UserAddressBySeq} toggleNav={toggleNav} onChange={onChange}/>}
-                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} postcode={postcode} address={address} toggleNav={toggleNav} user_phone2={user_phone2}  onChange={onChange} detailaddress={detailaddress} postcode={postcode} address={address}/>}
+                {isOpenUpdatePost && <ModalUpdateAddress isOpenUpdatePost={isOpenUpdatePost} handleClose={handleClose} UserAddressBySeq={UserAddressBySeq} toggleNav={toggleNav} onChange={onChange} onNextButton={onNextButton}/>}
+                {openDetailAddress && <ModalDetailAddress openDetailAddress={openDetailAddress} UserAddressBySeq={UserAddressBySeq} handleClose={handleClose} postcode={postcode} address={address} toggleNav={toggleNav} user_phone2={user_phone2}  onChange={onChange} detailaddress={detailaddress} postcode={postcode} address={address} user_phone={user_phone} address_name={address_name}/>}
             </div>
         </Grid>
         </>

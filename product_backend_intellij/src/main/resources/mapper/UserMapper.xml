@@ -70,6 +70,10 @@
     </select>
 
     <update id="UpdateUserAddress" parameterType="com.example.demo.vo.UserVO">
-        update tbl_address set postcode = #{postcode}, address = #{address}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress} where address_seq = #{address_seq}
+        update tbl_address set postcode = #{postcode}, address = #{address}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress}, address_name = #{address_name} where address_seq = #{address_seq}
     </update>
+
+    <delete id="DeleteUserAddress" parameterType="int">
+        delete tbl_address where address_seq = #{address_seq}
+    </delete>
 </mapper>

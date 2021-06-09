@@ -104,10 +104,17 @@ public class UserController {
         System.out.println("Address_seq : "+userVO.getAddress_seq());
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("PHONE : "+userVO.getUser_phone());
+        System.out.println("ADDRESS_NAME : "+userVO.getAddress_name());
         System.out.println("PHONE2 : "+userVO.getUser_phone2());
         System.out.println("POSTCODE : "+userVO.getPostcode());
         System.out.println("ADDRESS : "+userVO.getAddress());
         System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
         userService.UpdateUserAddress(userVO);
+    }
+
+    @GetMapping("/deleteuseraddress/{address_seq}")
+    public void DeleteUserAddress(@PathVariable int address_seq){
+        System.out.println("DeleteUserAddress Start");
+        userService.DeleteUserAddress(address_seq);
     }
 }

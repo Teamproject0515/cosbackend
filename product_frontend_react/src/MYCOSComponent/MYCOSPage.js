@@ -65,12 +65,12 @@ function ManagerPage() {
         .then( res => {
             setuserinfo(res.data);
             console.log(userinfo);
+            setState(0);
             console.log("state : "+state);
         })
         .catch(err => {
             console.log('userinfo print error!', err);
         })
-        setState(0);
     },[user_email, state]);
 
     let [check_password, setcheck_password] = useState(null);

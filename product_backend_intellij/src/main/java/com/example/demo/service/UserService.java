@@ -39,4 +39,6 @@ public interface UserService {
 
     // 해당 유저의 주소값 수정
     public void UpdateUserAddress(UserVO userVO);
+
+    public void DeleteUserAddress(int address_seq);
 }
