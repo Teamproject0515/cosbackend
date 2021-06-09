@@ -56,7 +56,15 @@ class ApiService {
     }
 
     updateUserRepay(userRepay){
-        return axios.post(USER_API_BASE_URL+'/updateuserrepay', userRepay)
+        return axios.post(USER_API_BASE_URL+'/updateuserrepay', userRepay);
+    }
+
+    getUserAddressByAddress_seq(address_seq){
+        return axios.post(USER_API_BASE_URL+'/useraddressbyseq/'+address_seq);
+    }
+
+    UpdateUserAddress(useraddress){
+        return axios.post(USER_API_BASE_URL+'/updateuseraddress',useraddress);
     }
 
 }

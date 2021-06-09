@@ -34,4 +34,9 @@ public interface UserMapper {
 
     // 해당 유저의 소득공제용 정보 수정
     void UpdateUserRepay(UserVO userVO);
+
+    // 해당 유저에 맞는 등록된 주소값 불러오기
+    UserVO GetUserAddressBySeq(int address_seq);
+
+    void UpdateUserAddress(UserVO userVO);
 }

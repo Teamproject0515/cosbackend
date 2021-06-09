@@ -29,6 +29,7 @@ function ModalUpdatePhoneComponent(props) {
                 onClose={props.handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
+                name="change_phone"
             >
                 <Fade in={props.openChangePhone}>
                     <div className={classes.paper}>

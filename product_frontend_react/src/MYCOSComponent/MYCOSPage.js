@@ -59,17 +59,19 @@ function ManagerPage() {
     let user_email = 'suovj140@gmail.com';
 
     let [userinfo, setuserinfo ] = useState([]);
+    const[state, setState] = useState(0);
 
     useEffect(() => {
         ApiService.getUserByID(user_email)
         .then( res => {
             setuserinfo(res.data);
             console.log(userinfo);
+            console.log("state : "+state);
         })
         .catch(err => {
             console.log('userinfo print error!', err);
         })
-    },[user_email]);
+    },[user_email, state]);
 
     let [check_password, setcheck_password] = useState(null);
     const [openErrorPassword, setOpenErrorPassword] = useState(false);
@@ -97,6 +99,12 @@ function ManagerPage() {
         setcheck_password(e.target.value);
     }
 
+
+
+
+
+
+    
     return (
         <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
             <Grid container spacing={3} style={{ paddingLeft:'10px', paddingRight:'10px', minHeight:'800px', width:'100%', maxWidth:'1560px', minHeight:'300px'}}>
@@ -106,7 +114,7 @@ function ManagerPage() {
                 </Grid>
                 {dashBoard && <MyCOSDashBoardComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress} openErrorPassword={openErrorPassword}/>}
                 {sidebarshow && <ManagerSidebar memberinfoOpen={memberinfoOpen} deliveryinfoOpen={deliveryinfoOpen} addressinfoOpen={addressinfoOpen}/>}
-                {memberinfo && <MemberInfoComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress}/>}
+                {memberinfo && <MemberInfoComponent user={userinfo} checkPW={checkPW} onChangePW={onChangePW} onKeyPress={onKeyPress} state={state} setState={setState}/>}
                 {deliveryinfo && <DeliveryInfoComponent  user={userinfo}/>}
                 {addressinfo && <AddressinfoComponent  user={userinfo}/>}
             </Grid>

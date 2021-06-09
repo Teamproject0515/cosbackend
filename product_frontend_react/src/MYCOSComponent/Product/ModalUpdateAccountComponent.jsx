@@ -8,7 +8,6 @@ function ModalUpdateAccountComponent(props) {
 
     useEffect(() => {
         if(props.user_account.user_bank != null && props.user_account.user_account != null){
-            console.log('a');
             setOpenAccountModify(true);
         }
         if(props.user_account.user_repay != null){

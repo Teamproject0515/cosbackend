@@ -58,5 +58,15 @@ public class UserServiceImpl implements UserService{
         userMapper.UpdateUserRepay(userVO);
     }
 
+    @Override
+    public UserVO GetUserAddressBySeq(int address_seq) {
+        return userMapper.GetUserAddressBySeq(address_seq);
+    }
+
+    @Override
+    public void UpdateUserAddress(UserVO userVO) {
+        userMapper.UpdateUserAddress(userVO);
+    }
+
 
 }

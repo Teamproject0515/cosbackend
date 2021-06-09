@@ -33,4 +33,10 @@ public interface UserService {
 
     // 해당 유저의 소득공제용 번호 수정
     public void UpdateUserRepay(UserVO userVO);
+
+    // 해당 유저에 맞는 등록된 주소값 불러오기
+    public UserVO GetUserAddressBySeq(int address_seq);
+
+    // 해당 유저의 주소값 수정
+    public void UpdateUserAddress(UserVO userVO);
 }

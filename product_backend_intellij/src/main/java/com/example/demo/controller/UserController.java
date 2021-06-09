@@ -90,4 +90,21 @@ public class UserController {
         System.out.println("REPAY : "+userVO.getUser_repay());
         userService.UpdateUserRepay(userVO);
     }
+
+    @PostMapping("/useraddressbyseq/{address_seq}")
+    public UserVO GetUserAddressBySeq(@PathVariable int address_seq){
+        System.out.println("GetUserAddressBySeq Success!");
+        System.out.println("Address_Seq : "+address_seq);
+        return userService.GetUserAddressBySeq(address_seq);
+    }
+
+    @PostMapping("/updateuseraddress")
+    public void UpdateUserAddress(@RequestBody UserVO userVO){
+        System.out.println("UpdateUserAddress Start!");
+        System.out.println("Address_seq : "+userVO.getAddress_seq());
+        System.out.println("EMAIL : "+userVO.getUser_email());
+        System.out.println("POSTCODE : "+userVO.getPostcode());
+        System.out.println("ADDRESS : "+userVO.getAddress());
+        userService.UpdateUserAddress(userVO);
+    }
 }

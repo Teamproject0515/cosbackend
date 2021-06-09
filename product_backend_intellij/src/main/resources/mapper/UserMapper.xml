@@ -64,4 +64,12 @@
     <update id="UpdateUserRepay" parameterType="com.example.demo.vo.UserVO">
         update tbl_user set user_repay = #{user_repay} where user_email = #{user_email}
     </update>
+
+    <select id="GetUserAddressBySeq" parameterType="int" resultType="com.example.demo.vo.UserVO">
+        select * from tbl_address where address_seq = #{address_seq}
+    </select>
+
+    <update id="UpdateUserAddress" parameterType="com.example.demo.vo.UserVO">
+        update tbl_address set postcode = #{postcode}, address = #{address} where address_seq = #{address_seq}
+    </update>
 </mapper>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Grid, Button, makeStyles, Modal, Backdrop, Fade} from '@material-ui/core';
-import {InputLabel, MenuItem, Select, FormControl} from '@material-ui/core';
+import {Grid, makeStyles} from '@material-ui/core';
 import ApiService from '../../ApiService';
 import UserAccount from './InsertUserAccount';
 import UpdateUserAccount from './UpdateUserAccount';
@@ -23,6 +22,16 @@ function MemberInfoComponent(props) {
     const [updateUserAccount, setUpdateUserAccount] = useState(false);
     const [user_name, setuser_name] = useState(props.user.user_name);
 
+    const [open, setOpen] = useState(false);
+    const [openChangePhone, setOpenChangePhone] = useState(false);
+    const [openChangePassword, setOpenChangePassword] = useState(false);
+    const [openUserAccountInsert, setOpenUserAccountInsert] = useState(false);
+    const [openUserSNSConnect, setOpenUserSNSConnect] = useState(false);
+    const [openUserDelete, setOpenUserDelete] = useState(false);
+    const [openReCheckUserDelete, setOpenReCheckUserDelete] = useState(false);
+    const [openInsertUserAccountPAY, setOpenInsertUserAccountPAY] = useState(false);
+    const [openUpdateUserRepay, setOpenUpdateUserRepay] = useState(false);
+
     const Change_user = {
         user_email : user_email,
         change_email : change_email,
@@ -31,12 +40,6 @@ function MemberInfoComponent(props) {
     }
 
     useEffect(() => {
-
-    // console.log("change_email : " + change_email);
-    // console.log("change_phone : " + change_phone);
-    // console.log("change_password : " + change_password);
-    // console.log("gender : " + props.user.user_gender);
-
         ApiService.userAccount(user_email)
             .then( res => {
                 setuser_account(res.data);
@@ -45,6 +48,7 @@ function MemberInfoComponent(props) {
                 console.log('user_account print error!', err);
             })
     },[]);
+
 
    
 
@@ -61,14 +65,17 @@ function MemberInfoComponent(props) {
             setchange_phone(null);
             setchange_password(null);
             setchange_email(e.target.value);
+            //props.setState(2);
         }else if(e.target.name == "change_phone"){
             setchange_email(null);
             setchange_password(null);
             setchange_phone(e.target.value);
+            //props.setState(3);
         }else if(e.target.name == "change_password"){
             setchange_email(null);
             setchange_phone(null);
             setchange_password(e.target.value);
+            //props.setState(4);
         }
     }
 
@@ -89,40 +96,43 @@ function MemberInfoComponent(props) {
       }));
 
 
-    const classes = useStyles();
+      const classes = useStyles();
 
-    const [open, setOpen] = useState(false);
-    const [openChangePhone, setOpenChangePhone] = useState(false);
-    const [openChangePassword, setOpenChangePassword] = useState(false);
-    const [openUserAccountInsert, setOpenUserAccountInsert] = useState(false);
-    const [openUserSNSConnect, setOpenUserSNSConnect] = useState(false);
-    const [openUserDelete, setOpenUserDelete] = useState(false);
-    const [openReCheckUserDelete, setOpenReCheckUserDelete] = useState(false);
-    const [openInsertUserAccountPAY, setOpenInsertUserAccountPAY] = useState(false);
-    const [openUpdateUserRepay, setOpenUpdateUserRepay] = useState(false);
 
     const handleOpen = (e) => {
         if(e.target.name === "change_email"){
             setOpen(true);
+            props.setState(1);
         }else if(e.target.name === "change_phone"){
             setOpenChangePhone(true);
+            props.setState(2);
         }else if(e.target.name === "change_password"){
             setOpenChangePassword(true);
+            props.setState(3);
         }else if(e.target.name === "user_delete"){
             setOpenUserDelete(true);
+            props.setState(4);
         }else if(e.target.name === "recheck_user_delete"){
             setOpenReCheckUserDelete(true);
+            props.setState(5);
         }else if(e.target.name === "user_account_insert"){
             setOpenUserAccountInsert(true);
+            props.setState(6);
         }else if(e.target.name === "user_sns_connect"){
             setOpenUserSNSConnect(true);
-        }
-        
+            props.setState(7);
+        }   
     };
     
     const handleClose = (e) => {
+        
+        // 이메일 변경 모달 띄우기
         setOpen(false);
+
+        // 휴대폰 번호 변경 모달 띄우기
         setOpenChangePhone(false);
+        
+        // 비밀번호 변경 모달 띄우기
         setOpenChangePassword(false);
         
         // 환불 계좌 모달 띄우기
@@ -134,10 +144,14 @@ function MemberInfoComponent(props) {
         setOpenUserDelete(false);
         // 회원 탈퇴 다시 묻는 모달 띄우기
         setOpenReCheckUserDelete(false);
+        
+        // SNS계정 연동 모달 띄우기
         setOpenUserSNSConnect(false);
 
+        // 소득공제용 정보 변경 모달 띄우기
         setUpdateUserAccount(false);
-
+        //props.setState(0);
+        props.setState(8);
     };
 
 
@@ -151,7 +165,6 @@ function MemberInfoComponent(props) {
 
     const checkGender = (e) => {
         if(props.user.user_gender === e.target.value){
-            console.log('aaaa');
             return e.target.checked;
         }
     }
@@ -315,17 +328,17 @@ function MemberInfoComponent(props) {
                             </Fade>
                     </Modal> */}
 
-                        <ModalEmail open={open} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
+                        <ModalEmail open={open} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
 
-                        <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
+                        <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
 
-                        <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton}/>
+                        <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
 
-                        <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay}/>
+                        <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay} setState={props.setState}/>
 
-                        <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose}/>
+                        <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose} setState={props.setState}/>
 
-                        <ModalDeleteUser openUserDelete={openUserDelete} handleClose={handleClose} handleOpen={handleOpen} openReCheckUserDelete={openReCheckUserDelete} deleteUser={deleteUser}/>
+                        <ModalDeleteUser openUserDelete={openUserDelete} handleClose={handleClose} handleOpen={handleOpen} openReCheckUserDelete={openReCheckUserDelete} deleteUser={deleteUser} setState={props.setState}/>
                     {/* 휴대전화번호 변경 모달 */}
                     {/* <Modal
                         // aria-labelledby="transition-modal-title"
