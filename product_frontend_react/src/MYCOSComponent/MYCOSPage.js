@@ -68,6 +68,7 @@ function ManagerPage() {
             console.log(userinfo);
             setState(0);
             console.log("state : "+state);
+            console.log("user_seq : "+userinfo.user_seq);
         })
         .catch(err => {
             console.log('userinfo print error!', err);

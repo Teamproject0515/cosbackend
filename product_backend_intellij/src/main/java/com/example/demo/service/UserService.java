@@ -41,4 +41,6 @@ public interface UserService {
     public void UpdateUserAddress(UserVO userVO);
 
     public void DeleteUserAddress(int address_seq);
+
+    public void InsertUserAddress(UserVO userVO);
 }

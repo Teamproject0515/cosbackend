@@ -1186,11 +1186,14 @@ update tbl_user set user_repay = null where user_email = 'suovj140@gmail.com';
 
 create sequence tbl_address_seq increment by 1 start with 0 minvalue 0;
 
+insert into dual values(tbl_address_seq.nextval);
 
 
 select * from product;
 
 select * from ;
+
+commit;
 
 
 
@@ -1249,3 +1252,18 @@ commit;
         product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
         group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
        
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+

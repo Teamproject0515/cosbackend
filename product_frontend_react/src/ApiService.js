@@ -71,6 +71,10 @@ class ApiService {
         return axios.get(USER_API_BASE_URL+'/deleteuseraddress/'+address_seq);
     }
 
+    insertUserAddress(user_info){
+        return axios.post(USER_API_BASE_URL+'/insertuseraddress',user_info);
+    }
+
 }
 
 export default new ApiService();

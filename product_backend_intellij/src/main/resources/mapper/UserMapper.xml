@@ -70,10 +70,22 @@
     </select>
 
     <update id="UpdateUserAddress" parameterType="com.example.demo.vo.UserVO">
-        update tbl_address set postcode = #{postcode}, address = #{address}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress}, address_name = #{address_name} where address_seq = #{address_seq}
+        update tbl_address set postcode = #{postcode}, address = #{address}, user_phone = #{user_phone}, user_phone2 = #{user_phone2}, detailaddress = #{detailaddress}, address_name = #{address_name} where address_seq = #{address_seq}
     </update>
 
     <delete id="DeleteUserAddress" parameterType="int">
         delete tbl_address where address_seq = #{address_seq}
     </delete>
+
+    <insert id="InsertUserAddress" parameterType="com.example.demo.vo.UserVO">
+        insert into tbl_address (address_seq, user_seq, user_email, address_name, postcode, address, detailaddress, user_phone
+        <if test="user_phone2 != null">
+            , user_phone2
+        </if>
+        ) values(tbl_address_seq.nextval, #{user_seq}, #{user_email}, #{address_name}, #{postcode}, #{address}, #{detailaddress}, #{user_phone}
+        <if test="user_phone2 != null">
+            , #{user_phone2}
+        </if>
+        )
+    </insert>
 </mapper>

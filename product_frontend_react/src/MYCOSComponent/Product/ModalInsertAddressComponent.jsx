@@ -29,39 +29,44 @@ function ModalDetailAddressComponent(props) {
 
     const classes = useStyles();
 
-      function submit(){
-          const user_info = {
-              address_seq : props.UserAddressBySeq.address_seq,
-              user_email : UserAddress.user_email,
-              user_phone : props.user_phone,
-              user_phone2 : props.user_phone2,
-              postcode : props.postcode,
-              address : props.address,
-              detailaddress : props.detailaddress,
-              address_name : props.address_name,
-          }
-        //   console.log(user_info);
-          ApiService.UpdateUserAddress(user_info);
-          props.handleClose();
-          
-      }
+        function submit(){
+            const user_info = {
+                user_seq : props.user_seq,
+                user_email : props.user_email,
+                user_phone : props.user_phone,
+                user_phone2 : props.user_phone2,
+                postcode : props.postcode,
+                address : props.address,
+                detailaddress : props.detailaddress,
+                address_name : props.address_name,
+            }
+            console.log(user_info);
+            if(user_info.user_seq != null && user_info.user_email != null && user_info.user_phone != null && user_info.postcode != null && user_info.address != null && user_info.detailaddress != null && user_info.address_name != null){
+                ApiService.insertUserAddress(user_info);
+                props.handleClose();
+                props.setState(5);
+            }else{
+                alert("정보를 모두 입력해주세요.");
+            }
+          props.setState(6);
+        }
 
     return (
         <div>
             {/* 휴대전화번호 변경 모달 */}
             <Modal
                 className={classes.modal}
-                open={props.openDetailAddress}
+                open={props.openInsertAddress}
                 onClose={props.handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
             >
-                <Fade in={props.openDetailAddress}>
+                <Fade in={props.openInsertAddress}>
                     <div className={classes.paper}>
                         <div style={{textAlign:'left', marginTop:'10px'}}>
-                        {/* <h5 style={{margin:'0px 0px 20px 0px'}}>배송지 정보</h5> */}
+                        <h5 style={{margin:'0px 0px 20px 0px'}}>배송지 추가</h5>
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>이메일</div>
-                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={UserAddress.user_email} name="change_email" onChange={props.onChange} disabled/>
+                            <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'15px'}} type="email" value={props.user_email} name="change_email" onChange={props.onChange} disabled/>
 
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>휴대폰 번호</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'285px', marginBottom:'5px'}} type="email" value={props.user_phone} name="change_phone" onChange={props.onChange}/>
@@ -76,7 +81,7 @@ function ModalDetailAddressComponent(props) {
                             
                             <div style={{fontSize:'11px', color:'black', textAlign:'left', marginBottom:'5px'}}>배송지주소</div>
                             <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'175px', marginBottom:'15px'}} type="email" value={props.postcode} name="change_postcode" onChange={props.onChange}/>
-                            <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => props.toggleNav()}>찾기</Button>
+                            <Button style={{backgroundColor:'#444', width:'105px', height:'30px', borderRadius:'0px', marginLeft:'10px',marginBottom:'0px', boxShadow:'none', fontSize:'13px', color:'white'}} onClick={() => props.toggleInsertNav()}>찾기</Button>
                             <div>
                                 <input style={{textAlign:'left', border:'0px', borderRadius:'0px', padding:'8px', fontSize:'11px', color:'gray', backgroundColor:'#E7E7E7', width:'290px', marginBottom:'10px'}} type="email" value={props.address} name="change_address" onChange={props.onChange}/>
                             </div>

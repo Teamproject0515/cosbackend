@@ -41,4 +41,6 @@ public interface UserMapper {
     void UpdateUserAddress(UserVO userVO);
 
     void DeleteUserAddress(int address_seq);
+
+    void InsertUserAddress(UserVO userVO);
 }
