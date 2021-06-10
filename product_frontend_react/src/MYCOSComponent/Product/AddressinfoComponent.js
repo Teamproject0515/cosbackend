@@ -39,8 +39,7 @@ function AddressinfoComponent(props) {
         .then( res => {
             setuseraddresses(res.data);
             setState(0);
-            console.log("state : " + state);
-            // console.log("add안에서 user_seq : "+user_seq);
+            // console.log("state : " + state);
 
         })
         .catch(err => {

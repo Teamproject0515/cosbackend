@@ -102,25 +102,18 @@ function MemberInfoComponent(props) {
     const handleOpen = (e) => {
         if(e.target.name === "change_email"){
             setOpen(true);
-            // props.setState(1);
         }else if(e.target.name === "change_phone"){
             setOpenChangePhone(true);
-            // props.setState(2);
         }else if(e.target.name === "change_password"){
             setOpenChangePassword(true);
-            // props.setState(3);
         }else if(e.target.name === "user_delete"){
             setOpenUserDelete(true);
-            // props.setState(4);
         }else if(e.target.name === "recheck_user_delete"){
             setOpenReCheckUserDelete(true);
-            // props.setState(5);
         }else if(e.target.name === "user_account_insert"){
             setOpenUserAccountInsert(true);
-            // props.setState(6);
         }else if(e.target.name === "user_sns_connect"){
             setOpenUserSNSConnect(true);
-            // props.setState(7);
         }   
         props.setState(2);
     };
@@ -151,8 +144,6 @@ function MemberInfoComponent(props) {
 
         // 소득공제용 정보 변경 모달 띄우기
         setUpdateUserAccount(false);
-        //props.setState(0);
-        // props.setState(8);
     };
 
 
@@ -166,7 +157,8 @@ function MemberInfoComponent(props) {
 
     const checkGender = (e) => {
         if(props.user.user_gender === e.target.value){
-            return e.target.checked;
+            // console.log("props : " +props.user.user_gender);
+            // console.log("targetvalue : " + e.target.value);
         }
     }
 

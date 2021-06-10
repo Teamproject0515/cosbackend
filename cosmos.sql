@@ -735,7 +735,11 @@ insert into product values(57, 24, '아동상품3', '상품1', 20000, 'KIDS', '모자', 
 insert into product values(58, 25, '여자상품4', '상품1', 20000, 'W', '원피스', '이미지', 'WHITE', 'M', '우레탄', sysdate);
 insert into product values(59, 25, '여자상품5', '상품1', 20000, 'W', '모자', '이미지', 'GREEN', 'XS', '우레탄', sysdate);
 insert into product values(60, 26, '남자상품4', '상품1', 20000, 'M', '원피스', '이미지', 'RED', 'M', '우레탄', sysdate);
-
+insert into product values(61, 27, '남자상품9', '상품2', 25000, 'M', '바지', '이미지1,이미지2', 'BLACK', 'M', '우레탄');
+insert into product values(62, 27, '남자상품9', '상품2', 25000, 'M', '바지', '이미지1,이미지2', 'RED', 'L', '우레탄');
+insert into product values(63, 27, '남자상품9', '상품2', 25000, 'M', '바지', '이미지1,이미지2', 'YELLOW', 'XL', '우레탄');
+delete from product where product_seq = 63;
+select * from product;
 
 insert into product_option values(1, 1, 250, 200);
 insert into product_option values(2, 1, 230, 100);
@@ -797,6 +801,9 @@ insert into product_option values(57, 24, 210, 500);
 insert into product_option values(58, 25, 240, 700);
 insert into product_option values(59, 25, 240, 700);
 insert into product_option values(60, 26, 240, 700);
+insert into product_option values(61, 27, 240, 150);
+insert into product_option values(62, 27, 240, 660);
+insert into product_option values(63, 27, 240, 100);
 
 
 
@@ -1243,27 +1250,17 @@ commit;
 
 
 
-        select *
-        from
-        (select rownum rnum, p.*
-        from
-        (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
-        from
-        product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
-        group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+select *
+from
+(select rownum rnum, p.*        
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+from
+product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
        
        
+update product set product_img = '이미지1.jpg,이미지2.jpg';
        
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-
+    
+commit;

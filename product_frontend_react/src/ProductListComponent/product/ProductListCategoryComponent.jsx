@@ -11,7 +11,7 @@ import PageNumComponent from './PageNumComponent';
 import {Table, TableCell, TableRow, Typography, InputLabel, FormControl, Grid} from '@material-ui/core';
 
 function ProductListComponent(props){
-
+    const imgUrl = '/imgs/';
     let [products, setproducts ] = useState([]);
     let [product_pageNum, setproduct_pageNum] = useState(1);
     let [product_gender, setproduct_gender] = useState(window.localStorage.getItem("selectGender"));
@@ -148,7 +148,9 @@ function ProductListComponent(props){
                     <Table style={{marginBottom:'30px'}}>     
                         <div align="right" onClick = {() => {Productinfo(product.product_id)}}>
                             <TableRow key={product.product_id}>
-                                <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> <img src={img01} style={{width:'100%'}}/></TableCell>
+                                <TableCell component="th" scope="product" style={{border:'0px', padding:'0px'}}> 
+                                    <img src={imgUrl+product.imgs[0]} style={{width:'100%', objectFit: 'cover'}}/>
+                                </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell alingn="right" style={{border:'0px'}}>{ product.product_title }</TableCell>

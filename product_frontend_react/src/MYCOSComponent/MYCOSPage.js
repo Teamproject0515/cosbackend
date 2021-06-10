@@ -40,6 +40,7 @@ function ManagerPage() {
         setDashBoard(false);
         setProductDetail(false);
     }
+
     const dashBoardOpen= ()=>{
         setDashBoard(true);
         setAddressinfo(false);
@@ -48,17 +49,17 @@ function ManagerPage() {
         setProductDetail(false);
     }
 
-    const productDetailOpen=()=>{
-        setProductDetail(true);
-        setDashBoard(false);
-        setAddressinfo(false);
-        setDeliveryinfo(false);
-        setMemberinfo(false);
-    }
+    // const productDetailOpen=()=>{
+    //     setProductDetail(true);
+    //     setDashBoard(false);
+    //     setAddressinfo(false);
+    //     setDeliveryinfo(false);
+    //     setMemberinfo(false);
+    // }
 
     let user_email = 'suovj140@gmail.com';
 
-    let [userinfo, setuserinfo ] = useState([]);
+    let [userinfo, setuserinfo] = useState([]);
     const[state, setState] = useState(0);
 
     useEffect(() => {
@@ -67,8 +68,8 @@ function ManagerPage() {
             setuserinfo(res.data);
             console.log(userinfo);
             setState(0);
-            console.log("state : "+state);
-            console.log("user_seq : "+userinfo.user_seq);
+            // console.log("state : "+state);
+            // console.log("user_seq : "+userinfo.user_seq);
         })
         .catch(err => {
             console.log('userinfo print error!', err);

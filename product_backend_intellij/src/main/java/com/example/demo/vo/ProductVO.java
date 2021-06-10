@@ -14,7 +14,10 @@ public class ProductVO {
     String product_title;
     String product_content;
     int product_price;
+
     String product_img;
+    String[] imgs;
+
     String product_gender;
     String product_category;
 
@@ -38,6 +41,11 @@ public class ProductVO {
 //    public void setProduct_color(String product_color) { colors=product_color.split(","); }
 //
 //    public void setProduct_size(String product_size) { sizes=product_size.split(","); }
+
+
+    public void setProduct_img(String product_img){
+        imgs = product_img.split(",");
+    }
 
     public void setProduct_color(String product_color) {
         colors=product_color.split(",");
