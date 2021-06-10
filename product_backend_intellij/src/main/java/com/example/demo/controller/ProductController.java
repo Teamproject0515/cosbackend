@@ -16,9 +16,10 @@ public class ProductController {
     ProductService productService;
 
 
-    @GetMapping("/{product_seq}")
-    public ProductVO ProductByID(@PathVariable int product_seq){
-        return productService.ProductByID(product_seq);
+    @GetMapping("/{product_id}")
+    public ProductVO ProductByID(@PathVariable int product_id){
+        System.out.println(product_id);
+        return productService.ProductByID(product_id);
     }
 
     @PostMapping("/list")

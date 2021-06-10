@@ -57,26 +57,25 @@ function MemberInfoComponent(props) {
         console.log(Change_user);
         ApiService.updateUserInfo(Change_user);
         // alert('업데이트 성공');
-        handleClose();
         props.setState(10);
+        handleClose();
     };
 
+    // 이메일, 핸드폰 번호, 비밀번호 변경시 해당 set에 입력되게 하고, 다른 set에 이미 입력된 값이 있다면 null값으로 처리한다.
+    // 만약 비밀번호를 바꾸려다 말고 핸드폰 번호를 아니면 잘못 입력했을 경우에를 대비해서 null로 지정해둠
     function onChange(e){
         if(e.target.name == "change_email"){
             setchange_phone(null);
             setchange_password(null);
             setchange_email(e.target.value);
-            //props.setState(2);
         }else if(e.target.name == "change_phone"){
             setchange_email(null);
             setchange_password(null);
             setchange_phone(e.target.value);
-            //props.setState(3);
         }else if(e.target.name == "change_password"){
             setchange_email(null);
             setchange_phone(null);
             setchange_password(e.target.value);
-            //props.setState(4);
         }
     }
 
@@ -97,32 +96,33 @@ function MemberInfoComponent(props) {
       }));
 
 
-      const classes = useStyles();
+    const classes = useStyles();
 
 
     const handleOpen = (e) => {
         if(e.target.name === "change_email"){
             setOpen(true);
-            props.setState(1);
+            // props.setState(1);
         }else if(e.target.name === "change_phone"){
             setOpenChangePhone(true);
-            props.setState(2);
+            // props.setState(2);
         }else if(e.target.name === "change_password"){
             setOpenChangePassword(true);
-            props.setState(3);
+            // props.setState(3);
         }else if(e.target.name === "user_delete"){
             setOpenUserDelete(true);
-            props.setState(4);
+            // props.setState(4);
         }else if(e.target.name === "recheck_user_delete"){
             setOpenReCheckUserDelete(true);
-            props.setState(5);
+            // props.setState(5);
         }else if(e.target.name === "user_account_insert"){
             setOpenUserAccountInsert(true);
-            props.setState(6);
+            // props.setState(6);
         }else if(e.target.name === "user_sns_connect"){
             setOpenUserSNSConnect(true);
-            props.setState(7);
+            // props.setState(7);
         }   
+        props.setState(2);
     };
     
     const handleClose = (e) => {
@@ -152,7 +152,7 @@ function MemberInfoComponent(props) {
         // 소득공제용 정보 변경 모달 띄우기
         setUpdateUserAccount(false);
         //props.setState(0);
-        props.setState(8);
+        // props.setState(8);
     };
 
 
@@ -328,17 +328,17 @@ function MemberInfoComponent(props) {
                             </Fade>
                     </Modal> */}
 
-                        <ModalEmail open={open} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
+                        <ModalEmail open={open} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} />
 
-                        <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
+                        <ModalPhone openChangePhone={openChangePhone} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} />
 
-                        <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} setState={props.setState}/>
+                        <ModalPassword openChangePassword={openChangePassword} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} />
                     
-                        <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay} setState={props.setState}/>
+                        <ModalAccount user_name={user_name} openUserAccountInsert={openUserAccountInsert} user_email={user_email} user_account={user_account} centerDivBetween={centerDivBetween} openAccountButton={openAccountButton} updateUserAccount={updateUserAccount} UpdateUserAccount={UpdateUserAccount} openUpdateUserRepay={openUpdateUserRepay} UpdateUserRepay={UpdateUserRepay} openInsertUserAccountPAY={openInsertUserAccountPAY} InsertUserAccountPAY={InsertUserAccountPAY} userAccount01={userAccount01} UserAccount={UserAccount} handleClose={handleClose} onChange={onChange} onKeyPress={onKeyPress} updateButton={updateButton} update_user_account={update_user_account} insertUserRepay={insertUserRepay} update_user_repay={update_user_repay} />
 
-                        <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose} setState={props.setState}/>
+                        <ModalSNS openUserSNSConnect={openUserSNSConnect} handleClose={handleClose} />
 
-                        <ModalDeleteUser openUserDelete={openUserDelete} handleClose={handleClose} handleOpen={handleOpen} openReCheckUserDelete={openReCheckUserDelete} deleteUser={deleteUser} setState={props.setState}/>
+                        <ModalDeleteUser openUserDelete={openUserDelete} handleClose={handleClose} handleOpen={handleOpen} openReCheckUserDelete={openReCheckUserDelete} deleteUser={deleteUser} />
                     {/* 휴대전화번호 변경 모달 */}
                     {/* <Modal
                         // aria-labelledby="transition-modal-title"

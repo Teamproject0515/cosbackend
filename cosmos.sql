@@ -1188,4 +1188,64 @@ create sequence tbl_address_seq increment by 1 start with 0 minvalue 0;
 
 
 
+select * from product;
 
+select * from ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+ select *
+        from
+        (select rownum rnum, p.*
+        from
+        (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+        from
+        product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p);
+       
+       
+       
+       
+       
+       
+       
+       
+select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id;
+       
+select *
+from
+(select rownum rnum, p.* 
+from
+(select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size, product_saled
+from
+product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
+group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+
+commit;
+
+
+
+
+
+
+        select *
+        from
+        (select rownum rnum, p.*
+        from
+        (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
+        from
+        product, (select product_option_id, sum(product_saled) product_saled from product_option group by product_option_id) where product_id = product_option_id
+        group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img, product_saled) p);
+       

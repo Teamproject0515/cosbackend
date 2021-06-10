@@ -47,6 +47,7 @@ function ManagerPage() {
         setMemberinfo(false);
         setProductDetail(false);
     }
+
     const productDetailOpen=()=>{
         setProductDetail(true);
         setDashBoard(false);

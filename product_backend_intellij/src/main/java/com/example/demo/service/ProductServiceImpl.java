@@ -15,7 +15,7 @@ public class ProductServiceImpl implements ProductService{
 
     // 해당 시퀀스에 맞는 상품 정보 출력
     @Override
-    public ProductVO ProductByID(int product_seq) { return productMapper.ProductByID(product_seq); }
+    public ProductVO ProductByID(int product_id) { return productMapper.ProductByID(product_id); }
 
     // 옵션 조건에 맞는 상품 리스트 출력
     @Override

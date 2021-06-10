@@ -37,6 +37,7 @@ function ProductListComponent(props){
         ApiService.productsCategory(ProductVO)
         .then( res => {
               setproducts(res.data);
+              console.log(products);
         })
         .catch(err => {
             console.log('product_list print error!', err);

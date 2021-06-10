@@ -39,9 +39,9 @@ public class UserController {
         userService.UpdateUserInfo(userVO);
     }
 
-    @PostMapping("/deleteuserinfo")
-    public void DeleteUserInfo(@RequestBody UserVO userVO){
-        System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
+        @PostMapping("/deleteuserinfo")
+        public void DeleteUserInfo(@RequestBody UserVO userVO){
+            System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
         System.out.println("회원탈퇴 DeleteUserInfo Success!");
         userService.DeleteUserInfo(userVO);
     }
