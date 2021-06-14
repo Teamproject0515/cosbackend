@@ -41,7 +41,7 @@ public class UserController {
 
         @PostMapping("/deleteuserinfo")
         public void DeleteUserInfo(@RequestBody UserVO userVO){
-            System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
+        System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
         System.out.println("회원탈퇴 DeleteUserInfo Success!");
         userService.DeleteUserInfo(userVO);
     }
@@ -105,10 +105,10 @@ public class UserController {
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("PHONE : "+userVO.getUser_phone());
         System.out.println("ADDRESS_NAME : "+userVO.getAddress_name());
-        System.out.println("PHONE2 : "+userVO.getUser_phone2());
-        System.out.println("POSTCODE : "+userVO.getPostcode());
+        System.out.println("PHONE2 : "+userVO.getAddress_phone2());
+        System.out.println("POST_CODE : "+userVO.getPost_code());
         System.out.println("ADDRESS : "+userVO.getAddress());
-        System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
+        System.out.println("DETAIL_ADDRESS : "+userVO.getDetail_address());
         userService.UpdateUserAddress(userVO);
     }
 
@@ -121,15 +121,14 @@ public class UserController {
     @PostMapping("/insertuseraddress")
     public void InsertUserAddress(@RequestBody UserVO userVO){
         System.out.println("InsertUserAdderss Start");
-        System.out.println("User_seq : "+userVO.getUser_seq());
         System.out.println("Address_seq : "+userVO.getAddress_seq());
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("PHONE : "+userVO.getUser_phone());
         System.out.println("ADDRESS_NAME : "+userVO.getAddress_name());
-        System.out.println("PHONE2 : "+userVO.getUser_phone2());
-        System.out.println("POSTCODE : "+userVO.getPostcode());
+        System.out.println("PHONE2 : "+userVO.getAddress_phone2());
+        System.out.println("POSTCODE : "+userVO.getPost_code());
         System.out.println("ADDRESS : "+userVO.getAddress());
-        System.out.println("DETAILADDRESS : "+userVO.getDetailaddress());
+        System.out.println("DETAILADDRESS : "+userVO.getDetail_address());
         userService.InsertUserAddress(userVO);
     }
 }
