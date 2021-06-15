@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.ProductMapper">
+<mapper namespace="com.shopping.cosmos.mapper.ProductMapper">
 
 
 
     <!-- 해당 상품 클릭시 VO하나 출력 -->
-    <select id="ProductByID" resultType="com.example.demo.vo.ProductVO"
+    <select id="ProductByID" resultType="com.shopping.cosmos.vo.ProductVO"
             parameterType="int">
         select *
         from
@@ -20,7 +20,7 @@
 
 
     <!-- Product 리스트 출력 -->
-    <select id="productCategory" parameterType="com.example.demo.vo.ProductVO" resultType="com.example.demo.vo.ProductVO">
+    <select id="productCategory" parameterType="com.shopping.cosmos.vo.ProductVO" resultType="com.shopping.cosmos.vo.ProductVO">
         select *
         from
         (select rownum rnum, p.*
@@ -74,7 +74,7 @@
 
 
     <!-- 페이지 번호 출력 -->
-    <select id="findPageNum" parameterType="com.example.demo.vo.ProductVO" resultType="int">
+    <select id="findPageNum" parameterType="com.shopping.cosmos.vo.ProductVO" resultType="int">
         select max(rownum) from (select product_id, product_title, product_content, product_price, product_gender, product_category, product_img, wm_concat(product_color) product_color, wm_concat(product_size) product_size
         from tbl_product group by product_id, product_title, product_content, product_price, product_gender, product_category, product_img) p
         <where>
@@ -101,7 +101,7 @@
 
 
     <!-- Product 리스트 출력 -->
-<!--    <select id="productCategory" parameterType="com.example.demo.vo.ProductVO" resultType="com.example.demo.vo.ProductVO">-->
+<!--    <select id="productCategory" parameterType="ProductVO" resultType="ProductVO">-->
 <!--        select * from (-->
 <!--        select rownum rnum, p.* ,o.product_color, o.product_size, o.product_saled from product p,-->
 <!--        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size, sum(product_saled) product_saled from product_option group by product_option_seq) o-->
@@ -156,7 +156,7 @@
 
 
     <!-- 페이지 번호 출력 -->
-<!--    <select id="findPageNum" parameterType="com.example.demo.vo.ProductVO" resultType="int">-->
+<!--    <select id="findPageNum" parameterType="ProductVO" resultType="int">-->
 <!--        select max(rownum)-->
 <!--        from product p,-->
 <!--        (select product_option_seq, wm_concat(product_color) product_color, wm_concat(product_size) product_size from product_option group by product_option_seq) o-->
