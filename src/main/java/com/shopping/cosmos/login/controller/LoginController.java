@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
-@RequestMapping("/cos")
+@RequestMapping("/cosmos")
 public class LoginController {
 
     @Autowired
@@ -127,7 +127,7 @@ public class LoginController {
             Cookie[] cookies = request.getCookies();
             //로그인 시에 쿠키에 JSESSIONID 저장했음 비교해서 확인
             if (cookies != null && cookies.length > 0) {
-                for (int i = 0; i < cookies.length; i++) {
+                for(int i = 0; i < cookies.length; i++) {
                     System.out.println(cookies[i].getName() + "=" + cookies[i].getValue());
                     if (cookies[i].getValue() == sessionId) break;
                 }
