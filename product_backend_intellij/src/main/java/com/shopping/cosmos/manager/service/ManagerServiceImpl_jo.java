@@ -9,13 +9,13 @@ import java.util.List;
 
 @Service
 public class ManagerServiceImpl_jo implements ManagerService_jo {
-	
-	@Autowired
+
+    @Autowired
     ManagerMapper_jo mapper;
-	
-	@Override
-	public List<ManagerItemsVO_jo> managerItemsCnt(ManagerItemsVO_jo vo) {
-		return mapper.managerItemsCnt(vo);
-	}
+
+    @Override
+    public List<ManagerItemsVO_jo> managerItemsCnt(ManagerItemsVO_jo vo) {
+        return mapper.managerItemsCnt(vo);
+    }
 
 }

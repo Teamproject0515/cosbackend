@@ -11,16 +11,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/cos")
 public class ProductDetailController_jo {
-	
-	@Autowired
-	private ProductService_jo service;
-	
-	@GetMapping("/manager/productDetail/{seq}")
-	List<ProductVO_jo> getProductDetail(@PathVariable int seq, ProductVO_jo vo) {
-			System.out.println("returnProductDetail 접근");
-			vo.setProduct_id(seq);
-			System.out.println(vo);
-			return service.getProductDetail(vo);
-	}
-	
+
+    @Autowired
+    private ProductService_jo service;
+
+    @GetMapping("/manager/productDetail/{seq}")
+    List<ProductVO_jo> getProductDetail(@PathVariable int seq, ProductVO_jo vo) {
+        System.out.println("returnProductDetail 접근");
+        vo.setProduct_id(seq);
+        System.out.println(vo);
+        return service.getProductDetail(vo);
+    }
+
 }

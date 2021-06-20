@@ -11,19 +11,26 @@ import java.util.List;
 public interface UserMapper_jo {
 
     //회원가입
-	void insertUser(UserVO_jo vo);
-	//회원가입 이메일체크
-	int userEmailCheck(UserVO_jo vo);
-	//유저리스트
-	List<UserVO_jo> getUserList(UserVO_jo vo);
-	//검색 유저리스트
-	List<UserSearchVO_jo> userSearch(UserSearchVO_jo vo);
-	//유저 상태
-	List<UserStateVO_jo> userState(UserStateVO_jo vo);
-	//유저 수
-	int userCount();
-	//유저로그수
-	public int userLogCount();
-	//유저상태검색
-	public List<UserSearchVO_jo> userStateSearch(UserSearchVO_jo user);
+    void insertUser(UserVO_jo vo);
+
+    //회원가입 이메일체크
+    int userEmailCheck(UserVO_jo vo);
+
+    //유저리스트
+    List<UserVO_jo> getUserList(UserVO_jo vo);
+
+    //검색 유저리스트
+    List<UserSearchVO_jo> userSearch(UserSearchVO_jo vo);
+
+    //유저 상태
+    List<UserStateVO_jo> userState(UserStateVO_jo vo);
+
+    //유저 수
+    int userCount();
+
+    //유저로그수
+    public int userLogCount();
+
+    //유저상태검색
+    public List<UserSearchVO_jo> userStateSearch(UserSearchVO_jo user);
 }
