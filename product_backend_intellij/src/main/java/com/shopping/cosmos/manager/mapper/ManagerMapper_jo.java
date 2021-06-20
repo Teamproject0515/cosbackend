@@ -9,6 +9,4 @@ import java.util.List;
 public interface ManagerMapper_jo {
 	
 	List<ManagerItemsVO_jo> managerItemsCnt(ManagerItemsVO_jo vo);
-	//int getProductCnt(ProductVO vo);
-	//int getUserCnt(UserVO vo);
 }

@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cos")
 public class OrderStatusDetailController_jo {
-	
-	@Autowired
-	private OrderService_jo service;
-	
-	@GetMapping("/manager/orderDetail/{order_detail_num}/{user_email}")
-	OrderDetailVO_jo getOrderDetail(OrderDetailVO_jo vo){
-		System.out.println("getOrderDetail 접근");
-		System.out.println(vo);
-		System.out.println(service.orderDetail(vo));
-		return service.orderDetail(vo);
-	}
-	
-	@PutMapping("/manager/stateChange/{order_status}/{order_id}/{product_seq}")
-	void orderStateChange(OrderDetailVO_jo vo){
-		System.out.println("orderStateChange 접근");
-		System.out.println(vo);
-		service.stateChange(vo);
-		System.out.println("변경성공");
-	}
-	
+
+    @Autowired
+    private OrderService_jo service;
+
+    @GetMapping("/manager/orderDetail/{order_detail_num}/{user_email}")
+    OrderDetailVO_jo getOrderDetail(OrderDetailVO_jo vo) {
+        System.out.println("getOrderDetail 접근");
+        System.out.println(vo);
+        System.out.println(service.orderDetail(vo));
+        return service.orderDetail(vo);
+    }
+
+    @PutMapping("/manager/stateChange/{order_status}/{order_id}/{product_seq}")
+    void orderStateChange(OrderDetailVO_jo vo) {
+        System.out.println("orderStateChange 접근");
+        System.out.println(vo);
+        service.stateChange(vo);
+        System.out.println("변경성공");
+    }
+
 }
