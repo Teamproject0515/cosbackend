@@ -21,7 +21,7 @@ public class OrderStatusDetailController_jo {
 		return service.orderDetail(vo);
 	}
 	
-	@PutMapping("/manager/stateChange/{order_status}/{order_id}")
+	@PutMapping("/manager/stateChange/{order_status}/{order_id}/{product_seq}")
 	void orderStateChange(OrderDetailVO_jo vo){
 		System.out.println("orderStateChange 접근");
 		System.out.println(vo);

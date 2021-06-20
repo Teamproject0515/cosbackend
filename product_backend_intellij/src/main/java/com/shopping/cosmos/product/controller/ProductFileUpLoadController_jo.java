@@ -38,7 +38,7 @@ public class ProductFileUpLoadController_jo {
 					// System.out.println("파일명:"+fileName);
 					// trandsferto 파일 저장경로
 					//mf.transferTo(new File("C:/cos/cosfrontend/public/imgs/" + fileName + "." + extend));
-					mf.transferTo(new File("c:/github_merge/cos_project_merge/product_frontend_react/public/imgs/" + fileName + "." + extend));
+					mf.transferTo(new File("C:/cos_project_merge-cosmosmanager/cos_project_merge-cosmosmanager/product_frontend_react/public/imgs/" + fileName + "." + extend));
 				}else {
 					System.out.println("중복이있음");
 				}
