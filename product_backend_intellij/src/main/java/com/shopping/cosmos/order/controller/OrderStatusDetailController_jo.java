@@ -17,12 +17,14 @@ public class OrderStatusDetailController_jo {
     OrderDetailVO_jo getOrderDetail(OrderDetailVO_jo vo) {
         System.out.println("getOrderDetail 접근");
         return service.orderDetail(vo);
+
     }
 
     @PutMapping("/manager/stateChange/{order_status}/{order_id}")
     void orderStateChange(OrderDetailVO_jo vo) {
         System.out.println("orderStateChange 접근");
         System.out.println(vo);
+
         service.stateChange(vo);
 
         System.out.println("변경성공");

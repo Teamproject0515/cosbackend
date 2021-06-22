@@ -19,12 +19,10 @@ public class UserInsertController_jo {
     void insertUser(@RequestBody UserVO_jo user) {
         System.out.println("insertUser접근");
         System.out.println(user);
-        try {
-            userservice.insertUser(user);
-            System.out.println("insert성공");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+        userservice.insertUser(user);
+        System.out.println("insert성공");
+
     }
 
     //프론트에서 get방식으로 '/signUp/user_email'으로 들왔을시
@@ -33,12 +31,9 @@ public class UserInsertController_jo {
         System.out.println(user);
         System.out.println("userEmailCheck접근");
         //이메일이 있다면 0보다 큰걸 가져옴
-        try {
-            return userservice.userEmailCheck(user);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return 0;
+
+        return userservice.userEmailCheck(user);
+
     }
 
 }
