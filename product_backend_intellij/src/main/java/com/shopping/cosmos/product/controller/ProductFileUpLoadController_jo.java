@@ -14,7 +14,6 @@ public class ProductFileUpLoadController_jo {
     @PostMapping("/manager/upload")
     public void upload(@RequestParam("file") List<MultipartFile> mtfList) {
         System.out.println("upload접근");
-        System.out.println("upload접근");
         System.out.println(mtfList);
         for (MultipartFile list : mtfList) {
             System.out.println(list.getOriginalFilename());

@@ -24,36 +24,46 @@ public class UserListController_jo {
     List<UserVO_jo> getUserList(UserVO_jo user) {
         System.out.println("getUserList접근");
         // 만약 페이지가 없으면 1을 넣어줌
-        if (user.getPageNum() == 0)
-            user.setPageNum(1);
-        // 상품 몇번쨰부터 보여줄건지 계산
-        int startRow = (user.getPageNum() - 1) * 10 + 1;
-        // 10개씩 보여줌
-        int endRow = startRow + 9;
-        user.setStartRow(startRow);
-        user.setEndRow(endRow);
-        System.out.println(startRow);
-        System.out.println(endRow);
+        try {
+            if (user.getPageNum() == 0)
+                user.setPageNum(1);
+            // 상품 몇번쨰부터 보여줄건지 계산
+            int startRow = (user.getPageNum() - 1) * 10 + 1;
+            // 10개씩 보여줌
+            int endRow = startRow + 9;
+            user.setStartRow(startRow);
+            user.setEndRow(endRow);
+            System.out.println(startRow);
+            System.out.println(endRow);
 
-        return service.getUserList(user);
+            return service.getUserList(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GetMapping("/manager/userCount")
     int getUserCount(UserVO_jo vo) {
-        // 전체상품개수
-        int userCount = service.userCount();
-        // 상품페이지를 보여주기위해 10으로 나눈값을 하나더함 상품개수가 33개라면 3페이지가 아닌 4페이지를 보여주기위해
-        if (userCount > 10 && userCount % 10 != 0) {
-            userCount = userCount / 10 + 1;
-        } else {
-            userCount = userCount / 10;
+        try {
+            // 전체상품개수
+            int userCount = service.userCount();
+            // 상품페이지를 보여주기위해 10으로 나눈값을 하나더함 상품개수가 33개라면 3페이지가 아닌 4페이지를 보여주기위해
+            if (userCount > 10 && userCount % 10 != 0) {
+                userCount = userCount / 10 + 1;
+            } else {
+                userCount = userCount / 10;
 
+            }
+            if (userCount == 0) {
+                userCount = 1;
+            }
+            System.out.println(userCount);
+            return userCount;
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if (userCount == 0) {
-            userCount = 1;
-        }
-        System.out.println(userCount);
-        return userCount;
+        return 0;
     }
 
     // 유저검색
@@ -61,8 +71,11 @@ public class UserListController_jo {
     List<UserSearchVO_jo> userSearch(UserSearchVO_jo user) {
         System.out.println("userSearch접근");
         System.out.println(user);
-        return service.userSearch(user);
+        try {
+            return service.userSearch(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
-
-
 }
