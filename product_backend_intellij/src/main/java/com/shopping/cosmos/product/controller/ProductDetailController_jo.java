@@ -18,14 +18,8 @@ public class ProductDetailController_jo {
     @GetMapping("/manager/productDetail/{seq}")
     List<ProductVO_jo> getProductDetail(@PathVariable int seq, ProductVO_jo vo) {
         System.out.println("returnProductDetail 접근");
-        try {
             vo.setProduct_id(seq);
             System.out.println(vo);
             return service.getProductDetail(vo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
     }
-
 }

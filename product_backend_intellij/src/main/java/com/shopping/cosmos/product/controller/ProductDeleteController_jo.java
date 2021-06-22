@@ -16,14 +16,10 @@ public class ProductDeleteController_jo {
     @DeleteMapping("/manager/productDelect/{seq}")
     void deleteProduct(@PathVariable int seq, ProductVO_jo product) {
         System.out.println("deleteProduct 접근");
-        try {
             product.setProduct_id(seq);
             System.out.println(product);
             service.deleteProductOption(product);
             service.deleteProduct(product);
             System.out.println("삭제 성공");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

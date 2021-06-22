@@ -46,8 +46,6 @@ public class ProductListController_jo {
     @GetMapping("/manager/productCount")
     int getProductCount(ProductVO_jo vo) {
         //전체상품개수
-
-        try {
             int productCount = service.productCount();
             //상품페이지를 보여주기위해 10으로 나눈값을 하나더함 상품개수가 33개라면 3페이지가 아닌 4페이지를 보여주기위해
             System.out.println("productCount1 =" + productCount);
@@ -62,24 +60,15 @@ public class ProductListController_jo {
             }
             System.out.println("productCount2 =" + productCount);
             return productCount;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     @GetMapping("/manager/seach/{product_title}")
     List<ProductVO_jo> seachList(ProductSearchVO_jo product) {
         System.out.println("seachList 접근");
         System.out.println(product);
-        try {
-            List<ProductVO_jo> search2 = service.seachList(product);
-            System.out.println(search2);
-            return service.seachList(product);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
+        List<ProductVO_jo> search2 = service.seachList(product);
+        System.out.println(search2);
+        return service.seachList(product);
     }
 
 }

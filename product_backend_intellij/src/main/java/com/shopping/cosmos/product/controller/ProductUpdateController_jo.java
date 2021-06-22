@@ -18,7 +18,6 @@ public class ProductUpdateController_jo {
     @PutMapping("/manager/productUpdate")
     void updateProduct(@RequestBody List<ProductVO_jo> product) {
         System.out.println("updateProduct 접근");
-        try {
             ProductVO_jo vo = product.get(0);
 
             //현제 들어온 id가 같은것을 모두 가져옴
@@ -60,9 +59,6 @@ public class ProductUpdateController_jo {
                     }
                 }
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         System.out.println("update 성공");
     }
 }

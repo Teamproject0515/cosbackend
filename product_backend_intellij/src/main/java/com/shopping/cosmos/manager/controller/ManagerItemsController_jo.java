@@ -21,12 +21,7 @@ public class ManagerItemsController_jo {
     @GetMapping("/manager")
     List<ManagerItemsVO_jo> getManagerItems(ManagerItemsVO_jo vo) {
         System.out.println("getManagerItems 접근");
-        try{
-            return service.managerItemsCnt(vo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
+        return service.managerItemsCnt(vo);
     }
 
 }

@@ -12,7 +12,7 @@
         VALUES(#{user_email},#{user_password},#{user_name},#{user_birthday},#{user_phone},0,#{user_gender},to_char(sysdate,'yyyy.mm.dd
         hh24:mi'))
         INTO tbl_address_info(address_seq,user_email,post_code,address,detail_address)
-        VALUES(tbl_user_seq.nextval,#{user_email},#{post_code},#{address},#{detail_address})
+        VALUES(tbl_address_info_seq.nextval,#{user_email},#{post_code},#{address},#{detail_address})
         select * from dual
     </insert>
 
