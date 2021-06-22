@@ -20,7 +20,6 @@ public class ProductInsertController_jo {
     @PostMapping("/manager/productInsert")
     void insertProduct(@RequestBody List<ProductVO_jo> product) {
         System.out.println("insertProduct 접근");
-        try {
             for (int i = 0; i < product.size(); i++) {
                 if (i == 0) {
                     service.insertProduct(product.get(i));
@@ -29,8 +28,5 @@ public class ProductInsertController_jo {
                 }
             }
             System.out.println("insert성공");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

@@ -9,11 +9,11 @@
         INSERT ALL
         INTO tbl_product(product_seq, PRODUCT_ID,
         product_title,product_gender,product_category,product_price,product_color,product_size,product_content,product_img,product_material,product_date)
-        VALUES(product_seq.nextval,product_option_seq.nextval,
+        VALUES(tbl_product_seq.nextval,tbl_product_option_seq.nextval,
         #{product_title},#{product_gender},#{product_category},#{product_price},#{product_color},#{product_size},#{product_content},#{product_img},#{product_material},to_char(sysdate,'yyyy.mm.dd
         hh24:mi'))
         INTO tbl_product_option(product_seq,PRODUCT_ID,product_stock)
-        VALUES(product_seq.CURRVAL,product_option_seq.currval,#{product_stock})
+        VALUES(tbl_product_seq.CURRVAL,tbl_product_option_seq.currval,#{product_stock})
         select * from dual
     </insert>
 
@@ -21,11 +21,11 @@
         INSERT ALL
         INTO tbl_product(product_seq, product_id,
         product_title,product_gender,product_category,product_price,product_color,product_size,product_content,product_img,product_material,product_date)
-        VALUES(product_seq.nextval,product_option_seq.currval,
+        VALUES(tbl_product_seq.nextval,tbl_product_option_seq.currval,
         #{product_title},#{product_gender},#{product_category},#{product_price},#{product_color},#{product_size},#{product_content},
         #{product_img},#{product_material},to_char(sysdate,'yyyy.mm.dd hh24:mi'))
         INTO tbl_product_option(product_seq,product_id,product_stock)
-        VALUES(product_seq.CURRVAL,product_option_seq.currval,#{product_stock})
+        VALUES(tbl_product_seq.CURRVAL,tbl_product_option_seq.currval,#{product_stock})
         select * from dual
     </insert>
 
@@ -33,11 +33,11 @@
         INSERT ALL
         INTO tbl_product(product_seq, PRODUCT_ID,
         product_title,product_gender,product_category,product_price,product_color,product_size,product_content,product_img,product_material,product_date)
-        VALUES(product_seq.nextval,#{product_id},
+        VALUES(tbl_product_seq.nextval,#{product_id},
         #{product_title},#{product_gender},#{product_category},#{product_price},#{product_color},#{product_size},#{product_content},#{product_img},#{product_material},to_char(sysdate,'yyyy.mm.dd
         hh24:mi'))
         INTO tbl_product_option(product_seq,PRODUCT_ID,product_stock)
-        VALUES(product_seq.CURRVAL,#{product_id},#{product_stock})
+        VALUES(tbl_product_seq.CURRVAL,#{product_id},#{product_stock})
         select * from dual
     </insert>
 

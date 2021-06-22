@@ -16,23 +16,15 @@ public class OrderStatusDetailController_jo {
     @GetMapping("/manager/orderDetail/{order_detail_num}/{user_email}")
     OrderDetailVO_jo getOrderDetail(OrderDetailVO_jo vo) {
         System.out.println("getOrderDetail 접근");
-        try {
-            return service.orderDetail(vo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
+        return service.orderDetail(vo);
     }
 
     @PutMapping("/manager/stateChange/{order_status}/{order_id}")
     void orderStateChange(OrderDetailVO_jo vo) {
         System.out.println("orderStateChange 접근");
         System.out.println(vo);
-        try {
-            service.stateChange(vo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        service.stateChange(vo);
+
         System.out.println("변경성공");
     }
 

@@ -32,7 +32,7 @@ public class ProductFileUpLoadController_jo {
                     System.out.println("파일명:" + fileName);
                     System.out.println("확장자:" + extend);
 
-                    mf.transferTo(new File("C:/cos_project_merge-cosmosmanager/cos_project_merge-cosmosmanager/product_frontend_react/public/imgs/" + fileName + "." + extend));
+                    mf.transferTo(new File("C:/cosmos/cosmosfrontend/public/imgs/" + fileName + "." + extend));
                 } else {
                     System.out.println("중복이있음");
                 }
