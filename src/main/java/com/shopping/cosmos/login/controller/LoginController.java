@@ -149,6 +149,10 @@ public class LoginController {
             session.setMaxInactiveInterval(1800);
             System.out.println("세션 생성 완료:" + session + ":" + sessionId);
 
+           /* 세션에 아이디 저장*/
+            String user_email = vo.getUser_email();
+            session.setAttribute("user_email",user_email);
+
             Cookie cookie = new Cookie("sessionId", sessionId);
             /*브라우저를 닫으면 쿠키 사라짐*/
             cookie.setMaxAge(1800);
