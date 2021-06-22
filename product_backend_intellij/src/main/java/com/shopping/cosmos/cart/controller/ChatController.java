@@ -5,6 +5,8 @@ import com.shopping.cosmos.cart.service.ChatService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
 @AllArgsConstructor
@@ -13,10 +15,10 @@ public class ChatController {
     ChatService chatService;
 
     @PostMapping("/submit")
-    public void chatSubmit(@RequestBody ChatVO vo){
-//        String userId = (String) session.getAttribute("userId")
+    public void chatSubmit(HttpSession session, @RequestBody ChatVO vo){
+        String userId=(String) session.getAttribute("user_email");
         int temp=0;
-        vo.setFromEmail("licsh12@gmail.com");
+        vo.setFromEmail(userId);
         vo.setChatTime("ef");
         System.out.println(vo);
         if(vo.getFromEmail()==null || vo.getFromEmail().equals("")

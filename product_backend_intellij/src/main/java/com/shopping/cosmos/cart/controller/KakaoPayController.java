@@ -22,17 +22,15 @@ public class KakaoPayController {
 
     private OrderSerivce orderSerivce;
 
-    @GetMapping("/address/{email}")
-    public List<AddressVO> addressList(HttpSession session,@PathVariable String email){
-//        String userId=(String) session.getAttribute("userId");
-        //String userId = "licsh12@gmail.com";
-        String userId = email;
+    @GetMapping("/address")
+    public List<AddressVO> addressList(HttpSession session){
+        String userId=(String) session.getAttribute("user_email");
         return kakaopayService.listAddress(userId);
     }
-    @GetMapping("/user/{email}")
-    public UserVO userData(HttpSession session,@PathVariable String email){
+    @GetMapping("/user")
+    public UserVO userData(HttpSession session){
         //String userId = "licsh12@gmail.com";
-        String userId = email;
+        String userId=(String) session.getAttribute("user_email");
         return kakaopayService.userOrderData(userId);
     }
 
@@ -49,7 +47,7 @@ public class KakaoPayController {
 
     @PostMapping("/insert")
     public void orderInsert(HttpSession session,@RequestBody OrderVO orderVO){
-        String userId = "licsh12@gmail.com";
+        String userId=(String) session.getAttribute("user_email");
         OrderDetailVO orderDetailVO = new OrderDetailVO();
         orderVO.setUserId(userId);
 

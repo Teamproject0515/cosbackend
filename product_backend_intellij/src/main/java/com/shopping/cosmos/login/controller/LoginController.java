@@ -1,7 +1,8 @@
 package com.shopping.cosmos.login.controller;
 
-import com.shopping.cosmos.login.service.LoginService_DI;
-import com.shopping.cosmos.login.vo.UserVO_DI;
+import com.shopping.cosmos.login.service.LoginService;
+
+import com.shopping.cosmos.login.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpSession;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/cosmos")
-public class LoginController_DI {
+public class LoginController {
 
     @Autowired
-    private LoginService_DI loginService;
+    private LoginService loginService;
 
     /*@Autowired
     public LoginController(LoginService loginService) {
@@ -26,7 +27,7 @@ public class LoginController_DI {
     /*연결확인 위한 메소드*/
     @GetMapping("/{id}/{pw}")
     public int login(@PathVariable String id,@PathVariable String pw){
-        UserVO_DI vo = new UserVO_DI();
+        UserVO vo = new UserVO();
         vo.setUser_email(id);
         vo.setUser_password(pw);
         vo.setUser_role("User");
@@ -35,8 +36,8 @@ public class LoginController_DI {
 
     /*로그인 후 UserVO 객체 리턴*/
     @PostMapping("/signIn")
-    public UserVO_DI signIn(@RequestBody UserVO_DI user, HttpSession session, HttpServletResponse response){
-        UserVO_DI vo;
+    public UserVO signIn(@RequestBody UserVO user,  HttpSession session, HttpServletResponse response){
+        UserVO vo;
         try{
             System.out.println("로그인 시도");
             if(loginService.getUserCntByPass(user) >0){
@@ -58,8 +59,8 @@ public class LoginController_DI {
 
    /* 이메일(아이디) 찾기*/
     @PostMapping("/findEmail")
-    public UserVO_DI findEmail(@RequestBody UserVO_DI user){
-        UserVO_DI vo;
+    public UserVO findEmail(@RequestBody UserVO user){
+        UserVO vo;
         try{
             System.out.println("이메일 찾기 시도");
             if(loginService.getEmailCnt(user)>0){
@@ -78,8 +79,8 @@ public class LoginController_DI {
 
     /*비밀번호 찾기*/
     @PostMapping("/findPW")
-    public UserVO_DI findPassword(@RequestBody UserVO_DI user){
-        UserVO_DI vo;
+    public UserVO findPassword(@RequestBody UserVO user){
+        UserVO vo;
         try{
             System.out.println("비밀번호 찾기 시도");
             if(loginService.getPWCnt(user)>0){
@@ -126,7 +127,7 @@ public class LoginController_DI {
             Cookie[] cookies = request.getCookies();
             //로그인 시에 쿠키에 JSESSIONID 저장했음 비교해서 확인
             if (cookies != null && cookies.length > 0) {
-                for (int i = 0; i < cookies.length; i++) {
+                for(int i = 0; i < cookies.length; i++) {
                     System.out.println(cookies[i].getName() + "=" + cookies[i].getValue());
                     if (cookies[i].getValue() == sessionId) break;
                 }
@@ -136,20 +137,19 @@ public class LoginController_DI {
                 return "false";
             }
         }catch (Exception e){
-
             System.out.println("checkSession 오류 기존 세션없음");
             return "false";
         }
     }
 
-    public void sessionCreated(UserVO_DI vo, HttpSession session, HttpServletResponse response) {
+    public void sessionCreated(UserVO vo, HttpSession session, HttpServletResponse response) {
         try {
             String sessionId = session.getId();
             /* 세션 유효시간 정하기 (/s)*/
             session.setMaxInactiveInterval(1800);
             System.out.println("세션 생성 완료:" + session + ":" + sessionId);
 
-            /* 세션에 아이디 저장*/
+           /* 세션에 아이디 저장*/
             String user_email = vo.getUser_email();
             session.setAttribute("user_email",user_email);
 
