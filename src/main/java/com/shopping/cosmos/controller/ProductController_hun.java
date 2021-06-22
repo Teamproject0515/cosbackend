@@ -1,8 +1,7 @@
 package com.shopping.cosmos.controller;
 
-import com.shopping.cosmos.service.ProductService;
-import com.shopping.cosmos.vo.*;
-import com.shopping.cosmos.vo.ProductVO;
+import com.shopping.cosmos.service.ProductService_hun;
+import com.shopping.cosmos.vo.ProductVO_hun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +10,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/products")
-public class ProductController {
+public class ProductController_hun {
 
     @Autowired
-    ProductService productService;
+    ProductService_hun productService;
 
 
 //    @GetMapping("/{product_id}")
@@ -24,7 +23,7 @@ public class ProductController {
 //    }
 
     @PostMapping("/list")
-    public List<ProductVO> productCategory(@RequestBody ProductVO productVO){
+    public List<ProductVO_hun> productCategory(@RequestBody ProductVO_hun productVO){
         System.out.println("Page Move Success");
         System.out.println("PAGENUM : "+productVO.getProduct_pageNum());
         System.out.println("GENDER : "+productVO.getProduct_gender());
@@ -38,7 +37,7 @@ public class ProductController {
     }
 
     @PostMapping("/pagenum")
-    public int findPageNum(@RequestBody ProductVO productVO){
+    public int findPageNum(@RequestBody ProductVO_hun productVO){
         if((productService.findPageNum(productVO)%12)==0){
             System.out.println(productService.findPageNum(productVO));
             return productService.findPageNum(productVO)/12;

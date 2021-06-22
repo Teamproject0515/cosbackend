@@ -1,7 +1,7 @@
 package com.shopping.cosmos.controller;
 
-import com.shopping.cosmos.service.UserService;
-import com.shopping.cosmos.vo.UserVO;
+import com.shopping.cosmos.service.UserService_hun;
+import com.shopping.cosmos.vo.UserVO_hun;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,26 +10,28 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/mycos")
-public class UserController {
+public class UserController_hun {
 
     @Autowired
-    UserService userService;
+    UserService_hun userService;
 
 
     @GetMapping("/userinfo/{user_email}")
-    public UserVO UserByID(@PathVariable String user_email){
+    public UserVO_hun UserByID(@PathVariable String user_email){
         System.out.println("UserInfo Success!");
+        System.out.println("user_email : "+user_email);
+        System.out.println(userService.UserByID(user_email));
         return userService.UserByID(user_email);
     }
 
     @GetMapping("/useraddressinfo/{user_email}")
-    public List<UserVO> UserAddressList(@PathVariable String user_email){
+    public List<UserVO_hun> UserAddressList(@PathVariable String user_email){
         System.out.println("UserAddressInfo Success!");
         return userService.UserAddressList(user_email);
     }
 
     @PostMapping("/updateuserinfo")
-    public void UpdateUserInfo(@RequestBody UserVO userVO){
+    public void UpdateUserInfo(@RequestBody UserVO_hun userVO){
         System.out.println("회원 정보 수정 user_email : "+userVO.getUser_email());
         System.out.println("회원 정보 수정 change_email : "+userVO.getChange_email());
         System.out.println("회원 정보 수정 change_phone : "+userVO.getChange_phone());
@@ -39,14 +41,14 @@ public class UserController {
     }
 
         @PostMapping("/deleteuserinfo")
-        public void DeleteUserInfo(@RequestBody UserVO userVO){
+        public void DeleteUserInfo(@RequestBody UserVO_hun userVO){
         System.out.println("회원탈퇴 user_email : "+userVO.getUser_email());
         System.out.println("회원탈퇴 DeleteUserInfo Success!");
         userService.DeleteUserInfo(userVO);
     }
 
     @PostMapping("/insertuseraccount")
-    public void InsertUserAccount(@RequestBody UserVO userVO){
+    public void InsertUserAccount(@RequestBody UserVO_hun userVO){
         System.out.println("user account insert");
         System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_email());
         System.out.println("회원 환불 계좌 등록 : "+userVO.getUser_name());
@@ -56,8 +58,8 @@ public class UserController {
     }
 
     @GetMapping("/useraccount/{user_email}")
-    public UserVO UserAccount(@PathVariable String user_email){
-        UserVO userVO = new UserVO();
+    public UserVO_hun UserAccount(@PathVariable String user_email){
+        UserVO_hun userVO = new UserVO_hun();
         userVO.setUser_email(user_email);
         System.out.println("user account select");
         System.out.println("회원 환불 계좌 조회 : "+userVO.getUser_email());
@@ -65,7 +67,7 @@ public class UserController {
     }
 
     @PostMapping("/updateuseraccount")
-    public void UpdateUserAccount(@RequestBody UserVO userVO){
+    public void UpdateUserAccount(@RequestBody UserVO_hun userVO){
         System.out.println("user account select");
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("NAME : "+userVO.getUser_name());
@@ -75,7 +77,7 @@ public class UserController {
     }
 
     @PostMapping("/insertuserrepay")
-    public void InsertUserRepay(@RequestBody UserVO userVO){
+    public void InsertUserRepay(@RequestBody UserVO_hun userVO){
         System.out.println("InsertUserAccountREPAY success!");
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("PHONE : "+userVO.getUser_repay());
@@ -83,7 +85,7 @@ public class UserController {
     }
 
     @PostMapping("/updateuserrepay")
-    public void UpdateUserRepay(@RequestBody UserVO userVO){
+    public void UpdateUserRepay(@RequestBody UserVO_hun userVO){
         System.out.println("UpdateUserRepay Start!");
         System.out.println("EMAIL : "+userVO.getUser_email());
         System.out.println("REPAY : "+userVO.getUser_repay());
@@ -91,14 +93,14 @@ public class UserController {
     }
 
     @PostMapping("/useraddressbyseq/{address_seq}")
-    public UserVO GetUserAddressBySeq(@PathVariable int address_seq){
+    public UserVO_hun GetUserAddressBySeq(@PathVariable int address_seq){
         System.out.println("GetUserAddressBySeq Success!");
         System.out.println("Address_Seq : "+address_seq);
         return userService.GetUserAddressBySeq(address_seq);
     }
 
     @PostMapping("/updateuseraddress")
-    public void UpdateUserAddress(@RequestBody UserVO userVO){
+    public void UpdateUserAddress(@RequestBody UserVO_hun userVO){
         System.out.println("UpdateUserAddress Start!");
         System.out.println("Address_seq : "+userVO.getAddress_seq());
         System.out.println("EMAIL : "+userVO.getUser_email());
@@ -118,7 +120,7 @@ public class UserController {
     }
 
     @PostMapping("/insertuseraddress")
-    public void InsertUserAddress(@RequestBody UserVO userVO){
+    public void InsertUserAddress(@RequestBody UserVO_hun userVO){
         System.out.println("InsertUserAdderss Start");
         System.out.println("Address_seq : "+userVO.getAddress_seq());
         System.out.println("EMAIL : "+userVO.getUser_email());
