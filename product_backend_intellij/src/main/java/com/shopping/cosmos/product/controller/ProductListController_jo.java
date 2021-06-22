@@ -24,48 +24,62 @@ public class ProductListController_jo {
     //전달받은 pageNum를 vo에 넣음
     List<ProductVO_jo> getProductList(ProductVO_jo vo) {
         System.out.println("getProductList 접근");
-        //vo.setPageNum(pageNum);
-        // 만약 페이지가 없으면 1을 넣어줌
-        if (vo.getPageNum() == 0) vo.setPageNum(1);
-        //상품 몇번쨰부터 보여줄건지 계산
-        int startRow = (vo.getPageNum() - 1) * 10 + 1;
-        //10개씩 보여줌
-        int endRow = startRow + 9;
-        vo.setStartRow(startRow);
-        vo.setEndRow(endRow);
-        System.out.println(startRow);
-        System.out.println(endRow);
+        try {
+            // 만약 페이지가 없으면 1을 넣어줌
+            if (vo.getPageNum() == 0) vo.setPageNum(1);
+            //상품 몇번쨰부터 보여줄건지 계산
+            int startRow = (vo.getPageNum() - 1) * 10 + 1;
+            //10개씩 보여줌
+            int endRow = startRow + 9;
+            vo.setStartRow(startRow);
+            vo.setEndRow(endRow);
+            System.out.println(startRow);
+            System.out.println(endRow);
 
-        return service.getProductList(vo);
+            return service.getProductList(vo);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GetMapping("/manager/productCount")
     int getProductCount(ProductVO_jo vo) {
         //전체상품개수
-        int productCount = service.productCount();
-        //상품페이지를 보여주기위해 10으로 나눈값을 하나더함 상품개수가 33개라면 3페이지가 아닌 4페이지를 보여주기위해
-        System.out.println("productCount1 =" + productCount);
 
-        if (productCount > 10 && productCount % 10 != 0) {
-            productCount = productCount / 10 + 1;
+        try {
+            int productCount = service.productCount();
+            //상품페이지를 보여주기위해 10으로 나눈값을 하나더함 상품개수가 33개라면 3페이지가 아닌 4페이지를 보여주기위해
             System.out.println("productCount1 =" + productCount);
-        } else {
-            productCount = productCount / 10;
+            if (productCount > 10 && productCount % 10 != 0) {
+                productCount = productCount / 10 + 1;
+                System.out.println("productCount1 =" + productCount);
+            } else {
+                productCount = productCount / 10;
+            }
+            if (productCount == 0) {
+                productCount = 1;
+            }
+            System.out.println("productCount2 =" + productCount);
+            return productCount;
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        if (productCount == 0) {
-            productCount = 1;
-        }
-        System.out.println("productCount2 =" + productCount);
-        return productCount;
+        return 0;
     }
 
     @GetMapping("/manager/seach/{product_title}")
     List<ProductVO_jo> seachList(ProductSearchVO_jo product) {
         System.out.println("seachList 접근");
         System.out.println(product);
-        List<ProductVO_jo> search2 = service.seachList(product);
-        System.out.println(search2);
-        return service.seachList(product);
+        try {
+            List<ProductVO_jo> search2 = service.seachList(product);
+            System.out.println(search2);
+            return service.seachList(product);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
